@@ -1,0 +1,45 @@
+Entry: labkey.selectRows
+Aliases: labkey.selectRows
+Keywords: IO
+Description: Select rows of data from labkey database to
+import into R
+URL: ../../../library/Rlabkey/html/labkey.selectRows.html
+
+Entry: labkey.executeSql
+Aliases: labkey.executeSql
+Keywords: IO
+Description: Use Sql commands to import data from a labkey
+database into R
+URL: ../../../library/Rlabkey/html/labkey.executeSql.html
+
+Entry: makeFilter
+Aliases: makeFilter
+Keywords: IO
+Description: Make filter object for use in labkey.selectRows
+URL: ../../../library/Rlabkey/html/makeFilter.html
+
+Entry: Rlabkey
+Aliases: Rlabkey Rlabkey-package
+Keywords: package
+Description: Import data from labkey database into R
+URL: ../../../library/Rlabkey/html/Rlabkey.html
+
+Entry: labkey.insertRows
+Aliases: labkey.insertRows
+Keywords: IO
+Description: Insert rows of data from R into a labkey database
+URL: ../../../library/Rlabkey/html/labkey.insertRows.html
+
+
+Entry: labkey.updateRows
+Aliases: labkey.updateRows
+Keywords: IO
+Description: Update existing rows of data in a labkey database
+URL: ../../../library/Rlabkey/html/labkey.updateRows.html
+
+
+Entry: labkey.deleteRows
+Aliases: labkey.deleteRows
+Keywords: IO
+Description: Delete rows of data from a labkey database
+URL: ../../../library/Rlabkey/html/labkey.deleteRows.html
