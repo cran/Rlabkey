@@ -1,0 +1,10 @@
+Changes in Version 0.0.5
+
+  o modified the makeDF function to speed up data frame creation from the meta data
+  o labkey.deleteRows function now accepts an entire row of data as input instead of just the Key column
+
+
+Changes in Version 0.0.4
+
+  o first CRAN release of the Rlabkey package
+

@@ -15,10 +15,11 @@ makeFilter(...)
 These filters are applied to the data prior to import into R. The user can specify as many 
 filters as desired. The format for specifying a filter is a vector of characters including
 the column name, operator and value.
-  \item{colname}{a string specifying the name of the column to be filtered} 
-  \item{operator}{a string specifying what operator should be used in the filter (see options below)}
-  \item{value}{an integer or string specifying the value the columns should be filtered on}
-
+\describe{
+\item{colname}{a string specifying the name of the column to be filtered} 
+\item{operator}{a string specifying what operator should be used in the filter (see options below)}
+\item{value}{an integer or string specifying the value the columns should be filtered on}
+}
 Possible operator values are as follows:
 "EQUALS", "EQUALS\_ONE\_OF", "NOT\_EQUALS", "GREATER\_THAN", "GREATER\_THAN\_OR\_EQUAL\_TO", 
 "LESS\_THAN", "LESS\_THAN\_OR\_EQUAL\_TO", "DATE\_EQUAL", "DATE\_NOT\_EQUAL", 
@@ -40,11 +41,13 @@ https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}
 \examples{
-## These example datasets are located at https://www.labkey.org/project/home/Study/demo/begin.view?
+## These example datasets are located at 
+## https://www.labkey.org/project/home/Study/demo/begin.view?
 
 
 ## Two filters:
-filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), c("HIVRapidTest","EQUALS","Positive"))
+filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
+c("HIVRapidTest","EQUALS","Positive"))
 
 ## Using "equals one of" operator:
 filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))

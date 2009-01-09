@@ -46,7 +46,8 @@ https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
-\code{\link{labkey.updateRows}}, \code{\link{labkey.deleteRows}}
+\code{\link{labkey.updateRows}}, \cr
+\code{\link{labkey.deleteRows}}
 
 }
 \examples{

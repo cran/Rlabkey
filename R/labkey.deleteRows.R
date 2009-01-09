@@ -17,16 +17,18 @@ if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## URL encode folder path, JSON encode post body
 if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
-n <- dim(toDelete)[1]
-p3 <- NULL
+nrows <- nrow(toDelete)
+ncols <- ncol(toDelete)
 p1 <- toJSON(list(schemaName=schemaName, queryName=queryName, apiVersion=8.3))
 cnames <- colnames(toDelete)
-cvalues <- as.list(toDelete[,1])
-names(cvalues) <- rep(cnames,n)
-for(j in 1:n)
-	{p2 <- toJSON(cvalues[j])	
-	p3 <- paste(p3,",",p2,sep="")}
+p3 <- NULL
+for(j in 1:nrows)
+    {cvalues <- as.list(toDelete[j,])
+    names(cvalues) <- cnames
+    p2 <- toJSON(cvalues)
+    p3 <- paste(p3,",",p2,sep="")}
 pbody <- paste(substr(p1,1,nchar(p1)-1),', \"rows\":[',substr(p3,2,nchar(p3)),"] }",sep="")
+
 
 ## Set options
 reader <- basicTextGatherer()

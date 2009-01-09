@@ -20,8 +20,8 @@ these functions.
 \tabular{ll}{
 Package: \tab Rlabkey\cr
 Type: \tab Package\cr
-Version: \tab 0.0.4\cr
-Date: \tab 2008-10-27\cr
+Version: \tab 0.0.5\cr
+Date: \tab 2009-01-09\cr
 License: \tab Apache License 2.0\cr
 LazyLoad: \tab yes\cr
 }
@@ -68,7 +68,8 @@ https://www.labkey.org/project/home/begin.view}
 \keyword{ package }
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
-\code{\link{labkey.insertRows}}, \code{\link{labkey.updateRows}}, \code{\link{labkey.deleteRows}}
+\code{\link{labkey.insertRows}}, \cr
+\code{\link{labkey.updateRows}}, \code{\link{labkey.deleteRows}}
 }
 \examples{
 }
