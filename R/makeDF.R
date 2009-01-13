@@ -33,8 +33,9 @@
 		
 	if(length(decode$rows)>0)
 		{hold.dat <- NULL
-  		for(j in 1:length(decode$rows)) {hold.dat <- rbind(hold.dat, decode$rows[[j]])}
-  		hold.dat <- as.data.frame(hold.dat)}
+    	hold.dat <- matrix(sapply(decode$rows,rbind), nrow=length(decode$rows), byrow=TRUE)
+    	hold.dat <- as.data.frame(hold.dat)
+    	names(hold.dat) <- names(decode$rows[[1]])}
 
 	## Order data
 	oindex <- NULL

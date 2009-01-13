@@ -18,9 +18,9 @@ stripAllHidden = TRUE)
 normally be hidden from user veiw. If no value is specified, no hidden columns are returned.}
 }
 \details{
-A single row or multiple rows of data can be deleted.  The \code{toDelete} data frame should consist of a single 
-column of data containing the data identifiers of the rows to be deleted (e.g., key or lsid).
-The name of the data in the data frame must be the column name from the labkey database.
+A single row or multiple rows of data can be deleted.  For the \code{toDelete} data frame, version 0.0.5 or later accepts either a single column 
+of data containing the data identifiers  (e.g., key or lsid) or the entire row of data to be deleted.
+The names of the data in the data frame must be the column names from the labkey database.
 The data frame must be created with the \code{stringsAsFactors} set to FALSE.
 
 NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
@@ -45,7 +45,8 @@ https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
-\code{\link{labkey.insertRows}}, \code{\link{labkey.updateRows}}
+\code{\link{labkey.insertRows}}, \cr
+\code{\link{labkey.updateRows}}
 }
 
 \examples{
