@@ -1,4 +1,4 @@
-labkey.deleteRows <- function(baseUrl, folderPath, schemaName, queryName, toDelete, stripAllHidden=TRUE)
+labkey.deleteRows <- function(baseUrl, folderPath, schemaName, queryName, toDelete) 
 {  
 ## Default showAllRows=TRUE
 showAllRows=TRUE
@@ -6,7 +6,6 @@ showAllRows=TRUE
 ## Error if any of baseUrl, folderPath, schemName or toDelete are missing
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("toDelete")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and toDelete."))
-
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
@@ -35,8 +34,8 @@ reader <- basicTextGatherer()
 header <- basicTextGatherer()
 handle <- getCurlHandle()
 headerFields <- c('Content-Type'="application/json;charset=utf-8")
-var1 <- ifcookie()
-if(var1) {myopts <- curlOptions(cookie=paste(labkey.sessionCookieName,"=",labkey.sessionCookieContents,sep=""),
+clist <- ifcookie()
+if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""),
                         writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
                         ssl.verifypeer=FALSE, followlocation=TRUE)} else
 {myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,

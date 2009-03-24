@@ -5,8 +5,7 @@
 Send data from an R session to update existing rows of data in the database.
 }
 \usage{
-labkey.updateRows(baseUrl, folderPath, schemaName, queryName, toUpdate, 
-stripAllHidden = TRUE)
+labkey.updateRows(baseUrl, folderPath, schemaName, queryName, toUpdate) 
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -14,8 +13,6 @@ stripAllHidden = TRUE)
   \item{schemaName}{a string specifying the  \code{schemaName}for the query}
   \item{queryName}{a string specifying the  \code{queryName}} 
   \item{toUpdate}{a data frame containing the row(s) of data to be updated}
-  \item{stripAllHidden}{(optional) a logical value indicating whether or not to return data columns that would 
-normally be hidden from user veiw. If no value is specified, no hidden columns are returned.}
 }
 \details{
 A single row or multiple rows of data can be updated.  The \code{toUpdate} data frame should contain 
@@ -30,6 +27,7 @@ the Rlabkey functions when a column name is expected. To identify a particular c
 a web site, use the \dQuote{export to R script} option available as a drop down option under the \dQuote{views}
 tab for each dataset.
 
+In versions 0.0.5 and earlier, \code{labkey.updateRows} had a \code{stripAllHidden} argument. This argument did not perform a useful function and has since been removed. 
 }
 \value{
 A list is returned with named categories of \bold{command}, \bold{rowsAffected}, \bold{rows}, \bold{queryName}, \bold{containerPath} and \bold{schemaName}.

@@ -1,4 +1,4 @@
- makeDF <- function(rawdata, colSelect=NULL, stripAllHidden)
+ makeDF <- function(rawdata, colSelect=NULL, showHidden)
 {	decode <- fromJSON(rawdata)
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
@@ -21,7 +21,7 @@
   	if(length(decode$rows)<1)
 		{tohide <- length(which(refdf$hide==TRUE))
 		totalcol <- length(refdf$cnames)
-		if(stripAllHidden==TRUE)
+		if(showHidden==FALSE)
 			{emptydf <- as.data.frame(rep(list(num=double(0)), each=(totalcol-tohide)))
 			colnames(emptydf) <- refdf$cnames[refdf$hide==FALSE]
 			warning("Empty data frame was returned. Query may be too restrictive.", call.=FALSE)
@@ -50,8 +50,8 @@
 	for(i in 1:length(cnames)){ newdat <- cbind(newdat, hold.dat[,refdf$oindex[i]])}
 	newdat <- as.data.frame(newdat)
 
-  	## Delete hidden column(s) unless stripAllHidden=FALSE
-  	if(stripAllHidden==FALSE)   {} else
+  	## Delete hidden column(s) unless showHidden=TRUE
+  	if(showHidden==TRUE)   {} else
   	{if(is.null(decode$metaData$id)) {} else
   		{hide.ind <- which(refdf$hide==TRUE)
   		newdat <- newdat[,-hide.ind]

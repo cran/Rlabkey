@@ -1,4 +1,4 @@
-labkey.updateRows <- function(baseUrl, folderPath, schemaName, queryName, toUpdate, stripAllHidden=TRUE)
+labkey.updateRows <- function(baseUrl, folderPath, schemaName, queryName, toUpdate)
 {  
 ## Default showAllRows=TRUE
 showAllRows=TRUE
@@ -34,8 +34,8 @@ reader <- basicTextGatherer()
 header <- basicTextGatherer()
 handle <- getCurlHandle()
 headerFields <- c('Content-Type'="application/json;charset=utf-8")
-var1 <- ifcookie()
-if(var1) {myopts <- curlOptions(cookie=paste(labkey.sessionCookieName,"=",labkey.sessionCookieContents,sep=""),
+clist <- ifcookie()
+if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont,sep=""),
                         writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
                         ssl.verifypeer=FALSE, followlocation=TRUE)} else
 {myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,

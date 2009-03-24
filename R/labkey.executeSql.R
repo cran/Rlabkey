@@ -1,10 +1,9 @@
-
-labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL, rowOffset=NULL, stripAllHidden=TRUE)
+labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL, 
+rowOffset=NULL, showHidden=FALSE)
 {  
 ## If maxRows and/or rowOffset are specified, set showAllRows=FALSE
 showAllRows=TRUE
 if(is.null(maxRows)==FALSE || is.null(rowOffset)==FALSE){showAllRows=FALSE}
-
 
 ## Error if any of baseUrl, folderPath, schemaName or sql are missing
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("sql")==FALSE)
@@ -14,7 +13,6 @@ stop (paste("A value must be specified for each of baseUrl, folderPath, schemaNa
 if(length(grep("%",schemaName))<1) {schemaName <- URLencode(schemaName)}
 if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
 
-
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
 folderPath <- gsub("[\\]", "/", folderPath)
@@ -22,17 +20,15 @@ if(substr(baseUrl, nchar(baseUrl), nchar(baseUrl))!="/"){baseUrl <- paste(baseUr
 if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
-
 ## Construct url 
 myurl <- paste(baseUrl,"query",folderPath,"executeSql.api",sep="")
-
 
 ## Set options
 reader <- basicTextGatherer()
 header <- basicTextGatherer()
 handle <- getCurlHandle()
-var1 <- ifcookie()
-if(var1) {myopts <- curlOptions(cookie=paste(labkey.sessionCookieName,"=",labkey.sessionCookieContents,sep=""),
+clist <- ifcookie()
+if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont,sep=""),
                         writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
                         ssl.verifypeer=FALSE, followlocation=TRUE)} else
 {myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
@@ -57,7 +53,7 @@ if(status>=400)
     {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
 
-newdata <- makeDF(rawdata=reader$value(), stripAllHidden=stripAllHidden)
+newdata <- makeDF(rawdata=reader$value(), showHidden=showHidden)
 
 return(newdata)
 }
