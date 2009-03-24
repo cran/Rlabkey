@@ -7,7 +7,7 @@ be manipulated through standard SQL commands supported in labkey SQL.
 }
 \usage{
 labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
-rowOffset = NULL, stripAllHidden = TRUE)
+rowOffset = NULL, showHidden = FALSE)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -17,8 +17,9 @@ rowOffset = NULL, stripAllHidden = TRUE)
   \item{maxRows}{(optional) an integer specifying the maximum number of rows to return. If no value is specified, all rows are returned.}
   \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval. 
 If no value is specified, rows will begin at the start of the result set.}
-  \item{stripAllHidden}{(optional) a logical value indicating whether or not to return data columns that would 
-normally be hidden from user veiw. If no value is specified, no hidden columns are returned.}
+  \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would 
+normally be hidden from user veiw. If no value is specified, the hidden columns are not returned. 
+In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
 }
 \details{
 A full dataset or any portion of a dataset can be imported into an R
@@ -59,8 +60,9 @@ getacute <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = 'select "Status Assessment".ParticipantId, "Status Assessment".StatusMeetCriteria 
-from "Status Assessment" where "Status Assessment".StatusMeetCriteria=\'Yes\'')
+sql = 'select "Status Assessment".ParticipantId, 
+"Status Assessment".StatusMeetCriteria from "Status Assessment" where 
+"Status Assessment".StatusMeetCriteria=\'Yes\'')
 
 
 ## Compute average ages over different gender groups, 
@@ -69,8 +71,8 @@ getage <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = "select Demographics.Gender, avg(Demographics.Age) as Number from Demographics 
-group by Demographics.Gender")
+sql = "select Demographics.Gender, avg(Demographics.Age) as Number from 
+Demographics group by Demographics.Gender")
 
 
 ## Get a list of participants with partner information 
@@ -78,8 +80,9 @@ getpartners <- labkey.executeSql(
 baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
-sql = 'select "Status Assessment".ParticipantID, "Status Assessment".StatusPartner1 
-from "Status Assessment" where "Status Assessment".StatusPartner1 is not null')
+sql = 'select "Status Assessment".ParticipantID, 
+"Status Assessment".StatusPartner1 from "Status Assessment" where 
+"Status Assessment".StatusPartner1 is not null')
 
 }
 \keyword{IO}
