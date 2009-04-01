@@ -1,6 +1,10 @@
 
-Changes in Version 0.0.6
 
+Changes in Version 0.0.7
+  o In previous versions this package would only bring labkey data into R that had hidden columns (ie, keys or other identifiers not usually shown to the user). Now any labkey data, with or without hidden columns, can be brought into R.
+
+
+Changes in Version 0.0.6
   o Replaced the stripAllHidden argument with showHidden. This affects the labkey.selectRows and labkey.executeSql functions and was done for clarity. The old default stripAllHidden=TRUE is replaced by the new default showHidden=FALSE which has the same functionality. See documentation for details.
   o The old stripAllHidden flag was removed from labkey.insertRows, labkey.updateRows and labkey.deleteRows. It served no use in these functions. The stripAllHidden (now replaced by showHidden) is only meaningfull when data are being returned to the user. 
   o The following filter names have been modified in the makeFilter function:
@@ -15,16 +19,12 @@ LESS_THAN_OR_EQUAL_TO -> LESS_THAN_OR_EQUAL
 The filter name changes were made for clarity and consistency with the other software packages that retrieve data from a Labkey database.
 
 
-
 Changes in Version 0.0.5
-
   o modified the makeDF function to speed up data frame creation from the meta data
   o labkey.deleteRows function now accepts an entire row of data as input instead of just the Key column
 
 
-
 Changes in Version 0.0.4
-
   o first CRAN release of the Rlabkey package
 
 
