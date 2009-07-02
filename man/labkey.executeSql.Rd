@@ -6,7 +6,7 @@ Use Sql commands to specify data to be imported into R. Prior to import, data ca
 be manipulated through standard SQL commands supported in labkey SQL.
 }
 \usage{
-labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL, 
+labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL,
 rowOffset = NULL, showHidden = FALSE)
 }
 \arguments{
@@ -15,10 +15,10 @@ rowOffset = NULL, showHidden = FALSE)
   \item{schemaName}{a string specifying the  \code{schemaName} for the query}
   \item{sql}{a string containing the \code{sql} commands to be executed}
   \item{maxRows}{(optional) an integer specifying the maximum number of rows to return. If no value is specified, all rows are returned.}
-  \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval. 
+  \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval.
 If no value is specified, rows will begin at the start of the result set.}
-  \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would 
-normally be hidden from user veiw. If no value is specified, the hidden columns are not returned. 
+  \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would
+normally be hidden from user veiw. If no value is specified, the hidden columns are not returned.
 In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
 }
 \details{
@@ -61,8 +61,8 @@ baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
 sql = 'select "Status Assessment".ParticipantId, 
-"Status Assessment".StatusMeetCriteria from "Status Assessment" where 
-"Status Assessment".StatusMeetCriteria=\'Yes\'')
+"Status Assessment".MeetsCriteria from "Status Assessment" where
+"Status Assessment".MeetsCriteria=\'Yes\'')
 
 
 ## Compute average ages over different gender groups, 
@@ -81,8 +81,8 @@ baseUrl="https://www.labkey.org",
 folderPath="/home/Study/demo",
 schemaName="study",
 sql = 'select "Status Assessment".ParticipantID, 
-"Status Assessment".StatusPartner1 from "Status Assessment" where 
-"Status Assessment".StatusPartner1 is not null')
+"Status Assessment".Partner1 from "Status Assessment" where
+"Status Assessment".Partner1 is not null')
 
 }
 \keyword{IO}

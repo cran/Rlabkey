@@ -37,7 +37,9 @@ CONTAINS\cr
 DOES\_NOT\_CONTAIN\cr
 STARTS\_WITH\cr
 DOES\_NOT\_START\_WITH\cr
-EQUALS\_ONE\_OF 
+EQUALS\_ONE\_OF\cr
+QC\_VALUE\cr
+NOT\_QC\_VALUE
 
 When using the MISSING or NOT\_MISSING operators, an empty string should be supplied as the value.
 See example below.

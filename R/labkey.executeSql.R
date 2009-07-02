@@ -1,6 +1,6 @@
-labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL, 
+labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL,
 rowOffset=NULL, showHidden=FALSE)
-{  
+{
 ## If maxRows and/or rowOffset are specified, set showAllRows=FALSE
 showAllRows=TRUE
 if(is.null(maxRows)==FALSE || is.null(rowOffset)==FALSE){showAllRows=FALSE}
@@ -20,7 +20,7 @@ if(substr(baseUrl, nchar(baseUrl), nchar(baseUrl))!="/"){baseUrl <- paste(baseUr
 if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
-## Construct url 
+## Construct url
 myurl <- paste(baseUrl,"query",folderPath,"executeSql.api",sep="")
 
 ## Set options
@@ -57,4 +57,4 @@ newdata <- makeDF(rawdata=reader$value(), showHidden=showHidden)
 
 return(newdata)
 }
-                                                              
+

@@ -1,4 +1,7 @@
-
+Changes in Version 0.0.8
+  o The following filter names have been added in the makeFilter function:
+QC_VALUE
+NOT_QC_VALUE
 
 Changes in Version 0.0.7
   o In previous versions this package would only bring labkey data into R that had hidden columns (ie, keys or other identifiers not usually shown to the user). Now any labkey data, with or without hidden columns, can be brought into R.

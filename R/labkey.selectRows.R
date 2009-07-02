@@ -1,6 +1,6 @@
-labkey.selectRows <- function(baseUrl, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL, 
-			maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE)
-{	
+labkey.selectRows <- function(baseUrl, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL,
+        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE)
+{
 ## Empty string/NULL checking
 if(is.null(viewName)==FALSE) {char <- nchar(viewName); if(char<1){viewName<-NULL}}
 if(is.null(colSelect)==FALSE) {char <- nchar(colSelect[1]); if(char<1){colSelect<-NULL}}
@@ -12,7 +12,7 @@ if(is.null(showHidden)==FALSE) {char <- nchar(showHidden); if(char<1){showHidden
 
 ## Error if any of baseUrl, folderPath, schemName or queryName are missing
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("queryName")==FALSE)
-stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName.")) 
+stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
 
 ## URL encoding of schema, query, view and folder path
 if(length(grep("%",schemaName))<1) {schemaName <- URLencode(schemaName)}
@@ -22,10 +22,10 @@ if(is.null(viewName)==FALSE) {if(length(grep("%",viewName))<1) viewName <- URLen
 
 ## Format colSelect
 if(is.null(colSelect)==FALSE)
-    {   lencolSel <- length(colSelect)
-		holder <- NULL
-        for(i in 1:length(colSelect)) holder <-paste(holder,URLencode(colSelect[i]),",",sep="")
-        colSelect <- substr(holder, 1, nchar(holder)-1)}
+  {   lencolSel <- length(colSelect)
+    holder <- NULL
+      for(i in 1:length(colSelect)) holder <-paste(holder,URLencode(colSelect[i]),",",sep="")
+      colSelect <- substr(holder, 1, nchar(holder)-1)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
@@ -34,7 +34,7 @@ if(substr(baseUrl, nchar(baseUrl), nchar(baseUrl))!="/"){baseUrl <- paste(baseUr
 if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
-## Construct url 
+## Construct url
 myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaName,"&query.queryName=",queryName,sep="","&apiVersion=8.3")
 if(is.null(viewName)==FALSE) {myurl <- paste(myurl,"&query.viewName=",viewName,sep="")}
 if(is.null(colSelect)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect,sep="")}
@@ -44,7 +44,7 @@ if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")
 if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) myurl <- paste(myurl,"&query.",colFilter[j],sep="")}
 if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
 
-## Set options 
+## Set options
 reader <- basicTextGatherer()
 header <- basicTextGatherer()
 myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, netrc=1, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE, followlocation=TRUE)
@@ -52,20 +52,20 @@ myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update,
 ## Http get
 handle <- getCurlHandle()
 clist <- ifcookie()
-if(clist$Cvalue==1) {mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))} else {mydata <- getURI(myurl, .opts=myopts, curl=handle)} 
+if(clist$Cvalue==1) {mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))} else {mydata <- getURI(myurl, .opts=myopts, curl=handle)}
 
 ## Error checking, decode data and return data frame
 h <- parseHeader(header$value())
 status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 
-if(status==500) 
-{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} 
+if(status==500)
+{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
-    {contTypes <- which(names(h)=='Content-Type')
-    if(length(contTypes)>1 & h[contTypes[2]]=="application/json;charset=utf-8")
-        {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
-    {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
+  {contTypes <- which(names(h)=='Content-Type')
+  if(length(contTypes)>1 & h[contTypes[2]]=="application/json;charset=utf-8")
+      {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
+  {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
 newdata <- makeDF(mydata, colSelect, showHidden)
 
@@ -75,4 +75,4 @@ if(is.null(colSelect)==FALSE){if(ncol(newdata)<lencolSel)warning("Fewer columns 
 
 
 return(newdata)
-} 
+}
