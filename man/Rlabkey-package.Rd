@@ -20,8 +20,8 @@ these functions.
 \tabular{ll}{
 Package: \tab Rlabkey\cr
 Type: \tab Package\cr
-Version: \tab 0.0.7\cr
-Date: \tab 2009-03-31\cr
+Version: \tab 0.0.8\cr
+Date: \tab 2009-07-01\cr
 License: \tab Apache License 2.0\cr
 LazyLoad: \tab yes\cr
 }
