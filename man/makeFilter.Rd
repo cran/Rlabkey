@@ -71,13 +71,13 @@ filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
 filter3 <- makeFilter(c("HIVRapidTest","NOT_MISSING","")) 
 
 ## Apply a filter in labkey.selectRows function
-getdata <- labkey.selectRows(
-baseUrl="https://www.labkey.org", 
-folderPath="/home/Study/demo", 
-schemaName="study", 
-queryName="HIV Test Results", 
-colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
-colFilter=filter3)
+#getdata <- labkey.selectRows(
+#baseUrl="https://www.labkey.org",
+#folderPath="/home/Study/demo",
+#schemaName="study",
+#queryName="HIV Test Results",
+#colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"),
+#colFilter=filter3)
 
 
 
