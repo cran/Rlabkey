@@ -1,8 +1,8 @@
-parseHeader <- function (lines) 
+parseHeader <- function (lines)
 {
-    if (length(lines) < 1) 
+    if (length(lines) < 1)
         return(NULL)
-    if (length(lines) == 1) 
+    if (length(lines) == 1)
         lines = strsplit(lines, "\r\n")[[1]]
     status = lines[1]
     lines = lines[-c(1, length(lines))]

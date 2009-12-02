@@ -58,24 +58,26 @@ https://www.labkey.org/project/home/begin.view}
 
 
 ## Retrieve full HIV Test Results dataset
-fulldata <- labkey.selectRows(	
-baseUrl="https://www.labkey.org", 
-folderPath="/home/Study/demo", 
-schemaName="study", 
-queryName="HIV Test Results")
+## Not run
+#fulldata <- labkey.selectRows(
+#baseUrl="https://www.labkey.org",
+#folderPath="/home/Study/demo",
+#schemaName="study",
+#queryName="HIV Test Results")
 
 
 ## Specifying filters, max rows and selecting columns
-myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-c("HIVRapidTest","EQUAL","Positive"))
-smalldata <- labkey.selectRows(	
-baseUrl="https://www.labkey.org", 
-folderPath="/home/Study/demo", 
-schemaName="study", 	
-queryName="HIV Test Results", 
-colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"), 
-maxRows=20,
-colFilter=myfilters)
+## Not run
+#myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500),
+#c("HIVRapidTest","EQUAL","Positive"))
+#smalldata <- labkey.selectRows(
+#baseUrl="https://www.labkey.org",
+#folderPath="/home/Study/demo",
+#schemaName="study",
+#queryName="HIV Test Results",
+#colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"),
+#maxRows=20,
+#colFilter=myfilters)
 
 
 

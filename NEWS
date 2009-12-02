@@ -1,3 +1,6 @@
+Changes in Version 0.0.9
+  o Misc bug fixes
+
 Changes in Version 0.0.8
   o The following filter names have been added in the makeFilter function:
 QC_VALUE

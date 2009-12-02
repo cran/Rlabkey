@@ -1,5 +1,9 @@
  makeDF <- function(rawdata, colSelect=NULL, showHidden)
-{	decode <- fromJSON(rawdata)
+{
+    ## substitute null literals for NA so the data frame gets constructed properly
+    rawdata <- gsub("null", "\"NA\"", rawdata)
+
+    decode <- fromJSON(rawdata)
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
 	if(is.null(colSelect)==FALSE){
@@ -65,20 +69,20 @@
   	{for(j in 1:ncol(newdat))
   	    {mod <- refdf$type[j]
   	    if(mod=="date"){ newdat[,j] <- as.Date(as.character(newdat[,j]), "%d %b %Y %H:%M:%S %Z")}else
-	    if(mod=="string"){	mode(newdat[,j]) <- "character"} else
-  	    if(mod=="int"){ mode(newdat[,j]) <- "numeric"} else
-  	    if(mod=="boolean"){mode(newdat[,j]) <- "logical"} else
-  	    if(mod=="float"){mode(newdat[,j]) <- "numeric"} else
+	    if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
+  	    if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
+  	    if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
+  	    if(mod=="float"){suppressWarnings(mode(newdat[,j]) <- "numeric")} else
   	    {print("MetaData field type not recognized.")}}
 	newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames}
 	## Set mode for single column of data
 	if(is.null(dim(newdat))==TRUE & length(newdat)>1) 
 	{mod <- refdf$type
   	if(mod=="date"){ newdat <- as.Date(as.character(newdat), "%d %b %Y %H:%M:%S %Z")}else
-  	if(mod=="string"){mode(newdat) <- "character"} else
-  	if(mod=="int"){ mode(newdat) <- "numeric"} else
-  	if(mod=="boolean"){mode(newdat) <- "logical"} else
-  	if(mod=="float"){mode(newdat) <- "numeric"} else
+  	if(mod=="string"){suppressWarnings(mode(newdat) <- "character")} else
+  	if(mod=="int"){ suppressWarnings(mode(newdat) <- "numeric")} else
+  	if(mod=="boolean"){suppressWarnings(mode(newdat) <- "logical")} else
+  	if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
   	{print("MetaData field type not recognized.")}
 	newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames[1]}
 
