@@ -1,9 +1,9 @@
 \name{makeFilter}
 \alias{makeFilter}
-\title{Builds filters to be used in labkey.selectRows}
+\title{Builds filters to be used in labkey.selectRows and getRows}
 \description{
 This function takes inputs of column name, filter value and filter operator and 
-returns an array of filters to be used in \code{labkey.selectRows}.
+returns an array of filters to be used in \code{labkey.selectRows} and \code{getRows}.
 }
 \usage{
 makeFilter(...)
@@ -23,25 +23,25 @@ the column name, operator and value.
 
 Operator values:\cr
 EQUAL\cr
-NOT\_EQUAL\cr 
-NOT\_EQUAL\_OR\_MISSING\cr
-DATE\_EQUAL\cr
-DATE\_NOT\_EQUAL\cr
+NOT_EQUAL\cr 
+NOT_EQUAL_OR_MISSING\cr
+DATE_EQUAL\cr
+DATE_NOT_EQUAL\cr
 MISSING\cr
-NOT\_MISSING\cr
-GREATER\_THAN\cr
-GREATER\_THAN\_OR\_EQUAL\cr
-LESS\_THAN\cr
-LESS\_THAN\_OR\_EQUAL\cr
+NOT_MISSING\cr
+GREATER_THAN\cr
+GREATER_THAN_OR_EQUAL\cr
+LESS_THAN\cr
+LESS_THAN_OR_EQUAL\cr
 CONTAINS\cr
-DOES\_NOT\_CONTAIN\cr
-STARTS\_WITH\cr
-DOES\_NOT\_START\_WITH\cr
-EQUALS\_ONE\_OF\cr
-QC\_VALUE\cr
-NOT\_QC\_VALUE
+DOES_NOT_CONTAIN\cr
+STARTS_WITH\cr
+DOES_NOT_START_WITH\cr
+EQUALS_ONE_OF\cr
+QC_VALUE\cr
+NOT_QC_VALUE
 
-When using the MISSING or NOT\_MISSING operators, an empty string should be supplied as the value.
+When using the MISSING or NOT_MISSING operators, an empty string should be supplied as the value.
 See example below.
 }
 
@@ -56,30 +56,43 @@ https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}
 \examples{
-## These example datasets are located at 
-## https://www.labkey.org/project/home/Study/demo/begin.view?
+# library(Rlabkey)
 
-
-## Two filters:
-filter1<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500), 
-c("HIVRapidTest","EQUAL","Positive"))
-
-## Using "equals one of" operator:
-filter2 <- makeFilter(c("HIVLoadIneq","EQUALS_ONE_OF","Equals ; Less than"))
-
-## Using "not missing" operator:
-filter3 <- makeFilter(c("HIVRapidTest","NOT_MISSING","")) 
+## Two filters, ANDed together
+filter1<- makeFilter(c("TextFld","CONTAINS","h"), c("BooleanFld","EQUAL","TRUE"))
 
 ## Apply a filter in labkey.selectRows function
-#getdata <- labkey.selectRows(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#queryName="HIV Test Results",
-#colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"),
-#colFilter=filter3)
+rows <- labkey.selectRows(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists", 
+	queryName="AllTypes",
+	colFilter=filter1
+)
+rows
 
+## Using "equals one of" operator:
+filter2 <- makeFilter(c("RowId","EQUALS_ONE_OF","2;3;6"))
+rows <- labkey.selectRows(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists", 
+	queryName="AllTypes",
+	colFilter=filter2
+)
+rows
 
+## Using "not missing" operator:
+filter3 <- makeFilter(c("IntFld","MISSING","")) 
+
+rows <- labkey.selectRows(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists", 
+	queryName="AllTypes",
+	colFilter=filter3
+)
+rows
 
 }
 \keyword{file}

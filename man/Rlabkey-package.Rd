@@ -3,29 +3,29 @@
 \alias{Rlabkey}
 \docType{package}
 \title{
-Import/export data between a labkey database and R
+Exchange data between LabKey Server and R
 }
 \description{
-This package allows the transfer of data between a labkey database and an R session. Data can be imported from 
-a labkey database into R by specifying the query schema information (\code{labkey.selectRows}) 
+This package allows the transfer of data between a LabKey Server and an R session. Data can be retrieved from 
+LabKey into a data frame in R by specifying the query schema information (\code{labkey.selectRows} and \code{getRows}) 
 or by using sql commands (\code{labkey.executeSql}). From an R session, existing data can be updated
  (\code{labkey.updateRows}), new data can be inserted (\code{labkey.insertRows}) or  
-data can be deleted from the labkey database (\code{labkey.deleteRows}). 
+data can be deleted from the LabKey database (\code{labkey.deleteRows}). Interactive R users can discover available data via
+schema objects (\code{labkey.getSchema}).
 
-The user must have the appropriate authorization on the labkey
-server in order to modify the database through the use of
-these functions.
 }
 \details{
 \tabular{ll}{
 Package: \tab Rlabkey\cr
 Type: \tab Package\cr
-Version: \tab 0.0.8\cr
-Date: \tab 2009-07-01\cr
+Version: \tab 2.1.110\cr
+Date: \tab 2010-03-28\cr
 License: \tab Apache License 2.0\cr
 LazyLoad: \tab yes\cr
 }
-Using this package to access a password protected labkey data base requires that the user
+The user must have the appropriate authorization on the LabKey
+Server in order to modify the database through the use of
+these functions.  Using this package to access a password protected LabKey data base requires that the user
 has their login information in a netrc file. The netrc file
 contains configuration and autologin information for the File Transfer Protocol client (ftp) and
 other programs such as CURL.
@@ -40,7 +40,7 @@ In that directory, create a text file named \_netrc (note that it's underscore n
 netrc like it is on UNIX). 
 
 The following three lines must be included in the .netrc or \_netrc file either separated by white space
-(spaces, tabs, or newlines) or commas.
+(spaces, tabs, or newlines) or commas.  
 
 machine <remote-machine-name>\cr
 login <user-email>\cr
@@ -48,29 +48,27 @@ password <user-password>
 
 
 One example would be:\cr
-machine atlas.scharp.org\cr
-login vobencha@fhcrc.org\cr
+machine localhost\cr
+login peter@labkey.com\cr
 password mypassword\cr
 
 Another example would be:\cr
-machine atlas.scharp.org login vobencha@fhcrc.org password mypassword
+machine atlas.scharp.org login vobencha@fhcrc.org password mypassword\cr
+\cr
+Multiple such blocks can exist in one file.
 }
 
-\author{
-
-
-
-Valerie Obenchain
+\author{Valerie Obenchain
 }
 \references{http://www.omegahat.org/RCurl/,\cr
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
+http://www.labkey.org/project/home/begin.view}
 \keyword{ package }
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
 \code{\link{labkey.insertRows}}, \cr
 \code{\link{labkey.updateRows}}, \code{\link{labkey.deleteRows}}
-}
-\examples{
+\cr
+The Rlabkey Users Guide is available by typing RlabkeyUsersGuide().
 }
 

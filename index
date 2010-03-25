@@ -5,5 +5,3 @@ labkey.insertRows		Insert new rows of data into a labkey database
 labkey.updateRows		Update exisiting rows of data in a labkey database
 labkey.deleteRows		Delete rows of data from a labkey database
 
-
-

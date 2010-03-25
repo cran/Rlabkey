@@ -1,5 +1,21 @@
+##
+#  Copyright (c) 2008-2010 Fred Hutchinson Cancer Research Center
+# 
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+##
+
 labkey.selectRows <- function(baseUrl, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL,
-        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE)
+        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption')
 {
 ## Empty string/NULL checking
 if(is.null(viewName)==FALSE) {char <- nchar(viewName); if(char<1){viewName<-NULL}}
@@ -49,10 +65,27 @@ reader <- basicTextGatherer()
 header <- basicTextGatherer()
 myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, netrc=1, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE, followlocation=TRUE)
 
+## Support user-settable options for debuggin and setting proxies etc
+if(exists(".lksession"))
+{
+	userOpt <- .lksession[["curlOptions"]] 
+	if (!is.null(userOpt))
+		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
+}
+
 ## Http get
 handle <- getCurlHandle()
 clist <- ifcookie()
-if(clist$Cvalue==1) {mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))} else {mydata <- getURI(myurl, .opts=myopts, curl=handle)}
+if(clist$Cvalue==1) 
+{	
+	mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))
+} 
+else 
+{
+	myopts <-curlOptions(.opts=c(myopts, httpauth=1L))
+	mydata <- getURI(myurl, .opts=myopts, curl=handle)
+}
+
 
 ## Error checking, decode data and return data frame
 h <- parseHeader(header$value())
@@ -60,14 +93,14 @@ status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 
 if(status==500)
-{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+{decode <- fromJSON2(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
   {contTypes <- which(names(h)=='Content-Type')
   if(length(contTypes)>1 & h[contTypes[2]]=="application/json;charset=utf-8")
-      {decode <- fromJSON(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
+      {decode <- fromJSON2(mydata); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
   {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
 
-newdata <- makeDF(mydata, colSelect, showHidden)
+newdata <- makeDF(mydata, colSelect, showHidden, colNameOpt)
 
 
 ## Check for less columns returned than requested
@@ -76,3 +109,4 @@ if(is.null(colSelect)==FALSE){if(ncol(newdata)<lencolSel)warning("Fewer columns 
 
 return(newdata)
 }
+

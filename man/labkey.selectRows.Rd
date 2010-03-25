@@ -7,14 +7,14 @@ Import full datasets or selected rows into R. The data can be sorted and filtere
 \usage{
 labkey.selectRows(baseUrl, folderPath, schemaName, queryName, 
 viewName = NULL, colSelect = NULL, maxRows = NULL, 
-rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE)
+rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE, colNameOpt="caption")
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
   \item{folderPath}{a string specifying the \code{folderPath} }
   \item{schemaName}{a string specifying the  \code{schemaName} for the query}
   \item{queryName}{a string specifying the \code{queryName}}
-  \item{viewName}{(optional) a string specifying the \code{viewName}}
+  \item{viewName}{(optional) a string specifying the \code{viewName} associated with the query. If not specified, the default view determines the rowset returned.  }
   \item{colSelect}{(optional) a vector of comma separated strings specifying which columns of a dataset or view to import}
   \item{maxRows}{(optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.}
   \item{colSort}{(optional) a string including the name of the column to sort preceeded by a \dQuote{+} or
@@ -24,62 +24,68 @@ value is specified, the retrieval starts with the first row.}
   \item{colFilter}{(optional) a vector or array object created by the \code{makeFilter} function which contains the
 column name, operator and value of the filter(s) to be applied to the retrieved data.}
   \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would normally be hidden from user view. If no value is specified, the hidden columns are not returned. In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
+  \item{colNameOpt}{(optional) controls the name source for the columns of the output dataframe, with valid values of 'caption', 'fieldname', and 'rname'}
 }
 \details{
-A full dataset or any portion of a dataset can be imported into an R data frame using the\cr 
+A full dataset or any portion of a dataset can be downloaded  into an R data frame using the 
 \code{labkey.selectRows} function. Function arguments are the components of the url that identify
 the location of the data and what actions should be taken on the data prior to import
 (ie, sorting, selecting particular columns or maximum number of rows, etc.).
 
-NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
-of each column on the web page and is longer and more descriptive. The column name is shorter and is
-used \dQuote{behind the scenes} for database manipulation. It is the column name that must be used in
-the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
-a web site, use the \dQuote{export to R script} option available as a drop down option under the \dQuote{views}
-tab for each dataset.
+Stored queries in LabKey Server have an associated default view and may have one or more named views.  Views determine the column set of
+the return data frame.  View columns cab be a subset or superset of the columns of the underlying query-- a subset if columns from the 
+query are left out of the view, and a superset if lookup columns in the underlying query are used to include columns from related queries.  
+Views can also include filter and sort propertiesthat will make thehir result set different from the underlying query.
+If no view is specified, the columns and rows returned are determined by the default view, which may not be the same as the 
+result rows of the underlying query.  Plese see the topic on Saving Views in the LabKey online documentation.
+
+In the returned data frame, there are three different ways to have the columns named:  
+\code{colNameOpt='caption'} uses the caption value, and is the default option for backward compatibility.  
+It may be the best option for displaying to another user, but may make scripting more difficult.
+\code{colNameOpt='fieldname'} uses the field name value, so that the data frame colnames are the same names
+that are used as arguments to labkey function calls.  It is the default for the new \code{\link{getRows}} session-based
+function.
+\code{colNameOpt='rname'} transforms the field name value into valid R names by substituting an underscore for both
+spaces and forward slach (/) characters, and the lower casing the entire name.  It is the way a data frame is passed to a
+script running at the LabKey server in the R View feature of the data grid.  If you are writing scripts for running in an 
+R view on the server, or if you prefer to work with legal r names in the returned grid, this option may be useful.
+
+For backward compatibility, column names returned by \code{labkey.executeSql} and \code{labkey.selectRows} 
+are field captions by default.  The \code{getRows} function has the same
+colNameOpt parameter but defaults to field names instead of captions.
 
 }
 \value{
-The requested data are returned in a data frame with column names as they appear on the website.
+The requested data are returned in a data frame with stringsAsFactors set to FALSE.  Column names are set as determined by the colNameOpt parameter.
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
+\references{https://www.labkey.org/wiki/home/Documentation/page.view?name=savingViews}
+
 \author{Valerie Obenchain}
 \seealso{
-\code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, \code{\link{labkey.insertRows}}, 
-\code{\link{labkey.updateRows}}, \cr
-\code{\link{labkey.deleteRows}}
+{Retrieve data:  } \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
+{Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}}\cr
+{List available data: } \code{\link{labkey.getSchemas}}, \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}},
+\code{\link{labkey.getQueryDetails}},\code{\link{labkey.getDefaultViewDetails}},\code{\link{labkey.getLookupDetails}},
 
 }
 \examples{
-## These example datasets are located at 
-## https://www.labkey.org/project/home/Study/demo/begin.view?
 
+# library(Rlabkey)
 
-## Retrieve full HIV Test Results dataset
-## Not run
-#fulldata <- labkey.selectRows(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#queryName="HIV Test Results")
+## select from a list named AllTypes
 
+rows <- labkey.selectRows(
+	baseUrl="http://localhost:8080/labkey",
+	folderPath="/apisamples",
+	schemaName="lists", 
+	queryName="AllTypes")
+	
+## select from a view on that list
+viewrows <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath="/apisamples", schemaName="Lists", queryName="AllTypes", viewName="rowbyrow")
 
-## Specifying filters, max rows and selecting columns
-## Not run
-#myfilters<- makeFilter(c("HIVLoadQuant","GREATER_THAN",500),
-#c("HIVRapidTest","EQUAL","Positive"))
-#smalldata <- labkey.selectRows(
-#baseUrl="https://www.labkey.org",
-#folderPath="/home/Study/demo",
-#schemaName="study",
-#queryName="HIV Test Results",
-#colSelect=c("ParticipantId","HIVDate","HIVLoadQuant","HIVRapidTest"),
-#maxRows=20,
-#colFilter=myfilters)
-
-
+## select a subset of columns
+colSelect=c("TextFld", "IntFld")
+subsetcols <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath="/apisamples",schemaName="lists", queryName="AllTypes", colSelect=colSelect)
 
 }
 \keyword{IO}
