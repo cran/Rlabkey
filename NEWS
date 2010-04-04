@@ -1,3 +1,9 @@
+Changes in version 2.1.110
+Major expansion of Rlabkey.  Added metadata functions, session-based access function, much faster rjson parsing on 
+returned data sets, many bug fixes related to null handling.  
+See the Rlabkey Users Guide for an overview of the package.
+	
+
 Changes in Version 0.0.9
   o Misc bug fixes
 

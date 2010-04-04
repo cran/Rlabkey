@@ -1,9 +1,23 @@
- makeDF <- function(rawdata, colSelect=NULL, showHidden)
-{
-    ## substitute null literals for NA so the data frame gets constructed properly
-    rawdata <- gsub("null", "\"NA\"", rawdata)
+##
+#  Copyright (c) 2008-2010 Fred Hutchinson Cancer Research Center
+# 
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+# 
+#      http://www.apache.org/licenses/LICENSE-2.0
+# 
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+##
 
-    decode <- fromJSON(rawdata)
+ makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
+{
+
+    decode <- fromJSON2(rawdata)
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
 	if(is.null(colSelect)==FALSE){
@@ -16,7 +30,23 @@
   	hindex <- NULL
   	hide <- NULL
   	for(j in 1:length(decode$columnModel))
-  	    {   cnames <- c(cnames, decode$columnModel[[j]]$header)
+  	{   	
+		## three different ways to refer to columns exist today
+		## selectRows and executeSQL by default return the field caption (also called the  "label")
+		## When sepcifying colSelect, colFilter, or ExecuteSql, you must use field names.
+		## when running R "views"  at the server, the field_name is modified to use underscores and lower cased.  
+		## This also makes it a legal name in R, which can be useful.
+
+  		if (colNameOpt=="caption")
+  			{cname <- decode$columnModel[[j]]$header}
+  		else if (colNameOpt == "fieldname")
+  			{cname <- decode$columnModel[[j]]$dataIndex}
+  		else if (colNameOpt == "rname" )
+  			{cname <- .getRNameFromName(decode$columnModel[[j]]$dataIndex, existing=cnames) }
+  		else
+  			{ stop("Invalid colNameOpt option.  Valid values are caption, fieldname, and rname.") }
+  			
+		cnames <- c(cnames, cname)
   	        hindex <- c(hindex, decode$columnModel[[j]]$dataIndex)
   	        hide <- c(hide, decode$columnModel[[j]]$hidden)}
   	refdf <- data.frame(cnames,hindex,hide)
@@ -35,24 +65,29 @@
 		warning("Empty data frame was returned. Query may be too restrictive.", call.=FALSE)}
 		return(emptydf)}
 		
-	if(length(decode$rows)>0)
-		{hold.dat <- NULL
-    	hold.dat <- matrix(sapply(decode$rows,rbind), nrow=length(decode$rows), byrow=TRUE)
-    	hold.dat <- as.data.frame(hold.dat)
-    	names(hold.dat) <- names(decode$rows[[1]])}
+	if(length(decode$rows)>0) {
+		hold.dat <- NULL
+    		hold.dat <- matrix(sapply(sapply(decode$rows,filterrow),rbind), nrow=length(decode$rows), byrow=TRUE)
+    		hold.dat <- as.data.frame(hold.dat,stringsAsFactors=FALSE)
+		tmprow <- filterrow(decode$rows[[1]])
+		names(hold.dat) <- names(tmprow)   			
+	}
 
 	## Order data
 	oindex <- NULL
-  	for(k in 1:length(names(hold.dat))){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+	## number of cols selected may be more or less than described in metadata
+  	for(k in 1:length(cnames)){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
+
   	refdf$oindex <- oindex
   	refdf$type <- NULL
-  	for(p in 1:dim(refdf)[1])
-  	    {   ind <- which(refdf$hindex==decode$metaData$fields[[p]]$name)
-  	        refdf$type[ind] <- decode$metaData$fields[[p]]$type}
+  	for(p in 1:dim(refdf)[1]) {   
+  	    ind <- which(refdf$hindex==decode$metaData$fields[[p]]$name)
+  	    refdf$type[ind] <- decode$metaData$fields[[p]]$type
+  	}
 
-	newdat <- NULL  	
-	for(i in 1:length(cnames)){ newdat <- cbind(newdat, hold.dat[,refdf$oindex[i]])}
-	newdat <- as.data.frame(newdat)
+	newdat <- matrix(ncol=0, nrow=length(decode$rows))
+	for(i in 1:length(cnames)){ newdat <- cbind(newdat, as.data.frame(hold.dat[,refdf$oindex[i]], stringsAsFactors=FALSE) )}
+	newdat <- as.data.frame(newdat,stringsAsFactors=FALSE)
 
   	## Delete hidden column(s) unless showHidden=TRUE
       if(showHidden==TRUE)   {} else {
@@ -85,14 +120,42 @@
   	if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
   	{print("MetaData field type not recognized.")}
 	newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames[1]}
+	
 
-
-	## Replace string "NA" with NA in character columns
-	for(k in 1:ncol(newdat))
-		{if(mode(newdat[,k])=="character") {na.ind <- which(newdat[,k]=="NA")
-											ifelse(na.ind>0, newdat[na.ind,k] <- NA, )}}    
-
-  	
+	
 return(newdat)
 }
 
+## need to get rid of hidden hrefs within the row, R doesn't use them and their presence causes problems
+## also consolidate null handling here
+filterrow<-function(row)
+{
+	filtered <- NULL
+	for (x in 1:length(row)) {		
+		valname <- names(row[x])
+		if ((nchar(valname)>11) && (substr(valname,1,11) == as.character("_labkeyurl_"))) {
+			next
+		}
+		if (is.null(row[x][[valname]])) { row[x][[valname]]<-NA }
+		filtered <- c(filtered, row[x])
+	}	
+return(filtered)
+
+}
+
+.getRNameFromName <- function(lkname, existing=NULL)
+{
+	rname <- tolower(chartr(" /", "__", lkname))
+	
+	if (length(existing)>0) 
+	{ 
+		for (i in 1:99)
+		{
+			if(length(existing[rname == existing]) ==0 )
+				{break;}
+			else 
+				{rname<- c(rname + as.character(i))}
+  	    	} 
+  	}    	
+  	return (rname)
+}

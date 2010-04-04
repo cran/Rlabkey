@@ -1,14 +1,14 @@
 \name{labkey.deleteRows}
 \alias{labkey.deleteRows}
-\title{Delete rows of data from a labkey database}
+\title{Delete rows of data from a LabKey database}
 \description{
-Specify rows of data to be deleted from the database.
+Specify rows of data to be deleted from the LabKey Server
 }
 \usage{
 labkey.deleteRows(baseUrl, folderPath, schemaName, queryName, toDelete) 
 }
 \arguments{
-  \item{baseUrl}{a string specifying the \code{baseUrl}for labkey server}
+  \item{baseUrl}{a string specifying the \code{baseUrl}for LabKey server}
   \item{folderPath}{a string specifying the \code{folderPath}}
   \item{schemaName}{a string specifying the  \code{schemaName} for the query}
   \item{queryName}{a string specifying the  \code{queryName}}
@@ -17,7 +17,7 @@ labkey.deleteRows(baseUrl, folderPath, schemaName, queryName, toDelete)
 \details{
 A single row or multiple rows of data can be deleted.  For the \code{toDelete} data frame, version 0.0.5 or later accepts either a single column 
 of data containing the data identifiers  (e.g., key or lsid) or the entire row of data to be deleted.
-The names of the data in the data frame must be the column names from the labkey database.
+The names of the data in the data frame must be the column names from the LabKey Server.
 The data frame must be created with the \code{stringsAsFactors} set to FALSE.
 
 NOTE: Each variable in a dataset has both a column label and a column name. The column label is visible at the top
@@ -37,10 +37,6 @@ and folder path used in the request.  The
 number as passed in the request. The \bold{rows} property contains a list of rows corresponding to the rows
 deleted.
 }
-\references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
-https://www.labkey.org/project/home/begin.view}
-
 \author{Valerie Obenchain}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
@@ -49,35 +45,48 @@ https://www.labkey.org/project/home/begin.view}
 }
 
 \examples{
+
 ## Insert, update and delete
-# Note that users must have the necessary permissions in the database
-# to be able to modify data through the use of these functions
+## Note that users must have the necessary permissions in the LabKey Server
+## to be able to modify data through the use of these functions
+# library(Rlabkey)
 
-### Not run
-#newrow <- data.frame(name="Frank", age=11, stringsAsFactors=FALSE)
-#labkey.insertRows(
-#baseUrl="https://atlas-test.scharp.org/cpas", 
-#folderPath="/CHAVI/Analysis/vobencha", 
-#schemaName="lists", 
-#queryName="testlist", 
-#toInsert=newrow)
-#
-#updaterow=data.frame(Key=4,name="Patty",age=11, stringsAsFactors=FALSE)
-#mydata <- labkey.updateRows(
-#baseUrl="https://atlas-test.scharp.org/cpas", 
-#folderPath="/CHAVI/Analysis/vobencha", 
-#schemaName="lists", 
-#queryName="testlist", 
-#toUpdate=updaterow)
-#
-#deleterow <- data.frame(Key=1, stringsAsFactors=FALSE)
-#mydata <- labkey.deleteRows(
-#baseUrl="https://atlas-test.scharp.org/cpas", 
-#folderPath="/CHAVI/Analysis/vobencha", 
-#schemaName="lists", 
-#queryName="testlist", 
-#toDelete=deleterow)
+newrow <- data.frame(
+	DisplayFld="Inserted from R"
+	, TextFld="how its done"
+	, IntFld= 98 
+	, DoubleFld = 12.345
+	, DateTimeFld = "03/01/2010"
+	, BooleanFld= FALSE
+	, LongTextFld = "Four score and seven years ago"
+#	, AttachmentFld = NA    #attachment fields not supported 
+	, RequiredText = "Veni, vidi, vici"
+	, RequiredInt = 0
+	, Category = "LOOKUP2"
+	, stringsAsFactors=FALSE)
 
+insertedRow <- labkey.insertRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes", toInsert=newrow)
+newRowId <- insertedRow$rows[[1]]$RowId
+
+selectedRow<-labkey.selectRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes"
+		, colFilter=makeFilter(c("RowId", "EQUALS", newRowId)))
+selectedRow
+
+updaterow=data.frame(
+	RowId=newRowId
+	, DisplayFld="Updated from R"
+	, TextFld="how to update"
+	, IntFld= 777 
+	, stringsAsFactors=FALSE)
+
+updatedRow <- labkey.updateRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes", toUpdate=updaterow)
+selectedRow<-labkey.selectRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes"
+		, colFilter=makeFilter(c("RowId", "EQUALS", newRowId)))
+selectedRow
+
+deleterow <- data.frame(RowId=newRowId, stringsAsFactors=FALSE)
+result <- labkey.deleteRows(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists", queryName="AllTypes",  toDelete=deleterow)
+result
 
 }
 \keyword{IO}
