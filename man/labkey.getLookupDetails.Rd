@@ -28,6 +28,8 @@ The available schemas are returned as a data frame, with the same columns as det
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getDefaultViewDetails}}
 }
 \examples{
+\dontrun{
+
 ## Details  of fields of a query referenced by a lookup field
 # library(Rlabkey)
 
@@ -63,5 +65,6 @@ rows<- labkey.selectRows(
  )
  rows
 
+}
 }
 \keyword{IO}

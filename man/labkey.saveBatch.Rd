@@ -34,6 +34,7 @@ Note that saveBatch currently supports only a single run with one result set per
 \code{\link{labkey.deleteRows}}
 }
 \examples{
+\dontrun{
 
 ## Very simple example of an analysis flow:  query some data, calculate some stats,
 ## then save the calculations as an assay result set in LabKey Server
@@ -66,5 +67,6 @@ assayInfo<- labkey.saveBatch(
 	runPropertyList=rpl
 )
 
+}
 }
 \keyword{IO}

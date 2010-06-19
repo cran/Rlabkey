@@ -19,10 +19,12 @@ getFolderPath(session)
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}  \code{\link{lsFolders}}}
 \examples{
+\dontrun{
 # library(Rlabkey)
 
 lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
 getFolderPath(lks)  #returns "/apisamples"
 
+}
 }
 \keyword{file}

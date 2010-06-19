@@ -19,6 +19,8 @@ lsSchemas(session)
 \seealso{\code{\link{getSession}}, {\code{\link{lsFolders}}, \code{\link{lsProjects}}}
 }
 \examples{
+\dontrun{
+
 ##  get a list of schemas available in the current session context
 # library(Rlabkey)
 
@@ -26,5 +28,6 @@ lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples
 
 lsSchemas(lks) #returns several schema names, e.g. "lists", "core", "MS1", etc.
 
+}
 }
 \keyword{file}

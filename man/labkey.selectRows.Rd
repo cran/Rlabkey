@@ -69,6 +69,8 @@ The requested data are returned in a data frame with stringsAsFactors set to FAL
 
 }
 \examples{
+\dontrun{
+
 
 # library(Rlabkey)
 
@@ -87,5 +89,6 @@ viewrows <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath=
 colSelect=c("TextFld", "IntFld")
 subsetcols <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath="/apisamples",schemaName="lists", queryName="AllTypes", colSelect=colSelect)
 
+}
 }
 \keyword{IO}

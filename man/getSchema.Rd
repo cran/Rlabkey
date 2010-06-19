@@ -21,6 +21,8 @@ schema objects is essentially the same as the schema and query objects shown in 
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}}
 \examples{
+\dontrun{
+
 
 ## the basics of using session, schema, and query objects
 
@@ -40,5 +42,6 @@ cols <- c(names(sch$AllTypes[2:6]), names(lucols)[2:4])
 
 getRows(s, sch$AllTypes, colSelect=cols)
 
+}
 }
 \keyword{file}

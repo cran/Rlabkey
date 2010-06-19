@@ -56,6 +56,8 @@ https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}
 \examples{
+\dontrun{
+
 # library(Rlabkey)
 
 ## Two filters, ANDed together
@@ -94,5 +96,6 @@ rows <- labkey.selectRows(
 )
 rows
 
+}
 }
 \keyword{file}

@@ -28,6 +28,7 @@ that with getRows the default is 'fieldname' instead of 'caption'.
 \code{\link{labkey.selectRows}}
 }
 \examples{
+\dontrun{
 
 ## simple example of getting data using schema objects
 
@@ -42,5 +43,6 @@ scobj$AllTypes  ## this is the query object
 
 getRows(s, scobj$AllTypes)
 	
+}
 }
 \keyword{file}

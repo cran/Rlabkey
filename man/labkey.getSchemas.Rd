@@ -33,7 +33,7 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-
+\dontrun{
 
 ## List of schemas
 # library(Rlabkey)
@@ -44,5 +44,6 @@ schemasDF <- labkey.getSchemas(
 )
 
 
+}
 }
 \keyword{IO}
