@@ -36,6 +36,8 @@ inserted.
 \code{\link{labkey.deleteRows}}
 }
 \examples{
+\dontrun{
+
 ## Insert, update and delete
 ## Note that users must have the necessary permissions in the database
 ## to be able to modify data through the use of these functions
@@ -75,5 +77,6 @@ selectedRow<-labkey.selectRows("http://localhost:8080/labkey", folderPath="/apis
 deleterow <- data.frame(RowId=newRowId, stringsAsFactors=FALSE)
 result <- labkey.deleteRows(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists", queryName="AllTypes",  toDelete=deleterow)
 
+}
 }
 \keyword{IO}

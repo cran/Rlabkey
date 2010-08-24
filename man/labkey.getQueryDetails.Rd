@@ -69,6 +69,8 @@ The available schemas are returned as a data frame,
 \code{\link{labkey.getDefaultViewDetails}}, \code{\link{labkey.getLookupDetails}}
 }
 \examples{
+\dontrun{
+
 ## Details  of fields of a query
 # library(Rlabkey)
 
@@ -78,5 +80,6 @@ queryDF<-labkey.getQueryDetails(
 	schemaName="lists",
 	queryName="AllTypes")
 
+}
 }
 \keyword{IO}

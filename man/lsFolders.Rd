@@ -19,6 +19,8 @@ lsFolders(session)
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}, \code{\link{lsProjects}}, \code{\link{lsSchemas}}}
 \examples{
+\dontrun{
+
 ##get a list if projects and folders
 # library(Rlabkey)
 
@@ -28,5 +30,6 @@ lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples
 
 lsFolders(lks) #returns values "/apisamples" , "/apisamples/sub1" ,"/apisamples/sub1/child" ,"/apisamples/sub2"  
 
+}
 }
 \keyword{file}

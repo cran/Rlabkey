@@ -40,6 +40,8 @@ See \code{\link{labkey.selectRows}} for a discussion of the valid options and de
 \code{\link{labkey.deleteRows}}, \code{\link{getRows}}
 }
 \examples{
+\dontrun{
+
 ## Example of an expicit join and use of group by and aggregates
 # library(Rlabkey)
 
@@ -60,5 +62,6 @@ sqlResults <- labkey.executeSql(
 
 sqlResults
 
+}
 }
 \keyword{IO}

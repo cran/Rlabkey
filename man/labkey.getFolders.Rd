@@ -32,11 +32,13 @@ The available schemas are returned as a single-column data frame..
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getDefaultViewDetails}}, \code{\link{labkey.getLookupDetails}},
 }
 \examples{
+\dontrun{
 
 ## List of folders 
 # library(Rlabkey)
 folders <- labkey.getFolders(baseUrl="http://localhost:8080/labkey",	folderPath="/apisamples")
 folders
 
+}
 }
 \keyword{IO}

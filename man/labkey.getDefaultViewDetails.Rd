@@ -29,6 +29,8 @@ The output field attributes of the default view are returned as a data frame.  S
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getLookupDetails}}
 }
 \examples{
+\dontrun{
+
 ## Details  of fields of a default query view
 # library(Rlabkey)
 
@@ -40,5 +42,6 @@ queryDF <- labkey.getDefaultViewDetails(
 	
 queryDF
 
+}
 }
 \keyword{IO}

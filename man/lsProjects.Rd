@@ -18,6 +18,7 @@ lsProjects(baseUrl)
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}, \code{\link{lsProjects}}, \code{\link{lsSchemas}}}
 \examples{
+\dontrun{
 
 ## get list of projects on server, connect a session in one project, then list the folders in that project
 # library(Rlabkey)
@@ -28,6 +29,6 @@ lsFolders(lkorg)
 
 lkorg <- getSession("http://www.labkey.org", "/home/Study/ListDemo")
 lsSchemas(lkorg)
-
+}
 }
 \keyword{file}

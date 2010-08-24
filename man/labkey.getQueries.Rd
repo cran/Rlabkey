@@ -40,7 +40,7 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-
+\dontrun{
 ## List of queries in a schema
 # library(Rlabkey)
 queriesDF <- labkey.getQueries(
@@ -48,6 +48,6 @@ queriesDF <- labkey.getQueries(
 	folderPath="/apisamples",
 	schemaName="lists"
 )
-
+}
 }
 \keyword{IO}

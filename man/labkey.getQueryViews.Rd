@@ -37,6 +37,7 @@ The available views for a query are returned as a three-column data frame, with 
 
 }
 \examples{
+\dontrun{
 
 ## List of views defined for a query in a schema
 # library(Rlabkey)
@@ -47,5 +48,7 @@ viewsDF <- labkey.getQueryViews(
 	schemaName="lists",
 	queryName="AllTypes"
 )
+
+}
 }
 \keyword{IO}

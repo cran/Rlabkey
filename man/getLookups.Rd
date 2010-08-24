@@ -26,6 +26,7 @@ a lookup query object are compound names relative to the base query object used 
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}, \code{\link{getRows}} \code{\link{getSchema}}}
 \examples{
+\dontrun{
 
 ##  get fields from lookup tables and add to query
 
@@ -42,5 +43,6 @@ cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
 
 getRows(s, scobj$AllTypes, colSelect=paste(cols, sep=","))
 
+}
 }
 \keyword{file}

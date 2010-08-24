@@ -15,7 +15,10 @@ RlabkeyUsersGuide(view=TRUE)
 }
 \author{Peter Hussey}
 \examples{
+\dontrun{
+
 # library(Rlabkey)
 ##RlabkeyUsersGuide()
+}
 }
 \keyword{file}

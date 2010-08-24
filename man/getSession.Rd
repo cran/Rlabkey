@@ -39,6 +39,8 @@ discussion of how the user identity is established.
 The Rlabkey Users Guide is available by typing RlabkeyUsersGuide().
 }
 \examples{
+\dontrun{
+
 
 # library(Rlabkey)
 s<-getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
@@ -77,5 +79,6 @@ sdbg<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisample
 getRows(sdbg, scobj$AllTypes)
 strwrap(d$value(), 100)
 
+}
 }
 \keyword{file}
