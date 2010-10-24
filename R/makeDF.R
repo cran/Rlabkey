@@ -90,14 +90,18 @@
 	newdat <- as.data.frame(newdat,stringsAsFactors=FALSE)
 
   	## Delete hidden column(s) unless showHidden=TRUE
-      if(showHidden==TRUE)   {} else {
-            if(is.null(decode$metaData$id)) {} else {
-            hide.ind <- which(refdf$hide==TRUE); if(length(hide.ind)>0){
-            newdat <- newdat[,-hide.ind]
-            refdf <- refdf[-hide.ind,]
-            cnames <- cnames[-hide.ind]} else {}
-            }
-      }
+	if (showHidden==TRUE || is.null(decode$metaData$id)) {}  else { 
+		hide.ind <- which(refdf$hide==TRUE)
+		if(length(hide.ind)>0 ) {
+			if(length(hide.ind) == length(newdat)) {
+				stop("No visible columns selected.  Use the showHidden=TRUE to see these columns.") 
+			} else {
+				newdat <- newdat[,-hide.ind]
+				refdf <- refdf[-hide.ind,]
+				cnames <- cnames[-hide.ind] 
+			}
+		} else {}		
+	}
 
 	## Set mode for multiple columns of data (this also removes list factor)
 	if(is.null(dim(newdat))==FALSE) 
