@@ -15,7 +15,7 @@
 ##
 
 labkey.selectRows <- function(baseUrl, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL,
-        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption')
+        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption', containerFilter=NULL)
 {
 ## Empty string/NULL checking
 if(is.null(viewName)==FALSE) {char <- nchar(viewName); if(char<1){viewName<-NULL}}
@@ -25,6 +25,8 @@ if(is.null(rowOffset)==FALSE) {char <- nchar(rowOffset); if(char<1){rowOffset<-N
 if(is.null(colSort)==FALSE) {char <- nchar(colSort); if(char<1){colSort<-NULL}}
 if(is.null(colFilter)==FALSE) {char <- nchar(colFilter[1]); if(char<1){colFilter<-NULL}}
 if(is.null(showHidden)==FALSE) {char <- nchar(showHidden); if(char<1){showHidden<-FALSE}}
+if(is.null(containerFilter)==FALSE) {char <- nchar(containerFilter[1]); if(char<1){containerFilter<-NULL}}
+
 
 ## Error if any of baseUrl, folderPath, schemName or queryName are missing
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("queryName")==FALSE)
@@ -35,6 +37,7 @@ if(length(grep("%",schemaName))<1) {schemaName <- URLencode(schemaName)}
 if(length(grep("%",queryName))<1) {queryName <- URLencode(queryName)}
 if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
 if(is.null(viewName)==FALSE) {if(length(grep("%",viewName))<1) viewName <- URLencode(viewName)}
+if(is.null(containerFilter)==FALSE) {if(length(grep("%",containerFilter))<1) containerFilter<- URLencode(containerFilter)}
 
 ## Format colSelect
 if(is.null(colSelect)==FALSE)
@@ -59,6 +62,7 @@ if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&query.offset=",rowOffset,s
 if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")}
 if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) myurl <- paste(myurl,"&query.",colFilter[j],sep="")}
 if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
+if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
 
 ## Set options
 reader <- basicTextGatherer()

@@ -38,8 +38,8 @@ DOES_NOT_CONTAIN\cr
 STARTS_WITH\cr
 DOES_NOT_START_WITH\cr
 EQUALS_ONE_OF\cr
-QC_VALUE\cr
-NOT_QC_VALUE
+MV_INDICATOR\cr
+NO_MV_INDICATOR
 
 When using the MISSING or NOT_MISSING operators, an empty string should be supplied as the value.
 See example below.

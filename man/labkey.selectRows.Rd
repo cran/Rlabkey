@@ -7,7 +7,7 @@ Import full datasets or selected rows into R. The data can be sorted and filtere
 \usage{
 labkey.selectRows(baseUrl, folderPath, schemaName, queryName, 
 viewName = NULL, colSelect = NULL, maxRows = NULL, 
-rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE, colNameOpt="caption")
+rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE, colNameOpt="caption", containerFilter=NULL)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -25,6 +25,17 @@ value is specified, the retrieval starts with the first row.}
 column name, operator and value of the filter(s) to be applied to the retrieved data.}
   \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would normally be hidden from user view. If no value is specified, the hidden columns are not returned. In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
   \item{colNameOpt}{(optional) controls the name source for the columns of the output dataframe, with valid values of 'caption', 'fieldname', and 'rname'}
+  \item{containerFilter}{(optional) Specifies the containers to include in the scope of selectRows request. A value of NULL is equivalent to "Current".   Valid values are 
+     \itemize{
+  	      \item{ "Current": Include the current folder only}
+  	      \item{ "CurrentAndSubfolders": Include the current folder and all subfolders }
+  	      \item{ "CurrentPlusProject": Include the current folder and the project that contains it }
+  	      \item{ "CurrentAndParents": Include the current folder and its parent folders }
+  	      \item{ "CurrentPlusProjectAndShared": Include the current folder plus its project plus any shared folders }
+  	      \item{ "AllFolders": Include all folders for which the user has read permission }
+	}
+  }
+  
 }
 \details{
 A full dataset or any portion of a dataset can be downloaded  into an R data frame using the 

@@ -50,9 +50,12 @@
  								"STARTS_WITH"="startswith",
  								"DOES_NOT_START_WITH"="doesnotstartwith",
  								"EQUALS_ONE_OF"="in",
-								"QC_VALUE"="hasqcvalue",
-								"NOT_QC_VALUE"="noqcvalue")
-
+								"MV_INDICATOR"="hasmvvalue",
+								"NO_MV_INDICATOR"="nomvvalue",
+								"QC_VALUE"="hasmvvalue",
+								"NOT_QC_VALUE"="nomvvalue")
+								# last two  for backward compatibility of renamed feature
+								
  				if(is.null(fop)==TRUE) stop ("Invalid operator name.")
  				# url encode column name and value
  				colnam <- URLencode(fmat[i,1])
