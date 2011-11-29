@@ -41,7 +41,7 @@ EQUALS_ONE_OF\cr
 MV_INDICATOR\cr
 NO_MV_INDICATOR
 
-When using the MISSING or NOT_MISSING operators, an empty string should be supplied as the value.
+When using the MISSING, NOT_MISSING, MV_INDICATOR, or NO_MV_INDICATOR operators, an empty string should be supplied as the value.
 See example below.
 }
 
@@ -84,7 +84,7 @@ rows <- labkey.selectRows(
 )
 rows
 
-## Using "not missing" operator:
+## Using "missing" operator:
 filter3 <- makeFilter(c("IntFld","MISSING","")) 
 
 rows <- labkey.selectRows(
