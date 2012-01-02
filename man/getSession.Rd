@@ -1,8 +1,9 @@
 \name{getSession}
 \alias{getSession}
-\title{Allows interaction with LabKey Server schemas}
+\title{Creates and returns a LabKey Server session}
 \description{
-Builds field lists to be used in \code{labkey.selectRows}.
+The session object holds server address and folder context for a user working with LabKey Server.  The session-based model 
+supports more efficient interactive use of LabKey Server from R.
 }
 \usage{
 getSession(baseUrl, folderPath="/home", curlOptions=NULL, lkOptions=NULL)
@@ -14,7 +15,7 @@ getSession(baseUrl, folderPath="/home", curlOptions=NULL, lkOptions=NULL)
   \item{lkOptions}{(optional) a list of settings for default behavior on naming of objects, see details}
 }
 \details{
-Creates a session key that is passed to all the other functions.  Associated with the key are a baseUrl and a folderPath which
+Creates a session key that is passed to all the other session-based functions.  Associated with the key are a baseUrl and a folderPath which
 determine the security context.  
 
 \code{curlOptions}

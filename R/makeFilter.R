@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2010 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2011 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -58,8 +58,8 @@
 								
  				if(is.null(fop)==TRUE) stop ("Invalid operator name.")
  				# url encode column name and value
- 				colnam <- URLencode(fmat[i,1])
- 				fvalue <- URLencode(fmat[i,3])
+ 				colnam <- curlEscape(fmat[i,1])
+ 				fvalue <- curlEscape(fmat[i,3])
  				filters[i] <- paste(colnam,"~",fop,"=",fvalue,sep="")
  			}
 

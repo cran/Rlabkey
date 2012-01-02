@@ -1,3 +1,6 @@
+Changes in version 2.1.116
+Minor change to makeFiler.R to use curlEscape instead of URLencode for encoding the colFilter parameters.
+
 Changes in version 2.1.110
 Major expansion of Rlabkey.  Added metadata functions, session-based access function, much faster rjson parsing on 
 returned data sets, many bug fixes related to null handling.  
