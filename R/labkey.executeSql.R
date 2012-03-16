@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2010 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2012 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -25,9 +25,9 @@ if(is.null(maxRows)==FALSE || is.null(rowOffset)==FALSE){showAllRows=FALSE}
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("sql")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and sql."))
 
-## URL encoding of schema and folder path
-if(length(grep("%",schemaName))<1) {schemaName <- URLencode(schemaName)}
-if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
+## URL encoding of schema and folder path (if not already encoded)
+if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
+if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)

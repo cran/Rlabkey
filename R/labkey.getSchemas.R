@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010 LabKey Corporation
+#  Copyright (c) 2010-2012 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -30,8 +30,8 @@ labkey.getSchemas <- function(baseUrl, folderPath)
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
 
-## URL encoding of folder path
-if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
+## URL encoding of folder path (if not already encoded)
+if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)

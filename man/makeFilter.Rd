@@ -27,6 +27,8 @@ NOT_EQUAL\cr
 NOT_EQUAL_OR_MISSING\cr
 DATE_EQUAL\cr
 DATE_NOT_EQUAL\cr
+DATE_GREATER_THAN_OR_EQUAL\cr
+DATE_LESS_THAN_OR_EQUAL\cr
 MISSING\cr
 NOT_MISSING\cr
 GREATER_THAN\cr
@@ -37,9 +39,12 @@ CONTAINS\cr
 DOES_NOT_CONTAIN\cr
 STARTS_WITH\cr
 DOES_NOT_START_WITH\cr
-EQUALS_ONE_OF\cr
+IN\cr
+NOT_IN\cr
 MV_INDICATOR\cr
-NO_MV_INDICATOR
+NO_MV_INDICATOR\cr
+CONTAINS_ONE_OF\cr
+CONTAINS_NONE_OF
 
 When using the MISSING, NOT_MISSING, MV_INDICATOR, or NO_MV_INDICATOR operators, an empty string should be supplied as the value.
 See example below.
@@ -73,8 +78,8 @@ rows <- labkey.selectRows(
 )
 rows
 
-## Using "equals one of" operator:
-filter2 <- makeFilter(c("RowId","EQUALS_ONE_OF","2;3;6"))
+## Using "in" operator:
+filter2 <- makeFilter(c("RowId","IN","2;3;6"))
 rows <- labkey.selectRows(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples",

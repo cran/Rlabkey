@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010 LabKey Corporation
+#  Copyright (c) 2010-2012 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -34,14 +34,14 @@ labkey.getQueryViews <- function(baseUrl, folderPath, schemaName, queryName)
 getQueryLists <- function(baseUrl, folderPath, schemaName, queryName=NULL)
 {
 
-	if((length(queryName)>0) && (length(grep("%",queryName)) <1) ) { queryName <- URLencode(queryName) }
+	if((length(queryName)>0) && (queryName==curlUnescape(queryName)) ) { queryName <- curlEscape(queryName) }
 	## Error if any of baseUrl, folderPath, or schemName are missing
 	if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE )
 	{stop ("A value must be specified for each of baseUrl, folderPath, schemaName.")}
 
-	## URL encoding of schemaName and folderPath
-	if(length(grep("%",schemaName))<1) {schemaName <- URLencode(schemaName)}
-	if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
+	## URL encoding of schemaName and folderPath (if not already encoded)
+	if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
+	if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 	## Formatting
 	baseUrl <- gsub("[\\]", "/", baseUrl)

@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2010 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2012 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -107,7 +107,7 @@
 	if(is.null(dim(newdat))==FALSE) 
   	{for(j in 1:ncol(newdat))
   	    {mod <- refdf$type[j]
-  	    if(mod=="date"){ newdat[,j] <- as.Date(as.character(newdat[,j]), "%d %b %Y %H:%M:%S")}else
+  	    if(mod=="date") { newdat[,j] <- .parseDate(newdat[,j])} else
 	    if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
   	    if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
   	    if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
@@ -159,7 +159,18 @@ return(filtered)
 				{break;}
 			else 
 				{rname<- c(rname + as.character(i))}
-  	    	} 
+        } 
   	}    	
   	return (rname)
+}
+
+.parseDate <- function(s)
+{
+    s <- as.character(s);
+    d <- tryCatch(as.Date(s),error = function(e) NA);
+    if (any(is.na(d)))
+    {
+        d[is.na(d)] <- as.Date(s[is.na(d)], "%d %b %Y %H:%M:%S");
+    }
+    return(d);
 }
