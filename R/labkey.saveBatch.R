@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010 LabKey Corporation
+#  Copyright (c) 2010-2012 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -30,9 +30,9 @@ if(substr(baseUrl, nchar(baseUrl), nchar(baseUrl))!="/"){baseUrl <- paste(baseUr
 if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
-## URL encode folder path and assay name, 
-if(length(grep("%",folderPath))<1) {folderPath <- URLencode(folderPath)}
-if(length(grep("%",assayName))<1) {assayNameParam <- URLencode(assayName)}
+## URL encode folder path and assay name (if not already encoded) 
+if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(assayName==curlUnescape(assayName)) {assayNameParam <- curlEscape(assayName)}
 else {assayNameParam <- assayName}
 
 ## Set options

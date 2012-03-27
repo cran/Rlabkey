@@ -1,3 +1,10 @@
+Changes in version 2.1.117
+  o Changes to use curlEscape instead of URLencode for schemaName, queryName, lookupKey, assayName, viewName, and colSelect
+  o Add parsing of new JSON date format
+  o The following filter types were added to the makeFilter function:
+        DATE_GREATER_THAN_OR_EQUAL, DATE_LESS_THAN_OR_EQUAL,
+        IN, NOT_IN, EQUALS_NONE_OF, CONTAINS_ONE_OF, and CONTAINS_NONE_OF
+
 Changes in version 2.1.116
 Minor change to makeFiler.R to use curlEscape instead of URLencode for encoding the colFilter parameters.
 
