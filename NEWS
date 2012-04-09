@@ -1,3 +1,6 @@
+Changes in version 2.1.118
+  o convert factors to strings for toJSON usages in labkey.insertRows, labkey.updateRows, and labkey.deleteRows
+
 Changes in version 2.1.117
   o Changes to use curlEscape instead of URLencode for schemaName, queryName, lookupKey, assayName, viewName, and colSelect
   o Add parsing of new JSON date format

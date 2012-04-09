@@ -31,6 +31,7 @@ if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- 
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## URL encode folder path, JSON encode post body (if not already encoded)
+toInsert <- convertFactorsToStrings(toInsert);
 if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 nrows <- nrow(toInsert)
 ncols <- ncol(toInsert)
