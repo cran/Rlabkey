@@ -174,3 +174,11 @@ return(filtered)
     }
     return(d);
 }
+
+# converts the factors of a data frame to characters
+convertFactorsToStrings <- function(df)
+{
+    factors <- sapply(df, is.factor)
+    df[factors] <- lapply(df[factors], as.character)
+    return(df);
+}
