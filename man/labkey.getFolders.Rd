@@ -22,7 +22,12 @@ Folders cut across schemas.  Some schemas, like the lists schema are not visible
 defined in it. Other schemas are visible in all folders.
 }
 \value{
-The available schemas are returned as a single-column data frame..
+The available folders are returned as a three-column data frame containing
+
+\code{name}{the name of the folder}  \cr
+\code{folderPath} {the full path of the folder from the project root} \cr
+\code{effectivePermissions}{the current user's effective permissions for the given folder}\cr
+
 }
 \author{Peter Hussey, peter@labkey.com}
 \seealso{

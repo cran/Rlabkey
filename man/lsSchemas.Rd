@@ -1,6 +1,6 @@
 \name{lsSchemas}
 \alias{lsSchemas}
-\title{List the available queries }
+\title{List the available schemas }
 \description{ Lists the available schemas given the current folder path for a Labkey session }
 
 \usage{

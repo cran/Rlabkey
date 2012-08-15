@@ -121,7 +121,7 @@
 	lsSchemas <-
 		function(session)
 	{
-		print(.getSchemasAsList(session))
+		return(.getSchemasAsList(session))
 	}
 
 

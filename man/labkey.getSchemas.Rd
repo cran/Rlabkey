@@ -19,7 +19,7 @@ Function arguments are the components of the url that identify the location of t
 
 }
 \value{
-The available schemas are returned as a single-column data frame..
+The available schemas are returned as a single-column data frame.
 }
 \references{http://www.omegahat.org/RCurl/,\cr 
 http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
