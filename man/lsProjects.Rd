@@ -10,13 +10,13 @@ lsProjects(baseUrl)
   \item{baseUrl}{a string specifying the \code{baseUrl}for the Labkey Server, of the form http://<server dns name>/<contextroot> }
 
 }
-\details{  Lists the available folder paths relative to the current folder path for a Labkey session.
+\details{  List the projects available at a given Labkey Server address.
 }
-\value{ A character array containing the available folder paths, relative to the root.  These values can be set on a session usiig curFolder<-
+\value{ A character array containing the available projects, relative to the root.  These values can be set on a session using curFolder<-
 }
 \references{https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}
-\seealso{\code{\link{getSession}}, \code{\link{lsProjects}}, \code{\link{lsSchemas}}}
+\seealso{\code{\link{getSession}}, \code{\link{lsFolders}}, \code{\link{lsSchemas}}}
 \examples{
 \dontrun{
 

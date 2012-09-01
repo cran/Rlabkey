@@ -13,7 +13,7 @@ lsFolders(session)
 \details{  Lists the available folder paths relative to the current folder path for a Labkey session 
 }
 
-\value{ A character array containing the available folder paths, relative to the root.  These values can be set on a session usiig curFolder<-
+\value{ A character array containing the available folder paths, relative to the project root.  These values can be set on a session usiig curFolder<-
 }
 \references{https://www.labkey.org/wiki/home/Documentation/page.view?name=projects}
 \author{Peter Hussey}

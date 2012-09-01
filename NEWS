@@ -1,3 +1,7 @@
+Changes in version 2.1.119
+  o add new labkey.makeRemotePath function 
+  o minor documentation fixes
+
 Changes in version 2.1.118
   o convert factors to strings for toJSON usages in labkey.insertRows, labkey.updateRows, and labkey.deleteRows
 

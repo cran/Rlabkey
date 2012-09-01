@@ -1,7 +1,7 @@
 useDynLib(Rlabkey)
 export(labkey.selectRows, labkey.executeSql, makeFilter, labkey.insertRows, labkey.updateRows, labkey.deleteRows, 
 	labkey.getSchemas, labkey.getQueries, labkey.getQueryViews, labkey.getQueryDetails, labkey.getDefaultViewDetails, labkey.getFolders,
-	labkey.getLookupDetails, getSession, getRows, getLookups, lsSchemas, lsFolders, lsProjects, labkey.saveBatch)
+	labkey.getLookupDetails, labkey.makeRemotePath, getSession, getRows, getLookups, lsSchemas, lsFolders, lsProjects, labkey.saveBatch)
 export("getSchema")
 export("getFolderPath")
 export("saveResults")
