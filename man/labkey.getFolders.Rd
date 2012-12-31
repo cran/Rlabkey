@@ -24,9 +24,9 @@ defined in it. Other schemas are visible in all folders.
 \value{
 The available folders are returned as a three-column data frame containing
 
-\code{name}{the name of the folder}  \cr
-\code{folderPath} {the full path of the folder from the project root} \cr
-\code{effectivePermissions}{the current user's effective permissions for the given folder}\cr
+\item{name}{the name of the folder}
+\item{folderPath}{the full path of the folder from the project root}
+\item{effectivePermissions}{the current user's effective permissions for the given folder}
 
 }
 \author{Peter Hussey, peter@labkey.com}
