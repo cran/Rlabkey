@@ -1,3 +1,7 @@
+Changes in version 2.1.120
+  o minor documentation updates
+  o fix to error message on failed insertRows call
+
 Changes in version 2.1.119
   o add new labkey.makeRemotePath function 
   o minor documentation fixes

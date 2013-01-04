@@ -18,8 +18,8 @@ schema objects (\code{labkey.getSchema}).
 \tabular{ll}{
 Package: \tab Rlabkey\cr
 Type: \tab Package\cr
-Version: \tab 2.1.110\cr
-Date: \tab 2010-03-28\cr
+Version: \tab 2.1.120\cr
+Date: \tab 2012-12-31\cr
 License: \tab Apache License 2.0\cr
 LazyLoad: \tab yes\cr
 }
@@ -31,15 +31,15 @@ contains configuration and autologin information for the File Transfer Protocol 
 other programs such as CURL.
 
 On a UNIX system this file should be named .netrc (dot netrc) and on windows it sould be 
-named \_netrc (underscore netrc). The file should be located in the users home directory and the 
+named _netrc (underscore netrc). The file should be located in the users home directory and the
 permissions on the file should be unreadable for everybody except the owner.  
 
-To create the \_netrc on a windows machine, first create an environment variable called 'HOME' that 
+To create the _netrc on a windows machine, first create an environment variable called 'HOME' that
 is set to your home directory (c:/Users/<User-Name> on Vista) or any directory you want to use. 
-In that directory, create a text file named \_netrc (note that it's underscore netrc, not dot 
+In that directory, create a text file named _netrc (note that it's underscore netrc, not dot
 netrc like it is on UNIX). 
 
-The following three lines must be included in the .netrc or \_netrc file either separated by white space
+The following three lines must be included in the .netrc or _netrc file either separated by white space
 (spaces, tabs, or newlines) or commas.  
 
 machine <remote-machine-name>\cr
