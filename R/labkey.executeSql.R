@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2012 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2013 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- 
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## Construct url
-myurl <- paste(baseUrl,"query",folderPath,"executeSql.api",sep="")
+myurl <- paste(baseUrl,"query",folderPath,"executeSql.api?schemaName=",schemaName,"&apiVersion=8.3",sep="")
 
 ## Set options
 reader <- basicTextGatherer()
@@ -61,7 +61,7 @@ if(exists(".lksession"))
 }
 
 ## Post form
-postForm(uri=myurl, "schemaName"=schemaName, "sql"=sql, "apiVersion"="8.3", .opts=myopts, curl=handle)
+postForm(uri=myurl, "sql"=sql, .opts=myopts, curl=handle)
 
 
 
@@ -72,10 +72,18 @@ message <- h$statusMessage
 if(status==500)
 {decode <- fromJSON2(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
-    {contTypes <- which(names(h)=='Content-Type')
-    if(length(contTypes)>1 & h[contTypes[2]]=="application/json;charset=utf-8")
-        {decode <- fromJSON2(reader$value()); message<-decode$exception; stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))} else
-    {stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}}
+{
+    contTypes <- which(names(h)=='Content-Type')
+    if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
+    {
+        decode <- fromJSON2(reader$value());
+        message<-decode$exception;
+        stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+    }
+    else {
+        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
+    }
+}
 
 
 newdata <- makeDF(rawdata=reader$value(), showHidden=showHidden, colNameOpt=colNameOpt)
