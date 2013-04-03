@@ -29,7 +29,8 @@ https://www.labkey.org/project/home/begin.view}
 {Retrieve data:  } \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
 {Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}}\cr
 {List available data: } \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}}, 
-\code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getDefaultViewDetails}}, \code{\link{labkey.getLookupDetails}},
+\code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getDefaultViewDetails}},
+\code{\link{labkey.getLookupDetails}},
 
 }
 \examples{

@@ -1,5 +1,5 @@
 ##
-# Copyright (c) 2009-2010 LabKey Corporation
+# Copyright (c) 2009-2013 LabKey Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,17 @@
 
 ifcookie <- function()
 {
-if(exists("labkey.sessionCookieName")) {Cvalue=1; Cname=labkey.sessionCookieName; 
-Ccont=labkey.sessionCookieContents} else {Cvalue=0; Cname=NULL; Ccont=NULL}
+if(exists("labkey.sessionCookieName")) {
+    Cvalue=1;
+    Cname=labkey.sessionCookieName;
+    Ccont=labkey.sessionCookieContents
+} else {
+    labkey.sessionCookieName = NA;
+    labkey.sessionCookieContents = NA;
+    Cvalue=0;
+    Cname=NULL;
+    Ccont=NULL
+}
 
 return(list(Cvalue=Cvalue,Cname=Cname,Ccont=Ccont))
 }

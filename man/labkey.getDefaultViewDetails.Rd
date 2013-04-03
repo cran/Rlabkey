@@ -4,7 +4,8 @@
 \description{
 Fetch a list of output fields and their attributes that are avaialble from the default view of a given query}
 \usage{
-labkey.getDefaultViewDetails(baseUrl, folderPath, schemaName, queryName)
+labkey.getDefaultViewDetails(baseUrl, folderPath,
+    schemaName, queryName)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}

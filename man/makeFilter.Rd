@@ -66,7 +66,8 @@ https://www.labkey.org/project/home/begin.view}
 # library(Rlabkey)
 
 ## Two filters, ANDed together
-filter1<- makeFilter(c("TextFld","CONTAINS","h"), c("BooleanFld","EQUAL","TRUE"))
+filter1<- makeFilter(c("TextFld","CONTAINS","h"),
+    c("BooleanFld","EQUAL","TRUE"))
 
 ## Apply a filter in labkey.selectRows function
 rows <- labkey.selectRows(

@@ -24,11 +24,15 @@ lsFolders(session)
 ##get a list if projects and folders
 # library(Rlabkey)
 
-lsProjects(baseUrl="http://localhost:8080/labkey")  # returns "/apisamples", "/home", ...
+# returns "/apisamples", "/home", ...
+lsProjects(baseUrl="http://localhost:8080/labkey")
 
-lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+lks<- getSession(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples")
 
-lsFolders(lks) #returns values "/apisamples" , "/apisamples/sub1" ,"/apisamples/sub1/child" ,"/apisamples/sub2"  
+#returns values "/apisamples" , "/apisamples/sub1" ,
+#     "/apisamples/sub1/child" ,"/apisamples/sub2"
+lsFolders(lks)
 
 }
 }

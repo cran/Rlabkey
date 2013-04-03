@@ -33,7 +33,8 @@ that with getRows the default is 'fieldname' instead of 'caption'.
 ## simple example of getting data using schema objects
 
 # library(Rlabkey)
-s<-getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+s<-getSession(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples")
 s  # shows schemas
 
 scobj <- getSchema(s, "lists")

@@ -6,8 +6,10 @@ Import full datasets or selected rows into R. The data can be sorted and filtere
 }
 \usage{
 labkey.selectRows(baseUrl, folderPath, schemaName, queryName, 
-viewName = NULL, colSelect = NULL, maxRows = NULL, 
-rowOffset = NULL, colSort = NULL, colFilter = NULL, showHidden = FALSE, colNameOpt="caption", containerFilter=NULL)
+    viewName = NULL, colSelect = NULL, maxRows = NULL,
+    rowOffset = NULL, colSort = NULL, colFilter = NULL,
+    showHidden = FALSE, colNameOpt="caption",
+    containerFilter=NULL)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -94,11 +96,15 @@ rows <- labkey.selectRows(
 	queryName="AllTypes")
 	
 ## select from a view on that list
-viewrows <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath="/apisamples", schemaName="Lists", queryName="AllTypes", viewName="rowbyrow")
+viewrows <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples", schemaName="Lists", queryName="AllTypes",
+    viewName="rowbyrow")
 
 ## select a subset of columns
 colSelect=c("TextFld", "IntFld")
-subsetcols <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",folderPath="/apisamples",schemaName="lists", queryName="AllTypes", colSelect=colSelect)
+subsetcols <- labkey.selectRows(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples", schemaName="lists", queryName="AllTypes",
+    colSelect=colSelect)
 
 }
 }

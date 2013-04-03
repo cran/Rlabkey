@@ -5,7 +5,8 @@
 Specify rows of data to be deleted from the LabKey Server
 }
 \usage{
-labkey.deleteRows(baseUrl, folderPath, schemaName, queryName, toDelete) 
+labkey.deleteRows(baseUrl, folderPath,
+    schemaName, queryName, toDelete)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for LabKey server}
@@ -67,11 +68,14 @@ newrow <- data.frame(
 	, Category = "LOOKUP2"
 	, stringsAsFactors=FALSE)
 
-insertedRow <- labkey.insertRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes", toInsert=newrow)
+insertedRow <- labkey.insertRows("http://localhost:8080/labkey",
+    folderPath="/apisamples", schemaName="lists",
+    queryName="AllTypes", toInsert=newrow)
 newRowId <- insertedRow$rows[[1]]$RowId
 
-selectedRow<-labkey.selectRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes"
-		, colFilter=makeFilter(c("RowId", "EQUALS", newRowId)))
+selectedRow<-labkey.selectRows("http://localhost:8080/labkey",
+    folderPath="/apisamples", schemaName="lists", queryName="AllTypes",
+    colFilter=makeFilter(c("RowId", "EQUALS", newRowId)))
 selectedRow
 
 updaterow=data.frame(
@@ -81,13 +85,18 @@ updaterow=data.frame(
 	, IntFld= 777 
 	, stringsAsFactors=FALSE)
 
-updatedRow <- labkey.updateRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes", toUpdate=updaterow)
-selectedRow<-labkey.selectRows("http://localhost:8080/labkey", folderPath="/apisamples",schemaName="lists", queryName="AllTypes"
-		, colFilter=makeFilter(c("RowId", "EQUALS", newRowId)))
+updatedRow <- labkey.updateRows("http://localhost:8080/labkey",
+    folderPath="/apisamples", schemaName="lists",
+    queryName="AllTypes", toUpdate=updaterow)
+selectedRow<-labkey.selectRows("http://localhost:8080/labkey",
+    folderPath="/apisamples", schemaName="lists", queryName="AllTypes",
+    colFilter=makeFilter(c("RowId", "EQUALS", newRowId)))
 selectedRow
 
 deleterow <- data.frame(RowId=newRowId, stringsAsFactors=FALSE)
-result <- labkey.deleteRows(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples", schemaName="lists", queryName="AllTypes",  toDelete=deleterow)
+result <- labkey.deleteRows(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples", schemaName="lists",
+    queryName="AllTypes",  toDelete=deleterow)
 result
 
 }
