@@ -5,8 +5,8 @@
 
 \usage{
 saveResults(session, assayName, resultDataFrame, 
-					batchPropertyList= list(name=paste("Batch ", as.character(date()))), 
-					runPropertyList= list(name=paste("Assay Run ", as.character(date()))) ) 
+  batchPropertyList= list(name=paste("Batch ", as.character(date()))),
+  runPropertyList= list(name=paste("Assay Run ", as.character(date()))))
 }
 \arguments{
   \item{session}{the session key returned from getSession}
@@ -32,11 +32,13 @@ https://www.labkey.org/project/home/begin.view}
 \examples{
 \dontrun{
 
-## Very simple example of an analysis flow:  query some data, calculate some stats,
-## then save the calculations as an assay result set in LabKey Server
+## Very simple example of an analysis flow:  query some data,
+## calculate some stats, then save the calculations as an assay
+## result set in LabKey Server
 
 # library(Rlabkey)
-s<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+s<- getSession(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples")
 scobj <- getSchema(s, "lists")
 simpledf <- getRows(s, scobj$AllTypes)
 
@@ -52,7 +54,8 @@ bprops <- list(LabNotes="this is a simple demo")
 bpl<- list(name=paste("Batch ", as.character(date())),properties=bprops) 
 rpl<- list(name=paste("Assay Run ", as.character(date())))
 
-assayInfo<- saveResults(s, "SimpleMeans", results, batchPropertyList=bpl, runPropertyList=rpl)
+assayInfo<- saveResults(s, "SimpleMeans", results,
+    batchPropertyList=bpl, runPropertyList=rpl)
 
 }
 }

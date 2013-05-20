@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2012 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2013 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -32,12 +32,13 @@ if(is.null(containerFilter)==FALSE) {char <- nchar(containerFilter[1]); if(char<
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("queryName")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
 
-## URL encoding of schema, query, view and folder path (if not already encoded)
+## URL encoding of schema, query, view, etc. (if not already encoded)
 if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
 if(queryName==curlUnescape(queryName)) {queryName <- curlEscape(queryName)}
 if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 if(is.null(viewName)==FALSE) {if(viewName==curlUnescape(viewName)) viewName <- curlEscape(viewName)}
-if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}                            
+if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
+if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}
 
 ## Format colSelect
 if(is.null(colSelect)==FALSE)
@@ -58,10 +59,10 @@ myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaNam
 if(is.null(viewName)==FALSE) {myurl <- paste(myurl,"&query.viewName=",viewName,sep="")}
 if(is.null(colSelect)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect,sep="")}
 if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&query.maxRows=",maxRows,sep="")}
+if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
 if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&query.offset=",rowOffset,sep="")}
 if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")}
 if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) myurl <- paste(myurl,"&query.",colFilter[j],sep="")}
-if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
 if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
 
 ## Set options

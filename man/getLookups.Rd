@@ -31,13 +31,16 @@ a lookup query object are compound names relative to the base query object used 
 ##  get fields from lookup tables and add to query
 
 # library(Rlabkey)
-s<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+s<- getSession(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples")
  
 scobj <- getSchema(s, "lists")
 
-lucols <- getLookups(s, scobj$AllTypes$Category)  # can add fields from related queries
+# can add fields from related queries
+lucols <- getLookups(s, scobj$AllTypes$Category)
 
-lucols2 <- getLookups(s, lucols[["Category/Group"]])  # keep going to other tables
+# keep going to other tables
+lucols2 <- getLookups(s, lucols[["Category/Group"]])
 
 cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
 

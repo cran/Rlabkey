@@ -28,15 +28,18 @@ schema objects is essentially the same as the schema and query objects shown in 
 
 # library(Rlabkey)
 
-s<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+s<- getSession(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples")
 
 sch<- getSchema(s, "lists")
 
-sch$AllTypes$Category          # can walk down the populataed schema tree from schema node or query node
+# can walk down the populataed schema tree from schema node or query node
+sch$AllTypes$Category
 sch$AllTypes$Category$caption
 sch$AllTypes$Category$type
 
-lucols <- getLookups(s, sch$AllTypes$Category)  # can add fields from related queries
+# can add fields from related queries
+lucols <- getLookups(s, sch$AllTypes$Category)
 
 cols <- c(names(sch$AllTypes[2:6]), names(lucols)[2:4])
 

@@ -5,7 +5,8 @@
 Fetch a list of all folders accessible to the current user, starting from a given folder.
 }
 \usage{
-labkey.getFolders(baseUrl, folderPath, includeSubfolders=FALSE, depth=50)
+labkey.getFolders(baseUrl, folderPath,
+    includeSubfolders=FALSE, depth=50)
 }
 \arguments{
   \item{baseUrl}{a string specifying the address of the LabKey Server, including the context root}
@@ -41,7 +42,8 @@ The available folders are returned as a three-column data frame containing
 
 ## List of folders 
 # library(Rlabkey)
-folders <- labkey.getFolders(baseUrl="http://localhost:8080/labkey",	folderPath="/apisamples")
+folders <- labkey.getFolders(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples")
 folders
 
 }

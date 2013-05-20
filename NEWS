@@ -1,3 +1,6 @@
+Changes in version 2.1.122
+  o fix URL-encoding for spaces in parameter names
+
 Changes in version 2.1.121
   o fix to error message on failed API call (deleteRows, insertRows, updateRows, etc.)
   o fix URL encoding of schemaName in executeSql call

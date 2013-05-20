@@ -5,7 +5,8 @@
 Save an assay batch object to a labkey database
 }
 \usage{
-labkey.saveBatch(baseUrl, folderPath, assayName, resultDataFrame, batchPropertyList=NULL, runPropertyList=NULL) 
+labkey.saveBatch(baseUrl, folderPath, assayName, resultDataFrame,
+    batchPropertyList=NULL, runPropertyList=NULL)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -36,9 +37,11 @@ Note that saveBatch currently supports only a single run with one result set per
 \examples{
 \dontrun{
 
-## Very simple example of an analysis flow:  query some data, calculate some stats,
-## then save the calculations as an assay result set in LabKey Server
-##  Note this example expects to find an assay named "SimpleMeans" in the apisamples project
+## Very simple example of an analysis flow:  query some data, calculate
+## some stats, then save the calculations as an assay result set in
+## LabKey Server
+##  Note this example expects to find an assay named "SimpleMeans" in
+##  the apisamples project
 # library(Rlabkey)
 simpledf <- labkey.selectRows(
 	baseUrl="http://localhost:8080/labkey",

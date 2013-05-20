@@ -22,7 +22,8 @@ getFolderPath(session)
 \dontrun{
 # library(Rlabkey)
 
-lks<- getSession(baseUrl="http://localhost:8080/labkey", folderPath="/apisamples")
+lks<- getSession(baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples")
 getFolderPath(lks)  #returns "/apisamples"
 
 }

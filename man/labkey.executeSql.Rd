@@ -6,8 +6,9 @@ Use Sql commands to specify data to be imported into R. Prior to import, data ca
 be manipulated through standard SQL commands supported in LabKey SQL.
 }
 \usage{
-labkey.executeSql(baseUrl, folderPath, schemaName, sql, maxRows = NULL,
-rowOffset = NULL, showHidden = FALSE, colNameOpt='caption')
+labkey.executeSql(baseUrl, folderPath, schemaName, sql,
+    maxRows = NULL, rowOffset = NULL, showHidden = FALSE,
+    colNameOpt='caption')
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -46,19 +47,18 @@ See \code{\link{labkey.selectRows}} for a discussion of the valid options and de
 # library(Rlabkey)
 
 sql<- "SELECT AllTypesCategories.Category AS Category, 
-	SUM(AllTypes.IntFld) AS SumOfIntFld,
-	AVG(AllTypes.DoubleFld) AS AvgOfDoubleFld
-
-	FROM AllTypes LEFT JOIN AllTypesCategories ON (AllTypes.Category = AllTypesCategories.TextKey)
-	WHERE AllTypes.Category IS NOT NULL
-	GROUP BY AllTypesCategories.Category"
-
+    SUM(AllTypes.IntFld) AS SumOfIntFld,
+    AVG(AllTypes.DoubleFld) AS AvgOfDoubleFld
+    FROM AllTypes LEFT JOIN AllTypesCategories
+    ON (AllTypes.Category = AllTypesCategories.TextKey)
+    WHERE AllTypes.Category IS NOT NULL
+    GROUP BY AllTypesCategories.Category"
 
 sqlResults <- labkey.executeSql(
-	baseUrl="http://localhost:8080/labkey",
-	folderPath="/apisamples",
-	schemaName="lists",
-	sql = sql)
+    baseUrl="http://localhost:8080/labkey",
+    folderPath="/apisamples",
+    schemaName="lists",
+    sql = sql)
 
 sqlResults
 

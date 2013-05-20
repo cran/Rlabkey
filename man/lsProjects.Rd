@@ -20,7 +20,8 @@ lsProjects(baseUrl)
 \examples{
 \dontrun{
 
-## get list of projects on server, connect a session in one project, then list the folders in that project
+## get list of projects on server, connect a session in one project,
+## then list the folders in that project
 # library(Rlabkey)
 lsProjects("http://www.labkey.org")
 
