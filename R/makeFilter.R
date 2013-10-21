@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2012 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2013 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -60,6 +60,7 @@
 								"NOT_QC_VALUE"="nomvvalue",
 								"EQUALS_NONE_OF"="notin",
 								"NOT_IN"="notin",
+								"MEMBER_OF"="memberof",
 								"CONTAINS_ONE_OF"="containsoneof",
 								"CONTAINS_NONE_OF"="containsnoneof")
 								

@@ -1,3 +1,8 @@
+Changes in version 2.1.123
+  o added labkey.importRows
+  o performance improvement for labkey.importRows, labkey.insertRows, labkey.deleteRows, labkey.updateRows
+  o The following filter types were added to the makeFilter function: MEMBER_OF
+
 Changes in version 2.1.122
   o fix URL-encoding for spaces in parameter names
 

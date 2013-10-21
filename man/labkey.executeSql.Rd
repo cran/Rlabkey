@@ -37,7 +37,7 @@ See \code{\link{labkey.selectRows}} for a discussion of the valid options and de
 \author{Valerie Obenchain}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.insertRows}}, 
-\code{\link{labkey.updateRows}}, \cr
+\code{\link{labkey.importRows}}, \code{\link{labkey.updateRows}}, \cr
 \code{\link{labkey.deleteRows}}, \code{\link{getRows}}
 }
 \examples{
