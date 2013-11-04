@@ -26,14 +26,14 @@ labkey database.   To update a row/column to a value of NULL, use an empty strin
 A list is returned with named categories of \bold{command}, \bold{rowsAffected}, \bold{rows}, \bold{queryName}, \bold{containerPath} and \bold{schemaName}.
 The \bold{schemaName}, \bold{queryName} and \bold{containerPath} properties contain the same schema, query 
 and folder path used in the request.  The
-\bold{rowsAffected} property indicates he number of rows affected by the API action. This will typically be the same
+\bold{rowsAffected} property indicates the number of rows affected by the API action. This will typically be the same
 number as passed in the request. The \bold{rows} property contains a list of row objects corresponding to the rows
 updated.
 }
 \author{Valerie Obenchain}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
-\code{\link{labkey.insertRows}}, \cr
+\code{\link{labkey.insertRows}}, \code{\link{labkey.importRows}}, \cr
 \code{\link{labkey.deleteRows}}
 }
 \examples{

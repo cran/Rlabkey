@@ -25,7 +25,7 @@ The output field attributes of the default view are returned as a data frame.  S
 \author{Peter Hussey, peter@labkey.com}
 \seealso{
 {Retrieve data:} \code{\link{labkey.selectRows}}, \code{\link{makeFilter}}, \code{\link{labkey.executeSql}} \cr
-{Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.deleteRows}}\cr
+{Modify data:  } \code{\link{labkey.updateRows}}, \code{\link{labkey.insertRows}}, \code{\link{labkey.importRows}}, \code{\link{labkey.deleteRows}}\cr
 {List available data: } \code{\link{labkey.getSchemas}}, \code{\link{labkey.getQueries}}, \code{\link{labkey.getQueryViews}}, 
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getLookupDetails}}
 }

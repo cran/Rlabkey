@@ -39,12 +39,14 @@ p1 <- toJSON(list(schemaName=schemaName, queryName=queryName, apiVersion=8.3))
 cnames <- colnames(toInsert)
 p3 <- NULL
 for(j in 1:nrows)
-	{cvalues <- as.list(toInsert[j,])
+{
+    cvalues <- as.list(toInsert[j,])
 	names(cvalues) <- cnames
     p2 <- toJSON(cvalues)
-    p3 <- paste(p3,",",p2,sep="")}
-pbody <- paste(substr(p1,1,nchar(p1)-1),', \"rows\":[',substr(p3,2,nchar(p3)),"] }",sep="")
-
+    p3 <- c(p3, p2)
+}
+p3 <- paste(p3, collapse=",")
+pbody <- paste(substr(p1,1,nchar(p1)-1),', \"rows\":[',p3,"] }",sep="")
 
 ## Set options
 reader <- basicTextGatherer()

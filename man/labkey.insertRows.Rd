@@ -27,14 +27,14 @@ Also, when inserting data into a study dataset, the sequence number must be spec
 A list is returned with named categories of \bold{command}, \bold{rowsAffected}, \bold{rows}, \bold{queryName}, \bold{containerPath} and \bold{schemaName}.
 The \bold{schemaName}, \bold{queryName} and \bold{containerPath} properties contain the same schema, query 
 and folder path used in the request.  The
-\bold{rowsAffected} property indicates he number of rows affected by the API action. This will typically be the same
+\bold{rowsAffected} property indicates the number of rows affected by the API action. This will typically be the same
 number as passed in the request. The \bold{rows} property contains a list of row objects corresponding to the rows 
 inserted.
 }
 \author{Valerie Obenchain}
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
-\code{\link{labkey.updateRows}}, \cr
+\code{\link{labkey.importRows}}, \code{\link{labkey.updateRows}}, \cr
 \code{\link{labkey.deleteRows}}
 }
 \examples{

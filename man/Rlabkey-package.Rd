@@ -9,7 +9,7 @@ Exchange data between LabKey Server and R
 This package allows the transfer of data between a LabKey Server and an R session. Data can be retrieved from 
 LabKey into a data frame in R by specifying the query schema information (\code{labkey.selectRows} and \code{getRows}) 
 or by using sql commands (\code{labkey.executeSql}). From an R session, existing data can be updated
- (\code{labkey.updateRows}), new data can be inserted (\code{labkey.insertRows}) or  
+ (\code{labkey.updateRows}), new data can be inserted (\code{labkey.insertRows} and \code{labkey.importRows}) or
 data can be deleted from the LabKey database (\code{labkey.deleteRows}). Interactive R users can discover available data via
 schema objects (\code{labkey.getSchema}).
 
@@ -18,8 +18,8 @@ schema objects (\code{labkey.getSchema}).
 \tabular{ll}{
 Package: \tab Rlabkey\cr
 Type: \tab Package\cr
-Version: \tab 2.1.122\cr
-Date: \tab 2013-04-03\cr
+Version: \tab 2.1.123\cr
+Date: \tab 2013-10-21\cr
 License: \tab Apache License 2.0\cr
 LazyLoad: \tab yes\cr
 }
@@ -66,7 +66,7 @@ http://www.labkey.org/project/home/begin.view}
 \keyword{ package }
 \seealso{
 \code{\link{labkey.selectRows}}, \code{\link{labkey.executeSql}}, \code{\link{makeFilter}}, 
-\code{\link{labkey.insertRows}}, \cr
+\code{\link{labkey.insertRows}}, \code{\link{labkey.importRows}}, \cr
 \code{\link{labkey.updateRows}}, \code{\link{labkey.deleteRows}}
 \cr
 The Rlabkey Users Guide is available by typing RlabkeyUsersGuide().
