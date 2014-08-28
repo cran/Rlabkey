@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2012 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2014 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
 {
 
-    decode <- fromJSON2(rawdata)
+    decode <- fromJSON(rawdata)
 
 	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
 	if(is.null(colSelect)==FALSE){
@@ -79,15 +79,13 @@
   	for(k in 1:length(cnames)){oindex <- rbind(oindex, which(names(hold.dat)==refdf$hindex[k]))}
 
   	refdf$oindex <- oindex
+	newdat <- as.data.frame(hold.dat[,refdf$oindex],stringsAsFactors=FALSE)
+
   	refdf$type <- NULL
   	for(p in 1:dim(refdf)[1]) {   
   	    ind <- which(refdf$hindex==decode$metaData$fields[[p]]$name)
   	    refdf$type[ind] <- decode$metaData$fields[[p]]$type
   	}
-
-	newdat <- matrix(ncol=0, nrow=length(decode$rows))
-	for(i in 1:length(cnames)){ newdat <- cbind(newdat, as.data.frame(hold.dat[,refdf$oindex[i]], stringsAsFactors=FALSE) )}
-	newdat <- as.data.frame(newdat,stringsAsFactors=FALSE)
 
   	## Delete hidden column(s) unless showHidden=TRUE
 	if (showHidden==TRUE || is.null(decode$metaData$id)) {}  else { 
@@ -104,29 +102,38 @@
 	}
 
 	## Set mode for multiple columns of data (this also removes list factor)
-	if(is.null(dim(newdat))==FALSE) 
-  	{for(j in 1:ncol(newdat))
-  	    {mod <- refdf$type[j]
-  	    if(mod=="date") { newdat[,j] <- .parseDate(newdat[,j])} else
-	    if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
-  	    if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
-  	    if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
-  	    if(mod=="float"){suppressWarnings(mode(newdat[,j]) <- "numeric")} else
-  	    {print("MetaData field type not recognized.")}}
-	newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames}
-	## Set mode for single column of data
-	if(is.null(dim(newdat))==TRUE & length(newdat)>1) 
-	{mod <- refdf$type
-  	if(mod=="date"){ newdat <- as.Date(as.character(newdat), "%d %b %Y %H:%M:%S")}else
-  	if(mod=="string"){suppressWarnings(mode(newdat) <- "character")} else
-  	if(mod=="int"){ suppressWarnings(mode(newdat) <- "numeric")} else
-  	if(mod=="boolean"){suppressWarnings(mode(newdat) <- "logical")} else
-  	if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
-  	{print("MetaData field type not recognized.")}
-	newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames[1]}
-	
+	if(is.null(dim(newdat))==FALSE)
+  	{
+  	    for(j in 1:ncol(newdat))
+  	    {
+  	        mod <- refdf$type[j]
+  	        try(
+                if(mod=="date") { newdat[,j] <- .parseDate(newdat[,j])} else
+                if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
+                if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
+                if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
+                if(mod=="float"){suppressWarnings(mode(newdat[,j]) <- "numeric")} else
+                {print("MetaData field type not recognized.")}
+            , silent=TRUE)
+        }
+	    newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames
+    }
 
-	
+	## Set mode for single column of data
+	if(is.null(dim(newdat))==TRUE & length(newdat)>1)
+	{
+	    mod <- refdf$type
+	    try(
+            if(mod=="date"){ newdat <- .parseDate(newdat)}else
+            if(mod=="string"){suppressWarnings(mode(newdat) <- "character")} else
+            if(mod=="int"){ suppressWarnings(mode(newdat) <- "numeric")} else
+            if(mod=="boolean"){suppressWarnings(mode(newdat) <- "logical")} else
+            if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
+            {print("MetaData field type not recognized.")}
+        , silent=TRUE)
+	    newdat <- as.data.frame(newdat, stringsAsFactors=FALSE); colnames(newdat)<-cnames[1]
+    }
+
 return(newdat)
 }
 
@@ -142,7 +149,7 @@ filterrow<-function(row)
 		}
 		if (is.null(row[x][[valname]])) { row[x][[valname]]<-NA }
 		filtered <- c(filtered, row[x])
-	}	
+	}
 return(filtered)
 
 }

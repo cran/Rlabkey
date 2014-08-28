@@ -1,3 +1,12 @@
+Changes in version 2.1.125
+  o set cainfo for RCurl requests to point to a certificate bundle throught the environment variable RLABKEY_CAINFO_FILE
+  o new functions to get and set curl options : labkey.curlOptions, labkey.setCurlOptions
+
+Changes in version 2.1.124
+  o replace usage of fromJSON2 with fromJSON
+  o add between and not between filter types
+  o fix to handle results from multi-valued columns
+
 Changes in version 2.1.123
   o added labkey.importRows
   o performance improvement for labkey.importRows, labkey.insertRows, labkey.deleteRows, labkey.updateRows

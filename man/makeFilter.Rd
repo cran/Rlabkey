@@ -23,29 +23,33 @@ the column name, operator and value.
 
 Operator values:\cr
 EQUAL\cr
-NOT_EQUAL\cr 
-NOT_EQUAL_OR_MISSING\cr
 DATE_EQUAL\cr
+NOT_EQUAL\cr
 DATE_NOT_EQUAL\cr
-DATE_GREATER_THAN_OR_EQUAL\cr
-DATE_LESS_THAN_OR_EQUAL\cr
-MISSING\cr
-NOT_MISSING\cr
+NOT_EQUAL_OR_MISSING\cr
 GREATER_THAN\cr
-GREATER_THAN_OR_EQUAL\cr
+DATE_GREATER_THAN\cr
 LESS_THAN\cr
+DATE_LESS_THAN\cr
+GREATER_THAN_OR_EQUAL\cr
+DATE_GREATER_THAN_OR_EQUAL\cr
 LESS_THAN_OR_EQUAL\cr
-CONTAINS\cr
-DOES_NOT_CONTAIN\cr
+DATE_LESS_THAN_OR_EQUAL\cr
 STARTS_WITH\cr
 DOES_NOT_START_WITH\cr
+CONTAINS\cr
+DOES_NOT_CONTAIN\cr
+CONTAINS_ONE_OF\cr
+CONTAINS_NONE_OF\cr
 IN\cr
 NOT_IN\cr
+BETWEEN\cr
+NOT_BETWEEN\cr
+MEMBER_OF\cr
+MISSING\cr
+NOT_MISSING\cr
 MV_INDICATOR\cr
 NO_MV_INDICATOR\cr
-MEMBER_OF\cr
-CONTAINS_ONE_OF\cr
-CONTAINS_NONE_OF
 
 When using the MISSING, NOT_MISSING, MV_INDICATOR, or NO_MV_INDICATOR operators, an empty string should be supplied as the value.
 See example below.
@@ -85,7 +89,7 @@ filter2 <- makeFilter(c("RowId","IN","2;3;6"))
 rows <- labkey.selectRows(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples",
-	schemaName="lists", 
+	schemaName="lists",
 	queryName="AllTypes",
 	colFilter=filter2
 )

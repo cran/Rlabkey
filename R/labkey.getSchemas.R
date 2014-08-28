@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010-2013 LabKey Corporation
+#  Copyright (c) 2010-2014 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ myurl <- paste(baseUrl,"query",folderPath,"getSchemas.view?apiVersion=9.3", sep=
 ## Set options
 reader <- basicTextGatherer()
 header <- basicTextGatherer()
-myopts <- curlOptions(writefunction=reader$update, headerfunction=header$update, netrc=1, ssl.verifyhost=FALSE, ssl.verifypeer=FALSE, followlocation=TRUE)
+myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
 
 ## Support user-settable options for debuggin and setting proxies etc
 if(exists(".lksession"))
@@ -67,13 +67,13 @@ status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 
 if(status==500)
-{decode <- fromJSON2(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
 {
     contTypes <- which(names(h)=='Content-Type')
     if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
     {
-        decode <- fromJSON2(mydata);
+        decode <- fromJSON(mydata);
         message<-decode$exception;
         stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
     } else
@@ -82,7 +82,7 @@ if(status>=400)
     }
 }
 
-decode <- fromJSON2(mydata)
+decode <- fromJSON(mydata)
 cn<-names(decode)
 newdata<- as.data.frame(cn)
 names(newdata)[1]<-"schemaName"

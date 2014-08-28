@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010-2013 LabKey Corporation
+#  Copyright (c) 2010-2014 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -41,11 +41,13 @@ header <- basicTextGatherer()
 handle <- getCurlHandle()
 headerFields <- c('Content-Type'="application/json;charset=utf-8")
 clist <- ifcookie()
-if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont,sep=""),
-                        writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
-                        ssl.verifypeer=FALSE, followlocation=TRUE)} else
-{myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
-                        ssl.verifypeer=FALSE, followlocation=TRUE)}
+if(clist$Cvalue==1) {
+    myopts<- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update,
+                        .opts=c(labkey.curlOptions()))
+} else {
+    myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update,
+                        .opts=c(labkey.curlOptions()))
+}
 
 ## Support user-settable options for debugging and setting proxies etc
 if(exists(".lksession"))
@@ -66,7 +68,7 @@ if(status>=400)
   {stop(paste("Could not find assay by that name. Status code = ",status,", Error message = ",message,sep=""))}
 
 assayDef <- NULL
-assayInfo<- fromJSON2(assayInfoJSON)
+assayInfo<- fromJSON(assayInfoJSON)
 if (length(assayInfo) == 1 && length(assayInfo[[1]]) == 1)
 {
 	assayDef <- assayInfo[[1]][[1]]
@@ -111,13 +113,13 @@ h <- parseHeader(header$value())
 status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 if(status==500) 
-{decode <- fromJSON2(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+{decode <- fromJSON(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
 {
     contTypes <- which(names(h)=='Content-Type')
 	if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
     {
-        decode <- fromJSON2(reader$value());
+        decode <- fromJSON(reader$value());
         message<-decode$exception;
         stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
     } else
@@ -126,7 +128,7 @@ if(status>=400)
     }
 }
 
-newAssayInfo <- fromJSON2(reader$value())
+newAssayInfo <- fromJSON(reader$value())
 
 return(newAssayInfo)
 }

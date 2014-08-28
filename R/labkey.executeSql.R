@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2013 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2008-2014 Fred Hutchinson Cancer Research Center
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -46,11 +46,13 @@ header <- basicTextGatherer()
 
 handle <- getCurlHandle()
 clist <- ifcookie()
-if(clist$Cvalue==1) {myopts <- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont,sep=""),
-                        writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
-                        ssl.verifypeer=FALSE, followlocation=TRUE)} else
-{myopts <- curlOptions(netrc=1, httpauth=1L, writefunction=reader$update, headerfunction=header$update, ssl.verifyhost=FALSE,
-                        ssl.verifypeer=FALSE, followlocation=TRUE)}
+if(clist$Cvalue==1) {
+    myopts<- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update,
+                        .opts=c(labkey.curlOptions()))
+} else {
+    myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update,
+                        .opts=c(labkey.curlOptions()))
+}
 
 ## Support user-settable options for debuggin and setting proxies etc
 if(exists(".lksession"))
@@ -70,13 +72,13 @@ h <- parseHeader(header$value())
 status <- getCurlInfo(handle)$response.code
 message <- h$statusMessage
 if(status==500)
-{decode <- fromJSON2(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
+{decode <- fromJSON(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
 if(status>=400)
 {
     contTypes <- which(names(h)=='Content-Type')
     if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
     {
-        decode <- fromJSON2(reader$value());
+        decode <- fromJSON(reader$value());
         message<-decode$exception;
         stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
     }
