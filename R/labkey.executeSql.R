@@ -15,7 +15,7 @@
 ##
 
 labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL,
-rowOffset=NULL, showHidden=FALSE, colNameOpt='caption')
+rowOffset=NULL, showHidden=FALSE, colNameOpt='caption', containerFilter=NULL)
 {
 ## If maxRows and/or rowOffset are specified, set showAllRows=FALSE
 showAllRows=TRUE
@@ -28,6 +28,7 @@ stop (paste("A value must be specified for each of baseUrl, folderPath, schemaNa
 ## URL encoding of schema and folder path (if not already encoded)
 if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
 if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
@@ -38,6 +39,7 @@ if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## Construct url
 myurl <- paste(baseUrl,"query",folderPath,"executeSql.api?schemaName=",schemaName,"&apiVersion=8.3",sep="")
+if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
 
 ## Set options
 reader <- basicTextGatherer()

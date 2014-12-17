@@ -8,7 +8,7 @@ be manipulated through standard SQL commands supported in LabKey SQL.
 \usage{
 labkey.executeSql(baseUrl, folderPath, schemaName, sql,
     maxRows = NULL, rowOffset = NULL, showHidden = FALSE,
-    colNameOpt='caption')
+    colNameOpt='caption', containerFilter=NULL)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -22,6 +22,16 @@ If no value is specified, rows will begin at the start of the result set.}
 normally be hidden from user veiw. If no value is specified, the hidden columns are not returned.}
   \item{colNameOpt}{(optional) controls the name source for the columns of the output dataframe, with valid values of 'caption', 'fieldname', and 'rname'
   See labkey.selectRows for more details.}
+  \item{containerFilter}{(optional) Specifies the containers to include in the scope of selectRows request. A value of NULL is equivalent to "Current".   Valid values are
+     \itemize{
+  	      \item{ "Current": Include the current folder only}
+  	      \item{ "CurrentAndSubfolders": Include the current folder and all subfolders }
+  	      \item{ "CurrentPlusProject": Include the current folder and the project that contains it }
+  	      \item{ "CurrentAndParents": Include the current folder and its parent folders }
+  	      \item{ "CurrentPlusProjectAndShared": Include the current folder plus its project plus any shared folders }
+  	      \item{ "AllFolders": Include all folders for which the user has read permission }
+	}
+  }
 }
 
 \details{

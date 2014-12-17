@@ -50,7 +50,7 @@ getQueryLists <- function(baseUrl, folderPath, schemaName, queryName=NULL)
 	if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
 	if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
-	## now setup the differeent columns for views vs queries
+	## now setup the different columns for views vs queries
 	if(length(queryName)==0)
 	{
 		serverAction <- "getQueries.view?schemaName="

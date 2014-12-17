@@ -20,7 +20,7 @@ PACKAGE_ENV = new.env()
 labkey.setCurlOptions <- function(...)
 {
     # default curl options
-    options <- curlOptions(ssl.verifyhost=TRUE, ssl.verifypeer=TRUE, followlocation=TRUE, sslversion=3L)
+    options <- curlOptions(ssl.verifyhost=2, ssl.verifypeer=TRUE, followlocation=TRUE, sslversion=3L)
 
     # check if a certificate bundle has been specified from the environment variable
     vars <- Sys.getenv("RLABKEY_CAINFO_FILE")
@@ -38,5 +38,5 @@ labkey.setCurlOptions <- function(...)
 
 labkey.acceptSelfSignedCerts <- function()
 {
-    return(labkey.setCurlOptions(ssl.verifyhost=FALSE, ssl.verifypeer=FALSE))
+    return(labkey.setCurlOptions(ssl.verifyhost=0, ssl.verifypeer=FALSE))
 }
