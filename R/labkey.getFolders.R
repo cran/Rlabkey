@@ -14,7 +14,7 @@
 # limitations under the License.
 ##
 
-labkey.getFolders <- function(baseUrl, folderPath, includeSubfolders=FALSE, depth=50)
+labkey.getFolders <- function(baseUrl, folderPath, includeEffectivePermissions=TRUE, includeSubfolders=FALSE, depth=50)
 {
 ## Empty string/NULL checking
 
@@ -32,16 +32,14 @@ if(substr(baseUrl, nchar(baseUrl), nchar(baseUrl))!="/"){baseUrl <- paste(baseUr
 if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 if(includeSubfolders) {inclsf <- paste("1&depth=", depth, sep="")} else {inclsf <- "0"}
+if(includeEffectivePermissions) {inclep <- "1"} else {inclep <- "0"}
 
 ## Construct url
-myurl <- paste(baseUrl,"project",folderPath,"getContainers.view?includeSubfolders=", inclsf, sep="")
+myurl <- paste(baseUrl,"project",folderPath,"getContainers.view?","includeSubfolders=",inclsf,"&includeEffectivePermissions=",inclep, sep="")
 
 ## Set options
 reader <- basicTextGatherer()
 header <- basicTextGatherer()
-
-## Http get
-handle <- getCurlHandle()
 myopts <- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
 
 ## Support user-settable options for debugging and setting proxies etc
@@ -52,13 +50,16 @@ if(exists(".lksession"))
 		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
 }
 
+## Http get
+handle <- getCurlHandle()
 clist <- ifcookie()
 if(clist$Cvalue==1) 
 {
 	mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))
-} 
+}
 else 
-{	
+{
+	myopts <- curlOptions(.opts=c(myopts, httpauth=1L))
 	mydata <- getURI(myurl, .opts=myopts, curl=handle)
 }
 

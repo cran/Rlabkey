@@ -6,11 +6,13 @@ Fetch a list of all folders accessible to the current user, starting from a give
 }
 \usage{
 labkey.getFolders(baseUrl, folderPath,
-    includeSubfolders=FALSE, depth=50)
+        includeEffectivePermissions=TRUE,
+        includeSubfolders=FALSE, depth=50)
 }
 \arguments{
   \item{baseUrl}{a string specifying the address of the LabKey Server, including the context root}
   \item{folderPath}{the starting point for the search.  }
+  \item{includeEffectivePermissions}{If set to false, the effective permissions for this container resource will not be included. (defaults to TRUE).}
   \item{includeSubfolders}{whether the search for subfolders should recurse down the folder hierarchy}
   \item{depth}{maximum number of subfolder levels to show if includeSubfolders=TRUE}
 }

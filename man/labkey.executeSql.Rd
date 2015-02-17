@@ -7,8 +7,9 @@ be manipulated through standard SQL commands supported in LabKey SQL.
 }
 \usage{
 labkey.executeSql(baseUrl, folderPath, schemaName, sql,
-    maxRows = NULL, rowOffset = NULL, showHidden = FALSE,
-    colNameOpt='caption', containerFilter=NULL)
+    maxRows = NULL, rowOffset = NULL, colSort=NULL,
+    showHidden = FALSE, colNameOpt='caption',
+    containerFilter=NULL, parameters=NULL)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -18,6 +19,8 @@ labkey.executeSql(baseUrl, folderPath, schemaName, sql,
   \item{maxRows}{(optional) an integer specifying the maximum number of rows to return. If no value is specified, all rows are returned.}
   \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval.
 If no value is specified, rows will begin at the start of the result set.}
+  \item{colSort}{(optional) a string including the name of the column to sort preceeded by a \dQuote{+} or
+                 \dQuote{-} to indicate sort direction}
   \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would
 normally be hidden from user veiw. If no value is specified, the hidden columns are not returned.}
   \item{colNameOpt}{(optional) controls the name source for the columns of the output dataframe, with valid values of 'caption', 'fieldname', and 'rname'
@@ -32,6 +35,7 @@ normally be hidden from user veiw. If no value is specified, the hidden columns 
   	      \item{ "AllFolders": Include all folders for which the user has read permission }
 	}
   }
+  \item{parameters}{(optional) List of name/value pairs for the parameters if the SQL references underlying queries that are parameterized. For example, parameters=c("X=1", "Y=2").}
 }
 
 \details{

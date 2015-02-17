@@ -15,7 +15,8 @@
 ##
 
 labkey.selectRows <- function(baseUrl, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL,
-        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption', containerFilter=NULL)
+        maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption',
+        containerFilter=NULL, parameters=NULL)
 {
 ## Empty string/NULL checking
 if(is.null(viewName)==FALSE) {char <- nchar(viewName); if(char<1){viewName<-NULL}}
@@ -26,7 +27,7 @@ if(is.null(colSort)==FALSE) {char <- nchar(colSort); if(char<1){colSort<-NULL}}
 if(is.null(colFilter)==FALSE) {char <- nchar(colFilter[1]); if(char<1){colFilter<-NULL}}
 if(is.null(showHidden)==FALSE) {char <- nchar(showHidden); if(char<1){showHidden<-FALSE}}
 if(is.null(containerFilter)==FALSE) {char <- nchar(containerFilter[1]); if(char<1){containerFilter<-NULL}}
-
+if(is.null(parameters)==FALSE) {char <- nchar(parameters[1]); if(char<1){parameters<-NULL}}
 
 ## Error if any of baseUrl, folderPath, schemName or queryName are missing
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("queryName")==FALSE)
@@ -63,6 +64,7 @@ if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
 if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&query.offset=",rowOffset,sep="")}
 if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")}
 if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) myurl <- paste(myurl,"&query.",colFilter[j],sep="")}
+if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) myurl <- paste(myurl,"&query.param.",parameters[k],sep="")}
 if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
 
 ## Set options

@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2014 LabKey Corporation
+#  Copyright (c) 2014-2015 LabKey Corporation
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ PACKAGE_ENV = new.env()
 labkey.setCurlOptions <- function(...)
 {
     # default curl options
-    options <- curlOptions(ssl.verifyhost=2, ssl.verifypeer=TRUE, followlocation=TRUE, sslversion=3L)
+    options <- curlOptions(ssl.verifyhost=2, ssl.verifypeer=TRUE, followlocation=TRUE, sslversion=1L)
 
     # check if a certificate bundle has been specified from the environment variable
     vars <- Sys.getenv("RLABKEY_CAINFO_FILE")
