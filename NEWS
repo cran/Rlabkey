@@ -1,3 +1,6 @@
+Changes in version 2.1.128
+  o allow NA values in insertRows and importRows
+
 Changes in version 2.1.127
   o change sslversion default values in curlOptions to TLSv1
   o fix to handle maxRows and rowOffset for labkey.executeSql

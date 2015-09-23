@@ -457,16 +457,16 @@ RlabkeyUsersGuide <- function(view=TRUE)
 
 .onLoad<- function(libname, pkgname)
 {	
-	try(winMenuAddItem("Vignettes", "Rlabkey", "RlabkeyUsersGuide()"), TRUE)
+	try(utils::winMenuAddItem("Vignettes", "Rlabkey", "RlabkeyUsersGuide()"), TRUE)
 }
 
 .onUnload<- function(libpath)
 {	
 	numItems= as.integer(0);
 	
-	try (numItems<- length(winMenuItems("Vignettes")), TRUE)
+	try (numItems<- length(utils::winMenuItems("Vignettes")), TRUE)
 	if (numItems > 0)
 	{
-		try(winMenuDelItem("Vignettes", "Rlabkey"), TRUE)
+		try(utils::winMenuDelItem("Vignettes", "Rlabkey"), TRUE)
 	}	
 }

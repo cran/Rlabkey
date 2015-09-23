@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2013-2014 LabKey Corporation
+#  Copyright (c) 2013-2015 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ for(j in 1:nrows)
 {
     cvalues <- as.list(toImport[j,])
 	names(cvalues) <- cnames
+	cvalues[is.na(cvalues)] = NULL
     p2 <- toJSON(cvalues)
     p3 <- c(p3, p2)
 }

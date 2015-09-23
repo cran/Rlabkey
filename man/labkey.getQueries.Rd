@@ -29,7 +29,6 @@ in the specified schema.  The three columns are
 
 }
 \references{http://www.omegahat.org/RCurl/,\cr 
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey, peter@labkey.com}
 \seealso{

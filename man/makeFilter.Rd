@@ -61,7 +61,6 @@ The function returns either a single string or an array of strings to be use in 
 \code{colFilter} argument of the \code{labkey.selectRows} function.
 }
 \references{http://www.omegahat.org/RCurl/, \cr
-http://dssm.unipa.it/CRAN/web/packages/rjson/rjson.pdf,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}

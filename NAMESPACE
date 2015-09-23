@@ -18,3 +18,5 @@ S3method(print, LabkeyQuery)
 
 import(RCurl)
 import(rjson)
+
+importFrom("utils", "URLdecode", "URLencode")
