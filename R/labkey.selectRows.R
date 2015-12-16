@@ -16,7 +16,7 @@
 
 labkey.selectRows <- function(baseUrl, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL,
         maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption',
-        containerFilter=NULL, parameters=NULL)
+        containerFilter=NULL, parameters=NULL, includeDisplayValues=FALSE)
 {
 ## Empty string/NULL checking
 if(is.null(viewName)==FALSE) {char <- nchar(viewName); if(char<1){viewName<-NULL}}
@@ -28,6 +28,7 @@ if(is.null(colFilter)==FALSE) {char <- nchar(colFilter[1]); if(char<1){colFilter
 if(is.null(showHidden)==FALSE) {char <- nchar(showHidden); if(char<1){showHidden<-FALSE}}
 if(is.null(containerFilter)==FALSE) {char <- nchar(containerFilter[1]); if(char<1){containerFilter<-NULL}}
 if(is.null(parameters)==FALSE) {char <- nchar(parameters[1]); if(char<1){parameters<-NULL}}
+if(is.null(includeDisplayValues)==FALSE) {char <- nchar(includeDisplayValues); if(char<1){includeDisplayValues<-FALSE}}
 
 ## Error if any of baseUrl, folderPath, schemName or queryName are missing
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("queryName")==FALSE)
@@ -40,6 +41,11 @@ if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 if(is.null(viewName)==FALSE) {if(viewName==curlUnescape(viewName)) viewName <- curlEscape(viewName)}
 if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
 if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}
+
+apiVersion = "8.3"
+if (!is.null(includeDisplayValues) && includeDisplayValues == TRUE) {
+    apiVersion = "8.3&includeDisplayValues=true"
+}
 
 ## Format colSelect
 if(is.null(colSelect)==FALSE)
@@ -56,7 +62,7 @@ if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- 
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## Construct url
-myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaName,"&query.queryName=",queryName,sep="","&apiVersion=8.3")
+myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaName,"&query.queryName=",queryName,"&apiVersion=",apiVersion,sep="")
 if(is.null(viewName)==FALSE) {myurl <- paste(myurl,"&query.viewName=",viewName,sep="")}
 if(is.null(colSelect)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect,sep="")}
 if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&query.maxRows=",maxRows,sep="")}

@@ -9,7 +9,7 @@ labkey.selectRows(baseUrl, folderPath, schemaName, queryName,
     viewName = NULL, colSelect = NULL, maxRows = NULL,
     rowOffset = NULL, colSort = NULL, colFilter = NULL,
     showHidden = FALSE, colNameOpt="caption",
-    containerFilter=NULL, parameters=NULL)
+    containerFilter=NULL, parameters=NULL, includeDisplayValues=FALSE)
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -38,6 +38,7 @@ column name, operator and value of the filter(s) to be applied to the retrieved 
 	}
   }
   \item{parameters}{(optional) List of name/value pairs for the parameters if the SQL references underlying queries that are parameterized. For example, parameters=c("X=1", "Y=2").}
+  \item{includeDisplayValues}{(optional) a logical value indicating if display values should be included in the response object for lookup fields.}
 }
 \details{
 A full dataset or any portion of a dataset can be downloaded  into an R data frame using the 
