@@ -1,7 +1,7 @@
 \name{getFolderPath}
 \alias{getFolderPath}
 \title{Reutrns the folder path associated with a session}
-\description{ Returns the current folder path for a Labkey session }
+\description{ Returns the current folder path for a LabKey session }
 
 \usage{
 getFolderPath(session) 
@@ -10,7 +10,7 @@ getFolderPath(session)
   \item{session}{the session key returned from getSession}
 }
 
-\details{  Returns a string containing the current folder path for the passed in Labkey session 
+\details{  Returns a string containing the current folder path for the passed in LabKey session
 }
 
 \value{ A character array containing the folder path, relative to the root. 

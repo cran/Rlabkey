@@ -1,3 +1,7 @@
+Changes in version 2.1.130
+  o makeFilter() operators may now be either upper or lower case (formerly upper case only)
+  o added labkey.setDefaults and support for authentication via an API key
+
 Changes in version 2.1.129
   o add parameter to selectRows for including display values for lookup fields in response
 

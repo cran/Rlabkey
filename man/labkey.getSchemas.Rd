@@ -12,8 +12,8 @@ labkey.getSchemas(baseUrl, folderPath)
   \item{folderPath}{a string specifying the hierarchy of folders to the current folder (container) for the operation, starting with the project folder }
 }
 \details{
-Schemas act as the name space for query objects in LabKey Server.  Schemas are generatlly
-associated with a Labkey Server "module" that provides some specific functionality.  Within a queriable object,
+Schemas act as the name space for query objects in LabKey Server. Schemas are generatlly
+associated with a LabKey Server "module" that provides some specific functionality. Within a queriable object,
 the specific data that is visible depends on the current user's permissions in a given folder.
 Function arguments are the components of the url that identify the location of the server and the folder path.
 

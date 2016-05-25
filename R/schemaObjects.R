@@ -26,7 +26,7 @@
 	## different if the URL is the same.  
 	## The session holds pointers to the site and session variables and holds the baseUrl and current folder path
 	##
-	## Two option buckets are created at the session root so that they  can be read by network-level code without having to pass
+	## Two option buckets are created at the session root so that they can be read by network-level code without having to pass
 	## them down through all the calls.
 
 	getSession <-

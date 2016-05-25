@@ -1,7 +1,7 @@
 \name{lsFolders}
 \alias{lsFolders}
 \title{List the available folder paths }
-\description{ Lists the available folder paths relative to the current folder path for a Labkey session }
+\description{ Lists the available folder paths relative to the current folder path for a LabKey session }
 
 \usage{
 lsFolders(session) 
@@ -10,10 +10,10 @@ lsFolders(session)
   \item{session}{the session key returned from getSession}
 }
 
-\details{  Lists the available folder paths relative to the current folder path for a Labkey session 
+\details{  Lists the available folder paths relative to the current folder path for a LabKey session
 }
 
-\value{ A character array containing the available folder paths, relative to the project root.  These values can be set on a session usiig curFolder<-
+\value{ A character array containing the available folder paths, relative to the project root. These values can be set on a session using curFolder<-
 }
 \references{https://www.labkey.org/wiki/home/Documentation/page.view?name=projects}
 \author{Peter Hussey}

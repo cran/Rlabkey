@@ -23,11 +23,8 @@ labkey.executeSql <- function(baseUrl, folderPath, schemaName, sql, maxRows=NULL
 if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("sql")==FALSE)
 stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and sql."))
 
-## URL encoding of schema and folder path (if not already encoded)
-if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
+## URL encoding of folder path (if not already encoded)
 if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
-if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}
-if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
@@ -37,64 +34,23 @@ if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- 
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## Construct url
-myurl <- paste(baseUrl,"query",folderPath,"executeSql.api?schemaName=",schemaName,"&apiVersion=8.3",sep="")
-if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&maxRows=",maxRows,sep="")}
-if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&showRows=all",sep="")}
-if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&offset=",rowOffset,sep="")}
-if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")}
-if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) myurl <- paste(myurl,"&query.param.",parameters[k],sep="")}
-if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
+myurl <- paste(baseUrl, "query", folderPath, "executeSql.api", sep="")
 
-## Set options
-reader <- basicTextGatherer()
-header <- basicTextGatherer()
+## Construct parameters
+params <- list(schemaName=schemaName, apiVersion=8.3, sql=sql)
+if(is.null(maxRows)==FALSE) {params <- c(params, list(maxRows=maxRows))}
+if(is.null(maxRows)==TRUE) {params <- c(params, list(showRows="all"))}
+if(is.null(rowOffset)==FALSE) {params <- c(params, list(offset=rowOffset))}
+if(is.null(colSort)==FALSE) {params <- c(params, list(query.sort=colSort))}
+if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) params <- c(params, list("query.param."=parameters[k]))}
+if(is.null(containerFilter)==FALSE) {params <- paste(params, list("containerFilter"=containerFilter))}
 
+pbody <- toJSON(params)
 
-handle <- getCurlHandle()
-clist <- ifcookie()
-if(clist$Cvalue==1) {
-    myopts<- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-} else {
-    myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-}
+## Execute via our standard POST function
+mydata <- labkey.post(myurl, pbody)
 
-## Support user-settable options for debuggin and setting proxies etc
-if(exists(".lksession"))
-{
-	userOpt <- .lksession[["curlOptions"]] 
-	if (!is.null(userOpt))
-		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
-}
-
-## Post form
-postForm(uri=myurl, "sql"=sql, .opts=myopts, curl=handle)
-
-
-
-## Error checking for incoming file
-h <- parseHeader(header$value())
-status <- getCurlInfo(handle)$response.code
-message <- h$statusMessage
-if(status==500)
-{decode <- fromJSON(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
-if(status>=400)
-{
-    contTypes <- which(names(h)=='Content-Type')
-    if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
-    {
-        decode <- fromJSON(reader$value());
-        message<-decode$exception;
-        stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    }
-    else {
-        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    }
-}
-
-
-newdata <- makeDF(rawdata=reader$value(), showHidden=showHidden, colNameOpt=colNameOpt)
+newdata <- makeDF(rawdata=mydata, showHidden=showHidden, colNameOpt=colNameOpt)
 
 return(newdata)
 }

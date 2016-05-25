@@ -1,18 +1,18 @@
 \name{lsProjects}
 \alias{lsProjects}
-\title{List the projects available at a given Labkey Server address }
-\description{ Lists the projects available.  Takes a string URL instead of a session, as it is intended for use before creating a session.}
+\title{List the projects available at a given LabKey Server address }
+\description{ Lists the projects available. Takes a string URL instead of a session, as it is intended for use before creating a session.}
 
 \usage{
 lsProjects(baseUrl) 
 }
 \arguments{
-  \item{baseUrl}{a string specifying the \code{baseUrl}for the Labkey Server, of the form http://<server dns name>/<contextroot> }
+  \item{baseUrl}{a string specifying the \code{baseUrl}for the LabKey Server, of the form http://<server dns name>/<contextroot> }
 
 }
-\details{  List the projects available at a given Labkey Server address.
+\details{  List the projects available at a given LabKey Server address.
 }
-\value{ A character array containing the available projects, relative to the root.  These values can be set on a session using curFolder<-
+\value{ A character array containing the available projects, relative to the root. These values can be set on a session using curFolder<-
 }
 \references{https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey}

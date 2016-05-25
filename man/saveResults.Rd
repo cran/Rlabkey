@@ -1,7 +1,7 @@
 \name{saveResults}
 \alias{saveResults}
-\title{ Returns an object representing a Labkey schema }
-\description{ Creates and returns an object representing a Labkey schema, containing child objects representing Labkey queries}
+\title{ Returns an object representing a LabKey schema }
+\description{ Creates and returns an object representing a LabKey schema, containing child objects representing LabKey queries}
 
 \usage{
 saveResults(session, assayName, resultDataFrame, 
@@ -16,8 +16,8 @@ saveResults(session, assayName, resultDataFrame,
   \item{runPropertyList}{a list of run Properties }
 
 }
-\details{  saveResults is a wrapper function to labkey.saveBatch with two changes:  First, it uses a session object in place
-of the separate baseUrl and folderPath arguments.  Second, it provides defaults for generating Batch and Run names based on a current 
+\details{  saveResults is a wrapper function to labkey.saveBatch with two changes: First, it uses a session object in place
+of the separate baseUrl and folderPath arguments. Second, it provides defaults for generating Batch and Run names based on a current
 timestamp.
 
 To see the save result on LabKey server, click on the "SimpleMeans" assay in the Assay List web part.

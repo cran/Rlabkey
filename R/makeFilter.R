@@ -27,7 +27,7 @@
  	filters <- array(0, dim=c(fcount,1))
  	for(i in 1:fcount)
  			{	# Match the operator
- 				fop  <- switch(EXPR=fmat[i,2],
+ 				fop  <- switch(EXPR=toupper(fmat[i,2]),
 
 								#
 								# These operators require a data value

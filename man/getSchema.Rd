@@ -1,7 +1,7 @@
 \name{getSchema}
 \alias{getSchema}
-\title{ Returns an object representing a Labkey schema }
-\description{ Creates and returns an object representing a Labkey schema, containing child objects representing Labkey queries}
+\title{ Returns an object representing a LabKey schema }
+\description{ Creates and returns an object representing a LabKey schema, containing child objects representing LabKey queries}
 
 \usage{
 getSchema(session, schemaIndex) 
@@ -10,7 +10,7 @@ getSchema(session, schemaIndex)
   \item{session}{the session key returned from getSession}
   \item{schemaIndex}{the name of the schema that contains the table on which you want to base a query, or the number of that schema as displayed by print(session)}
 }
-\details{Creates and returns an object representing a Labkey schema, containing child objects representing Labkey queries.  This compound object is created 
+\details{Creates and returns an object representing a LabKey schema, containing child objects representing LabKey queries.  This compound object is created
 by calling \code{labkey.getQueries} on the requested schema and \code{labkey.getQueryDetails} on each returned query.  The information returned in the
 schema objects is essentially the same as the schema and query objects shown in the Schema Browser on LabKey Server.
 }

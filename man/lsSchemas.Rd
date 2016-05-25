@@ -1,7 +1,7 @@
 \name{lsSchemas}
 \alias{lsSchemas}
 \title{List the available schemas }
-\description{ Lists the available schemas given the current folder path for a Labkey session }
+\description{ Lists the available schemas given the current folder path for a LabKey session }
 
 \usage{
 lsSchemas(session) 
@@ -10,7 +10,7 @@ lsSchemas(session)
   \item{session}{the session key returned from getSession}
 }
 
-\details{ Lists the available schemas given the current folder path for a Labkey session 
+\details{ Lists the available schemas given the current folder path for a LabKey session
 }
 
 \value{ A character array containing the available schema names

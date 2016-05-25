@@ -46,59 +46,13 @@ for(j in 1:nrows)
     p3 <- c(p3, p2)
 }
 p3 <- paste(p3, collapse=",")
-pbody <- paste(substr(p1,1,nchar(p1)-1),', \"rows\":[',p3,"] }",sep="")
+pbody <- paste(substr(p1,1,nchar(p1)-1), ', \"rows\":[', p3 ,"] }", sep="")
 
-## Set options
-reader <- basicTextGatherer()
-header <- basicTextGatherer()
-handle <- getCurlHandle()
-headerFields <- c('Content-Type'="application/json;charset=utf-8")
-clist <- ifcookie()
-if(clist$Cvalue==1) {
-    myopts<- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-} else {
-    myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-}
+myurl <- paste(baseUrl, "query", folderPath, "updateRows.api", sep="")
 
-## Support user-settable options for debuggin and setting proxies etc
-if(exists(".lksession"))
-{
-	userOpt <- .lksession[["curlOptions"]] 
-	if (!is.null(userOpt))
-		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
-}
-
-## Post form
-myurl <- paste(baseUrl,"query",folderPath,"updateRows.api",sep="")
-curlPerform(url=myurl, postFields=pbody, httpheader=headerFields, .opts=myopts, curl=handle)
-
-
-## Error checking, decode data and return in data frame
-h <- parseHeader(header$value())
-status <- getCurlInfo(handle)$response.code
-message <- h$statusMessage
-if(status==500) 
-{decode <- fromJSON(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
-
-if(status>=400)
-{
-    contTypes <- which(names(h)=='Content-Type')
-    if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
-    {
-        decode <- fromJSON(reader$value());
-        message<-decode$exception;
-        stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    } else
-    {
-        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    }
-}
-
-newdata <- fromJSON(reader$value())
-
-
+## Execute via our standard POST function
+mydata <- labkey.post(myurl, pbody)
+newdata <- fromJSON(mydata)
 
 return(newdata)
 }

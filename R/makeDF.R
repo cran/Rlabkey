@@ -19,11 +19,20 @@
 
     decode <- fromJSON(rawdata)
 
-	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
-	if(is.null(colSelect)==FALSE){
-	if(length(decode$columnModel)==1 & decode$columnModel[[1]]$header!=colSelect) 
-		{stop(paste('The column names in the query "',decode$queryName,'" do not match one or more of the names specified in the colSelect variable. Be sure you are using the column name and not the column label. See the documentation for more details.',sep=''))}}
+    colSelectVector <- NULL
+    if(is.null(colSelect)==FALSE){
+        colSelectVector <- strsplit(colSelect, ",")[[1]]
+    }
 
+	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
+	# TODO: this currently only verifies the colSelect if the columnModel has one column)
+	if(is.null(colSelect)==FALSE){
+	    if(length(decode$columnModel)==1) {
+	        if((colNameOpt=="caption" & decode$columnModel[[1]]$header!=colSelect) | (colNameOpt=="fieldname" & decode$columnModel[[1]]$dataIndex!=colSelect)) {
+                stop(paste('The column names in the query "',decode$queryName,'" do not match one or more of the names specified in the colSelect variable. Be sure you are using the column name and not the column label. See the documentation for more details.',sep=''))
+            }
+	    }
+    }
 
   	## Get column names in proper order, associated header index, hidden tag, and data type
   	cnames <- NULL
@@ -47,10 +56,19 @@
   			{ stop("Invalid colNameOpt option.  Valid values are caption, fieldname, and rname.") }
   			
 		cnames <- c(cnames, cname)
-  	        hindex <- c(hindex, decode$columnModel[[j]]$dataIndex)
-  	        hide <- c(hide, decode$columnModel[[j]]$hidden)}
+        hindex <- c(hindex, decode$columnModel[[j]]$dataIndex)
+
+        colHidden <- decode$columnModel[[j]]$hidden
+        # issue 26561: include column if it is specifically included in the colSelect vector
+        if(!is.null(colHidden)) {
+            if(colHidden & !is.null(colSelectVector)) {
+               colHidden <- !(decode$columnModel[[j]]$header %in% colSelectVector | decode$columnModel[[j]]$dataIndex %in% colSelectVector)
+            }
+        }
+        hide <- c(hide, colHidden)
+    }
   	refdf <- data.frame(cnames,hindex,hide)
-  	
+
 	## Check for no rows returned, put data in data frame 
   	if(length(decode$rows)<1)
 		{tohide <- length(which(refdf$hide==TRUE))

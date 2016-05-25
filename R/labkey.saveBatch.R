@@ -35,37 +35,11 @@ if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
 if(assayName==curlUnescape(assayName)) {assayNameParam <- curlEscape(assayName)}
 else {assayNameParam <- assayName}
 
-## Set options
-reader <- basicTextGatherer()
-header <- basicTextGatherer()
-handle <- getCurlHandle()
-headerFields <- c('Content-Type'="application/json;charset=utf-8")
-clist <- ifcookie()
-if(clist$Cvalue==1) {
-    myopts<- curlOptions(cookie=paste(clist$Cname,"=",clist$Ccont, sep=""), writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-} else {
-    myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update,
-                        .opts=c(labkey.curlOptions()))
-}
-
-## Support user-settable options for debugging and setting proxies etc
-if(exists(".lksession"))
-{
-	userOpt <- .lksession[["curlOptions"]] 
-	if (!is.null(userOpt))
-		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
-}
-
 ## Translate assay name to an ID
 myurl <- paste(baseUrl,"assay",folderPath,"assayList.view?name=", assayNameParam, sep="")
 
-assayInfoJSON <- getURI(myurl, .opts=myopts, curl=handle)
-h <- parseHeader(header$value())
-status <- getCurlInfo(handle)$response.code
-message <- h$statusMessage
-if(status>=400)
-  {stop(paste("Could not find assay by that name. Status code = ",status,", Error message = ",message,sep=""))}
+## Execute via our standard GET function
+assayInfoJSON <- labkey.get(myurl)
 
 assayDef <- NULL
 assayInfo<- fromJSON(assayInfoJSON)
@@ -93,42 +67,22 @@ for(j in 1:nrows) {
 dataInputsArray <- vector(mode="list", length=0)
 
 runsArray <- vector(mode="list", length=1)
-runPropertyList <- c(runPropertyList, list("dataInputs"=dataInputsArray))
+runPropertyList <- c(runPropertyList, list("dataInputs" = dataInputsArray))
 
 runsArray[[1]] <- c(runPropertyList, list("dataRows" = rowsVector))
 
-batchPropertyList<- c(batchPropertyList, list("runs"= runsArray))
+batchPropertyList <- c(batchPropertyList, list("runs" = runsArray))
 	
 baseAssayList <- list(assayId=assayDef$id)
 baseAssayList <- c(baseAssayList, list(batch=batchPropertyList))
 
 ## Now post form with batch object filled out
-myurl <- paste(baseUrl,"assay",folderPath,"saveAssayBatch.view", sep="")
-pbody<-toJSON(baseAssayList)
-curlPerform(url=myurl, postFields=pbody, httpheader=headerFields, .opts=myopts, curl=handle)
+myurl <- paste(baseUrl, "assay", folderPath, "saveAssayBatch.view", sep="")
+pbody <- toJSON(baseAssayList)
 
-
-## Error checking for incoming file
-h <- parseHeader(header$value())
-status <- getCurlInfo(handle)$response.code
-message <- h$statusMessage
-if(status==500) 
-{decode <- fromJSON(reader$value()); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
-if(status>=400)
-{
-    contTypes <- which(names(h)=='Content-Type')
-	if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
-    {
-        decode <- fromJSON(reader$value());
-        message<-decode$exception;
-        stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    } else
-	{
-	    stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    }
-}
-
-newAssayInfo <- fromJSON(reader$value())
+## Execute via our standard POST function
+mydata <- labkey.post(myurl, pbody)
+newAssayInfo <- fromJSON(mydata)
 
 return(newAssayInfo)
 }

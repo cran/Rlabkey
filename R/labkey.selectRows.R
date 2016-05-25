@@ -48,11 +48,16 @@ if (!is.null(includeDisplayValues) && includeDisplayValues == TRUE) {
 }
 
 ## Format colSelect
-if(is.null(colSelect)==FALSE)
-  {   lencolSel <- length(colSelect)
+colSelect2=NULL
+if(is.null(colSelect)==FALSE) {
+    lencolSel <- length(colSelect)
     holder <- NULL
-      for(i in 1:length(colSelect)) holder <-paste(holder,curlEscape(colSelect[i]),",",sep="")
-      colSelect <- substr(holder, 1, nchar(holder)-1)}
+    for(i in 1:length(colSelect)) {
+        holder <-paste(holder,curlEscape(colSelect[i]),",",sep="")
+    }
+    colSelect2 <- substr(holder, 1, nchar(holder)-1)
+    colSelect <- paste(colSelect, collapse=",")
+}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)
@@ -64,7 +69,7 @@ if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 ## Construct url
 myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaName,"&query.queryName=",queryName,"&apiVersion=",apiVersion,sep="")
 if(is.null(viewName)==FALSE) {myurl <- paste(myurl,"&query.viewName=",viewName,sep="")}
-if(is.null(colSelect)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect,sep="")}
+if(is.null(colSelect2)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect2,sep="")}
 if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&query.maxRows=",maxRows,sep="")}
 if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
 if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&query.offset=",rowOffset,sep="")}
@@ -73,60 +78,13 @@ if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) myurl <- paste(myur
 if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) myurl <- paste(myurl,"&query.param.",parameters[k],sep="")}
 if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
 
-## Set options
-reader <- basicTextGatherer()
-header <- basicTextGatherer()
-myopts<- curlOptions(netrc=1, writefunction=reader$update, headerfunction=header$update, .opts=c(labkey.curlOptions()))
-
-## Support user-settable options for debuggin and setting proxies etc
-if(exists(".lksession"))
-{
-	userOpt <- .lksession[["curlOptions"]] 
-	if (!is.null(userOpt))
-		{myopts<- curlOptions(.opts=c(myopts, userOpt))}
-}
-
-## Http get
-handle <- getCurlHandle()
-clist <- ifcookie()
-if(clist$Cvalue==1) 
-{	
-	mydata <- getURI(myurl, .opts=myopts, cookie=paste(clist$Cname,"=",clist$Ccont,sep=""))
-} 
-else 
-{
-	myopts <-curlOptions(.opts=c(myopts, httpauth=1L))
-	mydata <- getURI(myurl, .opts=myopts, curl=handle)
-}
-
-
-## Error checking, decode data and return data frame
-h <- parseHeader(header$value())
-status <- getCurlInfo(handle)$response.code
-message <- h$statusMessage
-
-if(status==500)
-{decode <- fromJSON(mydata); message <- decode$exception; stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))}
-if(status>=400)
-{
-    contTypes <- which(names(h)=='Content-Type')
-    if(length(contTypes)>0 && (tolower(h[contTypes[1]])=="application/json;charset=utf-8" || tolower(h[contTypes[2]])=="application/json;charset=utf-8"))
-    {
-        decode <- fromJSON(mydata);
-        message<-decode$exception;
-        stop (paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    } else
-    {
-        stop(paste("HTTP request was unsuccessful. Status code = ",status,", Error message = ",message,sep=""))
-    }
-}
+## Execute via our standard GET function
+mydata <- labkey.get(myurl);
 
 newdata <- makeDF(mydata, colSelect, showHidden, colNameOpt)
 
-
 ## Check for less columns returned than requested
 if(is.null(colSelect)==FALSE){if(ncol(newdata)<lencolSel)warning("Fewer columns are returned than were requested in the colSelect variable. The column names may be invalid. Be sure to use the column name and not the column caption. See the documentation for further explaination.")}
-
 
 return(newdata)
 }

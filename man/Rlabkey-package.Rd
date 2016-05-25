@@ -18,29 +18,26 @@ schema objects (\code{labkey.getSchema}).
 \tabular{ll}{
 Package: \tab Rlabkey\cr
 Type: \tab Package\cr
-Version: \tab 2.1.129\cr
-Date: \tab 2015-11-05\cr
+Version: \tab 2.1.130\cr
+Date: \tab 2016-05-24\cr
 License: \tab Apache License 2.0\cr
 LazyLoad: \tab yes\cr
 }
-The user must have the appropriate authorization on the LabKey
-Server in order to modify the database through the use of
-these functions.  Using this package to access a password protected LabKey data base requires that the user
-has their login information in a netrc file. The netrc file
-contains configuration and autologin information for the File Transfer Protocol client (ftp) and
-other programs such as CURL.
+The user must have appropriate authorization on the LabKey Server in order to access or modify data using these functions.
+All access to secure content on LabKey Server requires authentication via an api key (see \code{labkey.setDefaults} for
+more details) or a properly configured netrc file that includes the user's login information.
 
-On a UNIX system this file should be named .netrc (dot netrc) and on windows it sould be 
-named _netrc (underscore netrc). The file should be located in the users home directory and the
-permissions on the file should be unreadable for everybody except the owner.  
+The netrc file is a standard mechanism for conveying configuration and autologin information to the File Transfer Protocol
+client (ftp) and other programs such as CURL. On a Linux or Mac system this file should be named .netrc (dot netrc) and on
+Windows it should be named _netrc (underscore netrc). The file should be located in the user's home directory and the
+permissions on the file should be unreadable for everybody except the owner.
 
-To create the _netrc on a windows machine, first create an environment variable called 'HOME' that
-is set to your home directory (c:/Users/<User-Name> on Vista) or any directory you want to use. 
-In that directory, create a text file named _netrc (note that it's underscore netrc, not dot
-netrc like it is on UNIX). 
+To create the _netrc on a Windows machine, first create an environment variable called 'HOME' set to your home directory
+(e.g., c:/Users/<User-Name> on recent versions of Windows) or any directory you want to use. In that directory, create a
+text file named _netrc (note that it's underscore netrc, not dot netrc like it is on Linux/Mac).
 
 The following three lines must be included in the .netrc or _netrc file either separated by white space
-(spaces, tabs, or newlines) or commas.  
+(spaces, tabs, or newlines) or commas.
 
 machine <remote-machine-name>\cr
 login <user-email>\cr
