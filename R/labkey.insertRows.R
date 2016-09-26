@@ -14,14 +14,16 @@
 #  limitations under the License.
 ##
 
-labkey.insertRows <- function(baseUrl, folderPath, schemaName, queryName, toInsert)
+labkey.insertRows <- function(baseUrl=NULL, folderPath, schemaName, queryName, toInsert)
 {  
+baseUrl=labkey.getBaseUrl(baseUrl)    
+
 ## Default showAllRows=TRUE
 showAllRows=TRUE
 
 ## Error if any of baseUrl, folderPath, schemName or toInsert are missing
-if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("toInsert")==FALSE)
-stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and toInsert."))
+if(exists("baseUrl")==FALSE || is.null(baseUrl) || exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("toInsert")==FALSE)
+    stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and toInsert."))
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)

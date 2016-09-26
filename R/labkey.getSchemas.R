@@ -22,13 +22,15 @@
 # See https://www.labkey.org/wiki/home/Documentation/page.view?name=rAPI for more information.
 
 
-labkey.getSchemas <- function(baseUrl, folderPath)
+labkey.getSchemas <- function(baseUrl=NULL, folderPath)
 {
+baseUrl=labkey.getBaseUrl(baseUrl)    
+  
 ## Empty string/NULL checking
 
 ## Error if any of baseUrl, folderPath, schemName or queryName are missing
-if(exists("baseUrl")==FALSE || exists("folderPath")==FALSE)
-stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
+if (exists("baseUrl")==FALSE || is.null(baseUrl) || exists("folderPath")==FALSE)
+    stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
 
 ## URL encoding of folder path (if not already encoded)
 if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
