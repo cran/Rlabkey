@@ -18,8 +18,8 @@ schema objects (\code{labkey.getSchema}).
 \tabular{ll}{
 Package: \tab Rlabkey\cr
 Type: \tab Package\cr
-Version: \tab 2.1.131\cr
-Date: \tab 2016-09-07\cr
+Version: \tab 2.1.132\cr
+Date: \tab 2016-11-29\cr
 License: \tab Apache License 2.0\cr
 LazyLoad: \tab yes\cr
 }
@@ -57,7 +57,7 @@ Multiple such blocks can exist in one file.
 
 \author{Valerie Obenchain
 }
-\references{http://www.omegahat.org/RCurl/,\cr
+\references{http://www.omegahat.net/RCurl/,\cr
 http://www.labkey.org/project/home/begin.view}
 \keyword{ package }
 \seealso{

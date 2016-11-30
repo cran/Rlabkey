@@ -50,6 +50,7 @@ MISSING\cr
 NOT_MISSING\cr
 MV_INDICATOR\cr
 NO_MV_INDICATOR\cr
+Q\cr
 
 When using the MISSING, NOT_MISSING, MV_INDICATOR, or NO_MV_INDICATOR operators, an empty string should be supplied as the value.
 See example below.
@@ -60,7 +61,7 @@ See example below.
 The function returns either a single string or an array of strings to be use in the
 \code{colFilter} argument of the \code{labkey.selectRows} function.
 }
-\references{http://www.omegahat.org/RCurl/, \cr
+\references{http://www.omegahat.net/RCurl/, \cr
 https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}

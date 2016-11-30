@@ -1,3 +1,8 @@
+Changes in version 2.1.132
+  o fix for Issue 24231: support for date + time
+  o add new table search filter param option: Q
+  o fix issue with baseUrl parameter being overridden in labkey.saveBatch
+
 Changes in version 2.1.131
   o fix for Issue 26956
   o added labkey.setDefaults support for baseUrl

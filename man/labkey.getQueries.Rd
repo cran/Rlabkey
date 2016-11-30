@@ -28,7 +28,7 @@ in the specified schema.  The three columns are
 \code{caption}{the caption of the named field as shown in the column header of a data grid, also known as a label}\cr 
 
 }
-\references{http://www.omegahat.org/RCurl/,\cr 
+\references{http://www.omegahat.net/RCurl/,\cr
 https://www.labkey.org/project/home/begin.view}
 \author{Peter Hussey, peter@labkey.com}
 \seealso{

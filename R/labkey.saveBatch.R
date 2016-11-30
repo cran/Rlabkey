@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010-2014 LabKey Corporation
+#  Copyright (c) 2010-2016 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 labkey.saveBatch <- function(baseUrl=NULL, folderPath, assayName, resultDataFrame, batchPropertyList=NULL, runPropertyList=NULL)
 {
-baseUrl = labkey.getBaseUrl()
+baseUrl = labkey.getBaseUrl(baseUrl)
 
 ## Error if any of baseUrl, folderPathare missing
 if(exists("baseUrl")==FALSE || is.null(baseUrl) || exists("folderPath")==FALSE || exists("assayName")==FALSE  || exists("resultDataFrame")==FALSE)

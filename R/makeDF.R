@@ -192,11 +192,20 @@ return(filtered)
 .parseDate <- function(s)
 {
     s <- as.character(s);
-    d <- tryCatch(as.Date(s),error = function(e) NA);
-    if (any(is.na(d)))
-    {
-        d[is.na(d)] <- as.Date(s[is.na(d)], "%d %b %Y %H:%M:%S");
+
+    ## format from DateUtil.getJsonDateTimeFormatString ("yyyy/MM/dd HH:mm:ss")
+    d <- tryCatch(as.POSIXct(s),error = function(e) NA);
+    if (any(is.na(d))) {
+        ## backwards compatibility for DateUtil.getJsonDateTimeFormatString ("d MMM yyyy HH:mm:ss")
+        d[is.na(d)] <- as.POSIXct(s[is.na(d)], format = "%d %b %Y %H:%M:%S");
     }
+
+    ## if none of the values have time part, convert the variable to a date
+    t <- format(d, "%H-%M-%S")
+    if (all(t == "00-00-00", na.rm = TRUE)) {
+        d <- as.Date(d, tz = attr (d, which = "tzone"));
+    }
+
     return(d);
 }
 
