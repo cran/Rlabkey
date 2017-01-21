@@ -1,6 +1,6 @@
 Package: Rlabkey
-Version: 2.1.132
-Date: 2016-11-29
+Version: 2.1.133
+Date: 2017-01-12
 Title: Data Exchange Between R and LabKey Server
 Author: Peter Hussey 
 Maintainer: Cory Nathe <cnathe@labkey.com>
@@ -13,8 +13,10 @@ Description: The LabKey client library for R makes it easy for R users to
 License: Apache License 2.0
 Copyright: Copyright (c) 2008-2016 LabKey Corporation
 LazyLoad: true
-Depends: RCurl, rjson (>= 0.1.3)
+Depends: RCurl, rjson (>= 0.1.3), fasttime
+LinkingTo: Rcpp
+Imports: Rcpp (>= 0.11.0)
 NeedsCompilation: yes
-Packaged: 2016-11-29 17:09:28 UTC; Cory
+Packaged: 2017-01-19 15:49:33 UTC; Cory
 Repository: CRAN
-Date/Publication: 2016-11-30 16:28:46
+Date/Publication: 2017-01-21 01:43:19

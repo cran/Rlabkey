@@ -85,9 +85,9 @@
 		
 	if(length(decode$rows)>0) {
 		hold.dat <- NULL
-    		hold.dat <- matrix(sapply(sapply(decode$rows,filterrow),rbind), nrow=length(decode$rows), byrow=TRUE)
-    		hold.dat <- as.data.frame(hold.dat,stringsAsFactors=FALSE)
 		tmprow <- filterrow(decode$rows[[1]])
+		hold.dat<-listToMatrix(decode$rows, names(tmprow))
+        hold.dat <- as.data.frame(hold.dat,stringsAsFactors=FALSE)
 		names(hold.dat) <- names(tmprow)   			
 	}
 
@@ -194,11 +194,7 @@ return(filtered)
     s <- as.character(s);
 
     ## format from DateUtil.getJsonDateTimeFormatString ("yyyy/MM/dd HH:mm:ss")
-    d <- tryCatch(as.POSIXct(s),error = function(e) NA);
-    if (any(is.na(d))) {
-        ## backwards compatibility for DateUtil.getJsonDateTimeFormatString ("d MMM yyyy HH:mm:ss")
-        d[is.na(d)] <- as.POSIXct(s[is.na(d)], format = "%d %b %Y %H:%M:%S");
-    }
+    d <- tryCatch(fastPOSIXct(s, "GMT"),error = function(e) NA);
 
     ## if none of the values have time part, convert the variable to a date
     t <- format(d, "%H-%M-%S")

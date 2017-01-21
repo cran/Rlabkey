@@ -1,3 +1,7 @@
+Changes in version 2.1.133
+  o performance improvements for makeDF, using listToMatrix function
+  o update date parser to use fasttime library for POSIXct function
+
 Changes in version 2.1.132
   o fix for Issue 24231: support for date + time
   o add new table search filter param option: Q
