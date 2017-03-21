@@ -1,3 +1,7 @@
+Changes in version 2.1.134
+  o fix for getQueryDetails to get all column details instead of just default view column list
+  o revert previous versions usage of fasttime library for date parsing
+
 Changes in version 2.1.133
   o performance improvements for makeDF, using listToMatrix function
   o update date parser to use fasttime library for POSIXct function

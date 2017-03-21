@@ -288,7 +288,7 @@
 	.getQueryDetails <- function(session, schemaName, queryName)
 	{	
 		## get the default view info as this is what selectRows returns
-		out <- labkey.getDefaultViewDetails(attr(session,"baseUrl"), getFolderPath(session), schemaName, queryName)	
+		out <- labkey.getQueryDetails(attr(session,"baseUrl"), getFolderPath(session), schemaName, queryName)	
 		fieldList <- list()
 		for (r in row.names(out))
 		{				

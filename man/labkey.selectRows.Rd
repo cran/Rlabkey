@@ -17,11 +17,11 @@ labkey.selectRows(baseUrl, folderPath, schemaName, queryName,
   \item{schemaName}{a string specifying the  \code{schemaName} for the query}
   \item{queryName}{a string specifying the \code{queryName}}
   \item{viewName}{(optional) a string specifying the \code{viewName} associated with the query. If not specified, the default view determines the rowset returned.  }
-  \item{colSelect}{(optional) a vector of comma separated strings specifying which columns of a dataset or view to import}
+  \item{colSelect}{(optional) a vector of comma separated strings specifying which columns of a dataset or view to import. The wildcard character ("*") may also be used here to get all columns including those not in the default view.}
   \item{maxRows}{(optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.}
   \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval. If no
 value is specified, the retrieval starts with the first row.}
-  \item{colSort}{(optional) a string including the name of the column to sort preceeded by a \dQuote{+} or
+  \item{colSort}{(optional) a string including the name of the column to sort preceded by a \dQuote{+} or
 \dQuote{-} to indicate sort direction}
   \item{colFilter}{(optional) a vector or array object created by the \code{makeFilter} function which contains the
 column name, operator and value of the filter(s) to be applied to the retrieved data.}
@@ -47,11 +47,11 @@ the location of the data and what actions should be taken on the data prior to i
 (ie, sorting, selecting particular columns or maximum number of rows, etc.).
 
 Stored queries in LabKey Server have an associated default view and may have one or more named views.  Views determine the column set of
-the return data frame.  View columns cab be a subset or superset of the columns of the underlying query-- a subset if columns from the 
+the return data frame.  View columns can be a subset or superset of the columns of the underlying query-- a subset if columns from the
 query are left out of the view, and a superset if lookup columns in the underlying query are used to include columns from related queries.  
-Views can also include filter and sort propertiesthat will make thehir result set different from the underlying query.
+Views can also include filter and sort properties that will make their result set different from the underlying query.
 If no view is specified, the columns and rows returned are determined by the default view, which may not be the same as the 
-result rows of the underlying query.  Plese see the topic on Saving Views in the LabKey online documentation.
+result rows of the underlying query.  Please see the topic on Saving Views in the LabKey online documentation.
 
 In the returned data frame, there are three different ways to have the columns named:  
 \code{colNameOpt='caption'} uses the caption value, and is the default option for backward compatibility.  

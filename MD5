@@ -1,6 +1,6 @@
-38fcaea27b588d06e120803f17fa50d3 *DESCRIPTION
-335379cb02ecf81baab6397a53211beb *NAMESPACE
-e4d915ea7b73c62765d38f4c82321e5f *NEWS
+17a1d651d483fcb2bdc9ff14a1e0a8cf *DESCRIPTION
+231f693a2892026345ab2f763b29527b *NAMESPACE
+1a4368295c6e6d4a45a8f40f969694fb *NEWS
 0cc30c42f2bcbb9613eb1e661f423d6d *R/RcppExports.R
 0974e580e5274d046d62cbc3af8cada8 *R/fromJSON2.R
 7926b1454b758eee8a35ee24b9e47d72 *R/ifcookie.R
@@ -19,15 +19,15 @@ d20e9f53177310bdd0ef71c34c42ec7b *R/labkey.insertRows.R
 2e92b723e1a2d0d13eb670362cc046d5 *R/labkey.selectRows.R
 caec341f15045b1c6b30dc4d96d1f582 *R/labkey.setCurlOptions.R
 8c1d31ccc2316c82a3f63e4f657c9d88 *R/labkey.updateRows.R
-d77e7fd58d6e91cb9dc7327648fbfb11 *R/makeDF.R
+61a3ce937189fe4d490eb7f82b25eeb3 *R/makeDF.R
 1509b81a8876b462aced791560de33d2 *R/makeFilter.R
 797aa374cb55b738c4ff0d096e1fcbab *R/parseHeader.R
-ad6bd26e9a0d65bbe62ad208bd598bec *R/schemaObjects.R
-bdb45449c50fc73307dd8291bef1b1b6 *build/vignette.rds
+ddaf7b6e8f1251d0600fd1fcb3f47a6d *R/schemaObjects.R
+5ec60bde1aa2ae943b704a7589510bf3 *build/vignette.rds
 3e758edb09023ba129105f53fc9a669e *inst/doc/RlabkeyExample.Rnw
 22132f7616d820d0a104649965336706 *inst/doc/RlabkeyExample.pdf
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-6b82b22ac16e89d3ca0818bc22bc5d18 *man/Rlabkey-package.Rd
+39005b6dff862764e72c9d3064e9e037 *man/Rlabkey-package.Rd
 d85a1029f5d661e7650c024aaaa654ef *man/RlabkeyUsersGuide.Rd
 411a5c84c02f8fd9eaad41dda2a30829 *man/getFolderPath.Rd
 0c1083d1420419c66b89cdd558a72f20 *man/getLookups.Rd
@@ -49,7 +49,7 @@ d1f4bac5b1ab9335f56107b691919aa1 *man/labkey.importRows.Rd
 55558b23976949a315fde9c7fa337f5c *man/labkey.insertRows.Rd
 bb446b8ede4323c7ef0d8db9651a6eab *man/labkey.makeRemotePath.Rd
 d8d77eacdd5f914ea4c56ddb6a3cbd49 *man/labkey.saveBatch.Rd
-e754cc6db946761fd4eaffac5a0973e0 *man/labkey.selectRows.Rd
+05039f94186172ccc1304bd1d14c1983 *man/labkey.selectRows.Rd
 eab13b1938acaf130771f6b3e140931e *man/labkey.setCurlOptions.Rd
 1dc2fec7962ee2fb20756f56e2ca744a *man/labkey.setDefaults.Rd
 9da0926d75e20518784ecc5f888fa5a3 *man/labkey.updateRows.Rd
@@ -63,7 +63,7 @@ ef36a7f57fdc44d0ad7d9ed9ab8e4cf5 *man/saveResults.Rd
 1bf0fe3fa9b751759a73a2b4d49085b8 *src/Makevars
 3de1196eb7ed9cbf9125a185fb18b852 *src/RJSON_parser.c
 bd2dde8766089586a721dc04b7b134e4 *src/RJSON_parser.h
-d8b4a7a0455b2978249b6f3b601f1e72 *src/R_init.c
+fbfba6bb9393160dd0a406ce7d45d33d *src/R_init.c
 1cc4302dd314f8b6a176e11f85974a4d *src/RcppExports.cpp
 ea1c136983b484e4057c94521af66d75 *src/listToMatrix.cpp
 3e758edb09023ba129105f53fc9a669e *vignettes/RlabkeyExample.Rnw
