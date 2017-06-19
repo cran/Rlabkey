@@ -16,22 +16,35 @@
 
  makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
 {
-
     decode <- fromJSON(rawdata)
 
-    colSelectVector <- NULL
-    if(is.null(colSelect)==FALSE){
-        colSelectVector <- strsplit(colSelect, ",")[[1]]
-    }
+	## Check to make sure at least one column exists in the result set
+	if(length(decode$columnModel)==0){
+		stop('No columns exist in the result set. Be sure you are using the column name for colNameOpt="fieldname" and the column label for colNameOpt="caption" in the colSelect vector. See the documentation for more details.')
+	}
 
-	## Check for invalid colSelect name (with labkey 8.3 this returns lsid column only)
-	# TODO: this currently only verifies the colSelect if the columnModel has one column)
-	if(is.null(colSelect)==FALSE){
-	    if(length(decode$columnModel)==1) {
-	        if((colNameOpt=="caption" & decode$columnModel[[1]]$header!=colSelect) | (colNameOpt=="fieldname" & decode$columnModel[[1]]$dataIndex!=colSelect)) {
-                stop(paste('The column names in the query "',decode$queryName,'" do not match one or more of the names specified in the colSelect variable. Be sure you are using the column name and not the column label. See the documentation for more details.',sep=''))
-            }
-	    }
+	colModelNames = c()
+	colModelLabels = c()
+	for(i in 1:length(decode$columnModel)){
+		if(!is.null(decode$columnModel[[i]]$dataIndex)){
+			colModelNames[[i]] = decode$columnModel[[i]]$dataIndex
+		}
+		if(!is.null(decode$columnModel[[i]]$header)){
+			colModelLabels[[i]] = decode$columnModel[[i]]$header
+		}
+	}
+
+	## Check for invalid colSelect name
+	colSelectVector <- NULL
+	if(!is.null(colSelect)){
+		colSelectVector <- strsplit(colSelect, ",")[[1]]
+	}
+	if(!is.null(colSelectVector) & length(colSelectVector)>0){
+		for(i in 1:length(colSelectVector)){
+			if(!(colSelectVector[[i]] %in% colModelNames) & !(colSelectVector[[i]] %in% colModelLabels)){
+				stop(paste('The column "',colSelectVector[[i]],'" specified in the colSelect variable does not exist in the result set. Be sure you are using the column name for colNameOpt="fieldname" and the column label for colNameOpt="caption". See the documentation for more details.',sep=''))
+			}
+		}
     }
 
   	## Get column names in proper order, associated header index, hidden tag, and data type
@@ -46,14 +59,15 @@
 		## when running R "views"  at the server, the field_name is modified to use underscores and lower cased.  
 		## This also makes it a legal name in R, which can be useful.
 
-  		if (colNameOpt=="caption")
-  			{cname <- decode$columnModel[[j]]$header}
-  		else if (colNameOpt == "fieldname")
-  			{cname <- decode$columnModel[[j]]$dataIndex}
-  		else if (colNameOpt == "rname" )
-  			{cname <- .getRNameFromName(decode$columnModel[[j]]$dataIndex, existing=cnames) }
-  		else
-  			{ stop("Invalid colNameOpt option.  Valid values are caption, fieldname, and rname.") }
+  		if (colNameOpt == "caption") {
+			cname <- decode$columnModel[[j]]$header
+		} else if (colNameOpt == "fieldname") {
+			cname <- decode$columnModel[[j]]$dataIndex
+		} else if (colNameOpt == "rname" ) {
+			cname <- .getRNameFromName(decode$columnModel[[j]]$dataIndex, existing=cnames)
+		} else {
+			stop("Invalid colNameOpt option.  Valid values are caption, fieldname, and rname.")
+		}
   			
 		cnames <- c(cnames, cname)
         hindex <- c(hindex, decode$columnModel[[j]]$dataIndex)
@@ -70,18 +84,21 @@
   	refdf <- data.frame(cnames,hindex,hide)
 
 	## Check for no rows returned, put data in data frame 
-  	if(length(decode$rows)<1)
-		{tohide <- length(which(refdf$hide==TRUE))
+  	if(length(decode$rows)<1){
+		tohide <- length(which(refdf$hide==TRUE))
 		totalcol <- length(refdf$cnames)
-		if(showHidden==FALSE)
-			{emptydf <- as.data.frame(rep(list(num=double(0)), each=(totalcol-tohide)))
+		if(showHidden==FALSE){
+			emptydf <- as.data.frame(rep(list(num=double(0)), each=(totalcol-tohide)))
 			colnames(emptydf) <- refdf$cnames[refdf$hide==FALSE]
 			warning("Empty data frame was returned. Query may be too restrictive.", call.=FALSE)
-			return(emptydf)}else
-		{emptydf <- as.data.frame(rep(list(num=double(0)), each=(totalcol)))
-		colnames(emptydf) <- refdf$cnames
-		warning("Empty data frame was returned. Query may be too restrictive.", call.=FALSE)}
-		return(emptydf)}
+			return(emptydf)
+		} else {
+			emptydf <- as.data.frame(rep(list(num=double(0)), each=(totalcol)))
+			colnames(emptydf) <- refdf$cnames
+			warning("Empty data frame was returned. Query may be too restrictive.", call.=FALSE)
+		}
+		return(emptydf)
+	}
 		
 	if(length(decode$rows)>0) {
 		hold.dat <- NULL
@@ -106,7 +123,7 @@
   	}
 
   	## Delete hidden column(s) unless showHidden=TRUE
-	if (showHidden==TRUE || is.null(decode$metaData$id)) {}  else { 
+	if (showHidden==TRUE || is.null(decode$metaData$id)) {}  else {
 		hide.ind <- which(refdf$hide==TRUE)
 		if(length(hide.ind)>0 ) {
 			if(length(hide.ind) == length(newdat)) {
@@ -116,7 +133,7 @@
 				refdf <- refdf[-hide.ind,]
 				cnames <- cnames[-hide.ind] 
 			}
-		} else {}		
+		}
 	}
 
 	## Set mode for multiple columns of data (this also removes list factor)
@@ -128,7 +145,7 @@
   	        try(
                 if(mod=="date") { newdat[,j] <- .parseDate(newdat[,j])} else
                 if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
-                if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "numeric")} else
+                if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "integer")} else
                 if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
                 if(mod=="float"){suppressWarnings(mode(newdat[,j]) <- "numeric")} else
                 {print("MetaData field type not recognized.")}
@@ -144,7 +161,7 @@
 	    try(
             if(mod=="date"){ newdat <- .parseDate(newdat)}else
             if(mod=="string"){suppressWarnings(mode(newdat) <- "character")} else
-            if(mod=="int"){ suppressWarnings(mode(newdat) <- "numeric")} else
+            if(mod=="int"){ suppressWarnings(mode(newdat) <- "integer")} else
             if(mod=="boolean"){suppressWarnings(mode(newdat) <- "logical")} else
             if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
             {print("MetaData field type not recognized.")}
@@ -180,7 +197,7 @@ return(filtered)
 	{ 
 		for (i in 1:99)
 		{
-			if(length(existing[rname == existing]) ==0 )
+			if(length(existing[rname == existing]) ==0)
 				{break;}
 			else 
 				{rname<- c(rname + as.character(i))}

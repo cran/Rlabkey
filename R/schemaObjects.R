@@ -438,12 +438,6 @@
 		      class="LabkeyField", schemaName=schemaName, queryName=queryName)
 	}
 
-	#print.LabkeyField <-
-	#    function(x, ..., pad="")
-	#{
-	#	print(x)
-	#}
-
 
 ## the following two functions add an entry for the Rlabkey Users guide to the Vignettes menu
 RlabkeyUsersGuide <- function(view=TRUE)

@@ -22,7 +22,7 @@ If no value is specified, rows will begin at the start of the result set.}
   \item{colSort}{(optional) a string including the name of the column to sort preceeded by a \dQuote{+} or
                  \dQuote{-} to indicate sort direction}
   \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would
-normally be hidden from user veiw. If no value is specified, the hidden columns are not returned.}
+normally be hidden from user view. Defaults to FALSE if no value provided.}
   \item{colNameOpt}{(optional) controls the name source for the columns of the output dataframe, with valid values of 'caption', 'fieldname', and 'rname'
   See labkey.selectRows for more details.}
   \item{containerFilter}{(optional) Specifies the containers to include in the scope of selectRows request. A value of NULL is equivalent to "Current".   Valid values are

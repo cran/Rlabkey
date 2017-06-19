@@ -25,7 +25,7 @@ value is specified, the retrieval starts with the first row.}
 \dQuote{-} to indicate sort direction}
   \item{colFilter}{(optional) a vector or array object created by the \code{makeFilter} function which contains the
 column name, operator and value of the filter(s) to be applied to the retrieved data.}
-  \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would normally be hidden from user view. If no value is specified, the hidden columns are not returned. In versions 0.0.5 and earlier, this argument was called \code{stripAllHidden}. The \code{stripAllHidden} argument performed the same function as \code{showHidden} but with different logic. The change was made for clarity.}
+  \item{showHidden}{(optional) a logical value indicating whether or not to return data columns that would normally be hidden from user view. Defaults to FALSE if no value provided.}
   \item{colNameOpt}{(optional) controls the name source for the columns of the output dataframe, with valid values of 'caption', 'fieldname', and 'rname'}
   \item{containerFilter}{(optional) Specifies the containers to include in the scope of selectRows request. A value of NULL is equivalent to "Current".   Valid values are 
      \itemize{

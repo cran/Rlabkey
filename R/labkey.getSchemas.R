@@ -33,7 +33,7 @@ if (exists("baseUrl")==FALSE || is.null(baseUrl) || exists("folderPath")==FALSE)
     stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
 
 ## URL encoding of folder path (if not already encoded)
-if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(folderPath!=URLencode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 ## Formatting
 baseUrl <- gsub("[\\]", "/", baseUrl)

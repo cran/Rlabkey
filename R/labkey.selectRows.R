@@ -39,7 +39,7 @@ if(exists("baseUrl")==FALSE || is.null(baseUrl) ||exists("folderPath")==FALSE ||
 ## URL encoding of schema, query, view, etc. (if not already encoded)
 if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
 if(queryName==curlUnescape(queryName)) {queryName <- curlEscape(queryName)}
-if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(folderPath!=URLencode(folderPath)) {folderPath <- URLencode(folderPath)}
 if(is.null(viewName)==FALSE) {if(viewName==curlUnescape(viewName)) viewName <- curlEscape(viewName)}
 if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
 if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}

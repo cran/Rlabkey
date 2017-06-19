@@ -27,8 +27,6 @@ used \dQuote{behind the scenes} for database manipulation. It is the column name
 the Rlabkey functions when a column name is expected. To identify a particular column name in a dataset on
 a web site, use the \dQuote{export to R script} option available as a drop down option under the \dQuote{views} 
 tab for each dataset.
-
-In versions 0.0.5 and earlier, \code{labkey.deleteRows} had a \code{stripAllHidden} argument. This argument did not perform a useful function and has since been removed. 
 }
 \value{
 A list is returned with named categories of \bold{command}, \bold{rowsAffected}, \bold{rows}, \bold{queryName}, \bold{containerPath} and \bold{schemaName}.

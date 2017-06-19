@@ -1,3 +1,8 @@
+Changes in version 2.1.135
+  o Change the cast of integers from numeric to integer (Issue #30464)
+  o labkey.selectRows updates for colSelect and showHidden properties (Issue #30465)
+  o Fix for encoding extended characters in folderPath param (Issue #22034)
+
 Changes in version 2.1.134
   o fix for getQueryDetails to get all column details instead of just default view column list
   o revert previous versions usage of fasttime library for date parsing

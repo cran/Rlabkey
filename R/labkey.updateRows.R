@@ -34,7 +34,7 @@ if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
 ## URL encode folder path, JSON encode post body (if not already encoded)
 toUpdate <- convertFactorsToStrings(toUpdate);
-if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(folderPath!=URLencode(folderPath)) {folderPath <- URLencode(folderPath)}
 nrows <- nrow(toUpdate)
 ncols <- ncol(toUpdate)
 p1 <- toJSON(list(schemaName=schemaName, queryName=queryName, apiVersion=8.3))

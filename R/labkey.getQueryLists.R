@@ -42,7 +42,7 @@ getQueryLists <- function(baseUrl=NULL, folderPath, schemaName, queryName=NULL)
 
 	## URL encoding of schemaName and folderPath (if not already encoded)
 	if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
-	if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+	if(folderPath!=URLencode(folderPath)) {folderPath <- URLencode(folderPath)}
 
 	## Formatting
 	baseUrl <- gsub("[\\]", "/", baseUrl)

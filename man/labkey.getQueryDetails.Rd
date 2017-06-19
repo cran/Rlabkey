@@ -19,23 +19,23 @@ To retrieve that set of fields with their detailed properties such as type and n
 the location of the server, the folder path, the schema, and the name of the query.
 \cr \cr
 The results from getQueryDetails describe the \dQuote{field names} that are used to build the colSelect, 
-colFilter and colSort parameters to selectRows.  Each column in the data frame returned from selectRows 
-corresponsds to a field in the colSelect list.  
+colFilter and colSort parameters to selectRows. Each column in the data frame returned from selectRows
+corresponds to a field in the colSelect list.
 \cr
-There are two types of fieldNames that will be reported by the server in the output of this function.  For fields that are 
+There are two types of fieldNames that will be reported by the server in the output of this function. For fields that are
 directly defined in the query corresponding the queryName parameter for this function, the fieldName 
-is simply the name assigned by the query.  Because selectRows returns the results specified by the default view, however,
-there may be cases where this default view incorporats data from other queries that have a defined 1-M relationship 
-with the table designated by the queryName.  Such fields in related tables are referred to as \dQuote{lookup} fields.
-Lookup fields have multi-part names using a forward slash as the delmiter.  For example, in a samples data set, if the ParticipantId 
+is simply the name assigned by the query. Because selectRows returns the results specified by the default view, however,
+there may be cases where this default view incorporates data from other queries that have a defined 1-M relationship
+with the table designated by the queryName. Such fields in related tables are referred to as \dQuote{lookup} fields.
+Lookup fields have multi-part names using a forward slash as the delimiter. For example, in a samples data set, if the ParticipantId
 identifies the source of the sample, \code{ParticipantId/CohortId/CohortName} could be a reference to a \code{CohortName} field 
 in a \code{Cohorts} data set.
 
-These lookup fieldNames can appear in the default view and show up in the selectRows result.  If a field from a lookup table
-is not in the default view, it can still be added to the output column list of \code{labkey.selectRows}.  Use the 
-labkey.getLookups to discover what additonal fields are available via lookups, and then put their multipart fieldName values
-into the colSelect list.  Lookup fields have the semantics of a LEFT JOIN in SQL, such that 
-every record from the  target queryName apprears in the output whether or not there is a matching lookup field value.
+These lookup fieldNames can appear in the default view and show up in the selectRows result. If a field from a lookup table
+is not in the default view, it can still be added to the output column list of \code{labkey.selectRows}. Use the
+labkey.getLookups to discover what additional fields are available via lookups, and then put their multipart fieldName values
+into the colSelect list. Lookup fields have the semantics of a LEFT JOIN in SQL, such that
+every record from the target queryName appears in the output whether or not there is a matching lookup field value.
 
 }
 \value{
@@ -49,17 +49,17 @@ The available schemas are returned as a data frame,
 \code{isNullable} {TRUE if the field can be left empty (null)} \cr
 \code{isKeyField} {TRUE if the field is part of the primary key} \cr
 \code{isAutoIncrement} {TRUE if the system will automatically assign a sequential integer in this on inserting a record}\cr 
-\code{isVersionField} {TRUE if the field isused to detect changes since last read} \cr
+\code{isVersionField} {TRUE if the field issued to detect changes since last read} \cr
 \code{isHidden} {TRUE if the field is not displayed by default} \cr
-\code{isSelectable} {reserved for futre  use. }\cr
-\code{isUserEditable} {reserved for futre  use.}\cr 
-\code{isReadOnly} {reserved for futre  use}\cr 
-\code{isMvEnabled} {reserved for futre  use}\cr 
+\code{isSelectable} {reserved for future use. }\cr
+\code{isUserEditable} {reserved for future use.}\cr
+\code{isReadOnly} {reserved for future use}\cr
+\code{isMvEnabled} {reserved for future use}\cr
 \code{lookupKeyField}  {for a field defined as a lookup the primary key column of the query referenced by the lookup field;  NA for non-lookup fields} \cr
 \code{lookupSchemaName} {the schema of the query referenced by the lookup field;  NA for non-lookup fields} \cr
 \code{lookupDisplayField} {the field from the query referenced by the lookup field that is shown by default in place of the lookup field;  NA for non-lookup fields} \cr 
 \code{lookupQueryName} {the query referenced by the lookup field;  NA for non-lookup fields.  A non-NA value indicates that you can use this field in a call to getLookups} \cr 
-\code{lookupIsPublic} {reserved for futre  use}\cr
+\code{lookupIsPublic} {reserved for future use}\cr
 }
 \author{Peter Hussey, peter@labkey.com}
 \seealso{

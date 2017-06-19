@@ -56,7 +56,7 @@ if(is.null(lookupKey)==FALSE) {char <- nchar(lookupKey); if(char<1) {lookupKey<-
 ## URL encoding (if not already encoded)
 if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
 if(queryName==curlUnescape(queryName)) {queryName <- curlEscape(queryName)}
-if(folderPath==URLdecode(folderPath)) {folderPath <- URLencode(folderPath)}
+if(folderPath!=URLencode(folderPath)) {folderPath <- URLencode(folderPath)}
 if(is.null(lookupKey)==FALSE) {if(lookupKey==curlUnescape(lookupKey)) lookupKey <- curlEscape(lookupKey)}
 
 ## Formatting
