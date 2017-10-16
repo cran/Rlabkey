@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2014 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2010-2017 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -25,12 +25,14 @@
 
 	colModelNames = c()
 	colModelLabels = c()
+	colModelRNames = c()
 	for(i in 1:length(decode$columnModel)){
 		if(!is.null(decode$columnModel[[i]]$dataIndex)){
-			colModelNames[[i]] = decode$columnModel[[i]]$dataIndex
+			colModelNames = c(colModelNames, decode$columnModel[[i]]$dataIndex)
+			colModelRNames = c(colModelRNames, .getRNameFromName(decode$columnModel[[i]]$dataIndex, existing=colModelRNames))
 		}
 		if(!is.null(decode$columnModel[[i]]$header)){
-			colModelLabels[[i]] = decode$columnModel[[i]]$header
+			colModelLabels = c(colModelLabels, decode$columnModel[[i]]$header)
 		}
 	}
 
@@ -41,7 +43,7 @@
 	}
 	if(!is.null(colSelectVector) & length(colSelectVector)>0){
 		for(i in 1:length(colSelectVector)){
-			if(!(colSelectVector[[i]] %in% colModelNames) & !(colSelectVector[[i]] %in% colModelLabels)){
+			if(!(colSelectVector[[i]] %in% colModelNames) & !(colSelectVector[[i]] %in% colModelLabels) & !(colSelectVector[[i]] %in% colModelRNames)){
 				stop(paste('The column "',colSelectVector[[i]],'" specified in the colSelect variable does not exist in the result set. Be sure you are using the column name for colNameOpt="fieldname" and the column label for colNameOpt="caption". See the documentation for more details.',sep=''))
 			}
 		}
@@ -192,8 +194,8 @@ return(filtered)
 .getRNameFromName <- function(lkname, existing=NULL)
 {
 	rname <- tolower(chartr(" /", "__", lkname))
-	
-	if (length(existing)>0) 
+
+	if (length(existing)>0)
 	{ 
 		for (i in 1:99)
 		{

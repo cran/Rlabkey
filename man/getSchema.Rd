@@ -21,11 +21,9 @@ schema objects is essentially the same as the schema and query objects shown in 
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}}
 \examples{
-\dontrun{
-
+\donttest{
 
 ## the basics of using session, schema, and query objects
-
 # library(Rlabkey)
 
 s<- getSession(baseUrl="http://localhost:8080/labkey",

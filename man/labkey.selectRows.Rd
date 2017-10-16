@@ -5,11 +5,12 @@
 Import full datasets or selected rows into R. The data can be sorted and filtered prior to import.
 }
 \usage{
-labkey.selectRows(baseUrl, folderPath, schemaName, queryName, 
+labkey.selectRows(baseUrl = NULL, folderPath, schemaName, queryName,
     viewName = NULL, colSelect = NULL, maxRows = NULL,
     rowOffset = NULL, colSort = NULL, colFilter = NULL,
     showHidden = FALSE, colNameOpt="caption",
-    containerFilter=NULL, parameters=NULL, includeDisplayValues=FALSE)
+    containerFilter = NULL, parameters = NULL,
+    includeDisplayValues = FALSE, method = "POST")
 }
 \arguments{
   \item{baseUrl}{a string specifying the \code{baseUrl}for the labkey server}
@@ -17,7 +18,7 @@ labkey.selectRows(baseUrl, folderPath, schemaName, queryName,
   \item{schemaName}{a string specifying the  \code{schemaName} for the query}
   \item{queryName}{a string specifying the \code{queryName}}
   \item{viewName}{(optional) a string specifying the \code{viewName} associated with the query. If not specified, the default view determines the rowset returned.  }
-  \item{colSelect}{(optional) a vector of comma separated strings specifying which columns of a dataset or view to import. The wildcard character ("*") may also be used here to get all columns including those not in the default view.}
+  \item{colSelect}{(optional) a vector of strings specifying which columns of a dataset or view to import. The wildcard character ("*") may also be used here to get all columns including those not in the default view.}
   \item{maxRows}{(optional) an integer specifying how many rows of data to return. If no value is specified, all rows are returned.}
   \item{rowOffset}{(optional) an integer specifying which row of data should be the first row in the retrieval. If no
 value is specified, the retrieval starts with the first row.}
@@ -39,6 +40,7 @@ column name, operator and value of the filter(s) to be applied to the retrieved 
   }
   \item{parameters}{(optional) List of name/value pairs for the parameters if the SQL references underlying queries that are parameterized. For example, parameters=c("X=1", "Y=2").}
   \item{includeDisplayValues}{(optional) a logical value indicating if display values should be included in the response object for lookup fields.}
+  \item{method}{(optional) HTTP method to use for the request, defaults to POST.}
 }
 \details{
 A full dataset or any portion of a dataset can be downloaded  into an R data frame using the 
@@ -83,12 +85,10 @@ The requested data are returned in a data frame with stringsAsFactors set to FAL
 
 }
 \examples{
-\dontrun{
-
-
-# library(Rlabkey)
+\donttest{
 
 ## select from a list named AllTypes
+# library(Rlabkey)
 
 rows <- labkey.selectRows(
 	baseUrl="http://localhost:8080/labkey",

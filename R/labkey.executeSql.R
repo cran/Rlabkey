@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2015 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2010-2017 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -40,16 +40,14 @@ myurl <- paste(baseUrl, "query", folderPath, "executeSql.api", sep="")
 ## Construct parameters
 params <- list(schemaName=schemaName, apiVersion=8.3, sql=sql)
 if(is.null(maxRows)==FALSE) {params <- c(params, list(maxRows=maxRows))}
-if(is.null(maxRows)==TRUE) {params <- c(params, list(showRows="all"))}
+if(is.null(maxRows)==TRUE) {params <- c(params, list(maxRows="-1"))}
 if(is.null(rowOffset)==FALSE) {params <- c(params, list(offset=rowOffset))}
 if(is.null(colSort)==FALSE) {params <- c(params, list(query.sort=colSort))}
 if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) params <- c(params, list("query.param."=parameters[k]))}
 if(is.null(containerFilter)==FALSE) {params <- paste(params, list("containerFilter"=containerFilter))}
 
-pbody <- toJSON(params)
-
 ## Execute via our standard POST function
-mydata <- labkey.post(myurl, pbody)
+mydata <- labkey.post(myurl, toJSON(params))
 
 newdata <- makeDF(rawdata=mydata, showHidden=showHidden, colNameOpt=colNameOpt)
 

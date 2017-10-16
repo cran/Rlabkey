@@ -1,3 +1,8 @@
+Changes in version 2.1.136
+  o Account for colNameOpt = "rname" in the makeDF.R colSelect check
+  o Remove call to open empty window on package load
+  o Default to POST for labkey.selectRows, with param for method
+
 Changes in version 2.1.135
   o Change the cast of integers from numeric to integer (Issue #30464)
   o labkey.selectRows updates for colSelect and showHidden properties (Issue #30465)

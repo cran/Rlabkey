@@ -33,7 +33,7 @@ https://www.labkey.org/project/home/begin.view}
 
 }
 \examples{
-\dontrun{
+\donttest{
 
 ## List of schemas
 # library(Rlabkey)
@@ -42,7 +42,6 @@ schemasDF <- labkey.getSchemas(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples"
 )
-
 
 }
 }

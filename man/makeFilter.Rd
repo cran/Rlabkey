@@ -66,47 +66,18 @@ https://www.labkey.org/project/home/begin.view}
 \author{Valerie Obenchain}
 \seealso{\code{\link{labkey.selectRows}}}
 \examples{
-\dontrun{
 
 # library(Rlabkey)
 
 ## Two filters, ANDed together
-filter1<- makeFilter(c("TextFld","CONTAINS","h"),
+makeFilter(c("TextFld","CONTAINS","h"),
     c("BooleanFld","EQUAL","TRUE"))
 
-## Apply a filter in labkey.selectRows function
-rows <- labkey.selectRows(
-	baseUrl="http://localhost:8080/labkey",
-	folderPath="/apisamples",
-	schemaName="lists", 
-	queryName="AllTypes",
-	colFilter=filter1
-)
-rows
-
 ## Using "in" operator:
-filter2 <- makeFilter(c("RowId","IN","2;3;6"))
-rows <- labkey.selectRows(
-	baseUrl="http://localhost:8080/labkey",
-	folderPath="/apisamples",
-	schemaName="lists",
-	queryName="AllTypes",
-	colFilter=filter2
-)
-rows
+makeFilter(c("RowId","IN","2;3;6"))
 
 ## Using "missing" operator:
-filter3 <- makeFilter(c("IntFld","MISSING","")) 
+makeFilter(c("IntFld","MISSING",""))
 
-rows <- labkey.selectRows(
-	baseUrl="http://localhost:8080/labkey",
-	folderPath="/apisamples",
-	schemaName="lists", 
-	queryName="AllTypes",
-	colFilter=filter3
-)
-rows
-
-}
 }
 \keyword{file}

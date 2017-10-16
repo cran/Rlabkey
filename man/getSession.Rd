@@ -41,43 +41,12 @@ discussion of how the user identity is established.
 The Rlabkey Users Guide is available by typing RlabkeyUsersGuide().
 }
 \examples{
-\dontrun{
-
+\donttest{
 
 # library(Rlabkey)
-s<-getSession(baseUrl="http://localhost:8080/labkey",
-    folderPath="/apisamples")
+
+s <- getSession("http://www.labkey.org", "/home")
 s   #shows schemas
-
-scobj <- getSchema(s, "lists")
-scobj    #shows available queries
-
-scobj$AllTypes   #this is the query object
-
-#shorthand for labkey.selectRows, all the same args apply
-lkdata<- getRows(s, scobj$AllTypes)
-lkdata
-
- #can add fields from related queries
-lucols <- getLookups(s, scobj$AllTypes$Category)
-lucols
-
-# keep going to other tables
-lucols2 <- getLookups(s, lucols[["Category/Group"]])
-
-cols <- c(names(scobj$AllTypes)[2:6], names(lucols)[2:4])
-
-getRows(s, scobj$AllTypes, colSelect=paste(cols, sep=","))
-	
-## using lkOptions
-## change the default column naming to be the same as used in the default
-## labkey.data data frame in R views with rname, spaces and slashes are
-## replace with underscores, and the whole name is lower cased
-
-lkOptions<-list("colNameOpt"="rname")
-srname <-getSession(baseUrl="http://localhost:8080/labkey",
-    folderPath="/apisamples", lkOptions=lkOptions)
-getRows(srname, scobj$AllTypes)
 
 ## using the curlOptions for generating debug tracesof network traffic
 d<- debugGatherer()

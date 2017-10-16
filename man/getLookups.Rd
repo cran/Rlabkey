@@ -26,11 +26,11 @@ a lookup query object are compound names relative to the base query object used 
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}, \code{\link{getRows}} \code{\link{getSchema}}}
 \examples{
-\dontrun{
+\donttest{
 
 ##  get fields from lookup tables and add to query
-
 # library(Rlabkey)
+
 s<- getSession(baseUrl="http://localhost:8080/labkey",
     folderPath="/apisamples")
  

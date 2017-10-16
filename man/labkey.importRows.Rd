@@ -38,11 +38,10 @@ number as passed in the request.
 \code{\link{labkey.deleteRows}}
 }
 \examples{
-\dontrun{
+\donttest{
 
 ## Note that users must have the necessary permissions in the database
 ## to be able to modify data through the use of these functions
-
 # library(Rlabkey)
 
 newrows <- data.frame(

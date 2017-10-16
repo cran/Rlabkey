@@ -19,21 +19,14 @@ lsFolders(session)
 \author{Peter Hussey}
 \seealso{\code{\link{getSession}}, \code{\link{lsProjects}}, \code{\link{lsSchemas}}}
 \examples{
-\dontrun{
 
 ##get a list if projects and folders
 # library(Rlabkey)
 
-# returns "/apisamples", "/home", ...
-lsProjects(baseUrl="http://localhost:8080/labkey")
+lks<- getSession("http://www.labkey.org", "/home")
 
-lks<- getSession(baseUrl="http://localhost:8080/labkey",
-    folderPath="/apisamples")
-
-#returns values "/apisamples" , "/apisamples/sub1" ,
-#     "/apisamples/sub1/child" ,"/apisamples/sub2"
+#returns values "/home" , "/home/_menus" , ...
 lsFolders(lks)
 
-}
 }
 \keyword{file}

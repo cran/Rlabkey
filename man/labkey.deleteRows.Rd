@@ -44,8 +44,7 @@ deleted.
 }
 
 \examples{
-\dontrun{
-
+\donttest{
 
 ## Insert, update and delete
 ## Note that users must have the necessary permissions in the LabKey Server

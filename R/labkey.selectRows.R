@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2008-2015 Fred Hutchinson Cancer Research Center
+#  Copyright (c) 2010-2017 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 labkey.selectRows <- function(baseUrl=NULL, folderPath, schemaName, queryName, viewName=NULL, colSelect=NULL,
         maxRows=NULL, rowOffset=NULL, colSort=NULL, colFilter=NULL, showHidden=FALSE, colNameOpt='caption',
-        containerFilter=NULL, parameters=NULL, includeDisplayValues=FALSE)
+        containerFilter=NULL, parameters=NULL, includeDisplayValues=FALSE, method='POST')
 {
 baseUrl=labkey.getBaseUrl(baseUrl)    
   
@@ -36,18 +36,10 @@ if(is.null(includeDisplayValues)==FALSE) {char <- nchar(includeDisplayValues); i
 if(exists("baseUrl")==FALSE || is.null(baseUrl) ||exists("folderPath")==FALSE || exists("schemaName")==FALSE || exists("queryName")==FALSE)
     stop (paste("A value must be specified for each of baseUrl, folderPath, schemaName and queryName."))
 
-## URL encoding of schema, query, view, etc. (if not already encoded)
-if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
-if(queryName==curlUnescape(queryName)) {queryName <- curlEscape(queryName)}
+## URL encoding of folderPath
 if(folderPath!=URLencode(folderPath)) {folderPath <- URLencode(folderPath)}
-if(is.null(viewName)==FALSE) {if(viewName==curlUnescape(viewName)) viewName <- curlEscape(viewName)}
-if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
-if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}
 
 apiVersion = "8.3"
-if (!is.null(includeDisplayValues) && includeDisplayValues == TRUE) {
-    apiVersion = "8.3&includeDisplayValues=true"
-}
 
 ## Format colSelect
 colSelect2=NULL
@@ -68,20 +60,56 @@ if(substr(baseUrl, nchar(baseUrl), nchar(baseUrl))!="/"){baseUrl <- paste(baseUr
 if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
 if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
 
-## Construct url
-myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaName,"&query.queryName=",queryName,"&apiVersion=",apiVersion,sep="")
-if(is.null(viewName)==FALSE) {myurl <- paste(myurl,"&query.viewName=",viewName,sep="")}
-if(is.null(colSelect2)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect2,sep="")}
-if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&query.maxRows=",maxRows,sep="")}
-if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.showRows=all",sep="")}
-if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&query.offset=",rowOffset,sep="")}
-if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")}
-if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) myurl <- paste(myurl,"&query.",colFilter[j],sep="")}
-if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) myurl <- paste(myurl,"&query.param.",parameters[k],sep="")}
-if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
+if(is.null(method) == FALSE && method == "GET") {
+    ## URL encoding of schema, query, view, etc. (if not already encoded)
+    if(schemaName==curlUnescape(schemaName)) {schemaName <- curlEscape(schemaName)}
+    if(queryName==curlUnescape(queryName)) {queryName <- curlEscape(queryName)}
+    if(is.null(viewName)==FALSE) {if(viewName==curlUnescape(viewName)) viewName <- curlEscape(viewName)}
+    if(is.null(containerFilter)==FALSE) {if(containerFilter==curlUnescape(containerFilter)) containerFilter<- curlEscape(containerFilter)}
+    if(is.null(colSort)==FALSE) {if(colSort==curlUnescape(colSort)) colSort <- curlEscape(colSort)}
 
-## Execute via our standard GET function
-mydata <- labkey.get(myurl);
+    ## Construct url
+    myurl <- paste(baseUrl,"query",folderPath,"selectRows.api?schemaName=",schemaName,"&query.queryName=",queryName,"&apiVersion=",apiVersion,sep="")
+    if (!is.null(includeDisplayValues) && includeDisplayValues == TRUE) {myurl <- paste(myurl,"&includeDisplayValues=true",sep="")}
+    if(is.null(viewName)==FALSE) {myurl <- paste(myurl,"&query.viewName=",viewName,sep="")}
+    if(is.null(colSelect2)==FALSE) {myurl <- paste(myurl,"&query.columns=",colSelect2,sep="")}
+    if(is.null(maxRows)==FALSE) {myurl <- paste(myurl,"&query.maxRows=",maxRows,sep="")}
+    if(is.null(maxRows)==TRUE) {myurl <- paste(myurl,"&query.maxRows=-1",sep="")}
+    if(is.null(rowOffset)==FALSE) {myurl <- paste(myurl,"&query.offset=",rowOffset,sep="")}
+    if(is.null(colSort)==FALSE) {myurl <- paste(myurl,"&query.sort=",colSort,sep="")}
+    if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) myurl <- paste(myurl,"&query.",colFilter[j],sep="")}
+    if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) myurl <- paste(myurl,"&query.param.",parameters[k],sep="")}
+    if(is.null(containerFilter)==FALSE) {myurl <- paste(myurl,"&containerFilter=",containerFilter,sep="")}
+
+    ## Execute via our standard GET function
+    mydata <- labkey.get(myurl);
+} else {
+    ## Construct url and parameters
+    myurl <- paste(baseUrl, "query", folderPath, "selectRows.api", sep="")
+    params <- list(schemaName=schemaName, queryName=queryName, apiVersion=apiVersion)
+    if (!is.null(includeDisplayValues) && includeDisplayValues == TRUE) {params <- c(params, list(includeDisplayValues="true"))}
+    if(is.null(containerFilter)==FALSE) {params <- c(params, list(containerFilter=containerFilter))}
+    if(is.null(viewName)==FALSE) {params <- c(params, list(viewName=viewName))}
+    if(is.null(colSelect)==FALSE) {params <- c(params, list("query.columns"=colSelect))}
+    if(is.null(maxRows)==FALSE) {params <- c(params, list("query.maxRows"=maxRows))}
+    if(is.null(maxRows)==TRUE) {params <- c(params, list("query.maxRows"=-1))}
+    if(is.null(rowOffset)==FALSE) {params <- c(params, list("query.offset"=rowOffset))}
+    if(is.null(colSort)==FALSE) {params <- c(params, list("query.sort"=colSort))}
+    if(is.null(colFilter)==FALSE) {for(j in 1:length(colFilter)) {
+        # note that the makFilter call uses curlEscape() so we need to unescape here
+        key = paste("query.",curlUnescape(strsplit(colFilter[j],"=")[[1]][1]),sep="")
+        value = curlUnescape(strsplit(colFilter[j],"=")[[1]][2])
+        params[key] = value
+    }}
+    if(is.null(parameters)==FALSE) {for(k in 1:length(parameters)) {
+        key = paste("query.param.",strsplit(parameters[k],"=")[[1]][1],sep="")
+        value = strsplit(parameters[k],"=")[[1]][2]
+        params[key] = value
+    }}
+
+    ## Execute via our standard POST function
+    mydata <- labkey.post(myurl, toJSON(params))
+}
 
 newdata <- makeDF(mydata, colSelect, showHidden, colNameOpt)
 

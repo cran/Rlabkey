@@ -19,7 +19,7 @@ lsSchemas(session)
 \seealso{\code{\link{getSession}}, {\code{\link{lsFolders}}, \code{\link{lsProjects}}}
 }
 \examples{
-\dontrun{
+\donttest{
 
 ##  get a list of schemas available in the current session context
 # library(Rlabkey)

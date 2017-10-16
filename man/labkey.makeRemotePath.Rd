@@ -28,18 +28,18 @@ returned without its root being changed.
 }
 \author{Dax Hawkins}
 \examples{
-\dontrun{
+
 # library(Rlabkey)
 
-fcsFile <- labkey.makeRemotePath(
+labkey.pipeline.root <- "c:/data/fcs"
+labkey.remote.pipeline.root <- "/volumes/fcs"
+fcsFile <- "c:/data/fcs/runA/aaa.fcs"
+
+# returns "/volumes/fcs/runA/aaa.fcs
+labkey.makeRemotePath(
 	localRoot=labkey.pipeline.root,
 	remoteRoot=labkey.remote.pipeline.root,
 	fullPath=fcsFile);
-	 
-# given localRoot <- "c:\\data\\fcs"
-# given remoteRoot <- "/volumes/fcs"
-# given fullPath <- "c:\\data\\fcs\\runA\\aaa.fcs"
-# returns "/volumes/fcs/runA/aaa.fcs
-}
+
 }
 \keyword{file}

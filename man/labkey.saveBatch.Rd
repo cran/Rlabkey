@@ -35,7 +35,7 @@ Note that saveBatch currently supports only a single run with one result set per
 \code{\link{labkey.deleteRows}}
 }
 \examples{
-\dontrun{
+\donttest{
 
 ## Very simple example of an analysis flow:  query some data, calculate
 ## some stats, then save the calculations as an assay result set in
@@ -43,6 +43,7 @@ Note that saveBatch currently supports only a single run with one result set per
 ##  Note this example expects to find an assay named "SimpleMeans" in
 ##  the apisamples project
 # library(Rlabkey)
+
 simpledf <- labkey.selectRows(
 	baseUrl="http://localhost:8080/labkey",
 	folderPath="/apisamples",

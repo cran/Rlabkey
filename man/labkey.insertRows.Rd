@@ -38,12 +38,11 @@ inserted.
 \code{\link{labkey.deleteRows}}
 }
 \examples{
-\dontrun{
+\donttest{
 
 ## Insert, update and delete
 ## Note that users must have the necessary permissions in the database
 ## to be able to modify data through the use of these functions
-
 # library(Rlabkey)
 
 newrow <- data.frame(

@@ -40,14 +40,12 @@ The available folders are returned as a three-column data frame containing
 \code{\link{labkey.getQueryDetails}}, \code{\link{labkey.getDefaultViewDetails}}, \code{\link{labkey.getLookupDetails}},
 }
 \examples{
-\dontrun{
 
 ## List of folders 
 # library(Rlabkey)
-folders <- labkey.getFolders(baseUrl="http://localhost:8080/labkey",
-    folderPath="/apisamples")
+
+folders <- labkey.getFolders("http://www.labkey.org", "/home")
 folders
 
-}
 }
 \keyword{IO}

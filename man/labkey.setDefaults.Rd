@@ -26,7 +26,6 @@ key that can be copied and pasted into a labkey.setDefaults() statement to tie a
 and session information already set in the browser.\cr
 }
 \examples{
-\dontrun{
 
 ## Example of setting and clearing an API key.
 # library(Rlabkey)
@@ -37,11 +36,9 @@ labkey.setDefaults(apiKey="session|abcdef0123456789abcdef0123456789")
 ## and session information with the browser session
 
 labkey.setDefaults()
-or
-labkey.setDefaults(apiKey=NULL)
+## or labkey.setDefaults(apiKey=NULL)
 
 ## Functions no longer share authorization and session
 ## information with the browser session
 
-}
 }
