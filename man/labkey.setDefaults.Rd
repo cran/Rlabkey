@@ -21,9 +21,9 @@ session, which means the code runs in the same context as the browser (e.g., sam
 declared terms of use and PHI level, same impersonation state, etc.).\cr
 
 A site administrator must first enable the use of API keys on that LabKey Server. Once enabled, any logged in user can
-generate an API key by clicking their display name (upper right) and selecting "API Key". The API Key page displays a
-key that can be copied and pasted into a labkey.setDefaults() statement to tie an Rlabkey session to the authorization
-and session information already set in the browser.\cr
+generate an API key by clicking their display name (upper right) and selecting "API Keys". The API Key page creates
+and displays keys that can be copied and pasted into a labkey.setDefaults() statement to tie an Rlabkey session to the
+authorization and session information already set in the browser.\cr
 }
 \examples{
 
