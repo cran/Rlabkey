@@ -17,7 +17,6 @@
 ## public function getQueries, returns all queries associated with a specified schema
 labkey.getQueries <- function(baseUrl=NULL, folderPath, schemaName)
 {	
-	baseUrl=labkey.getBaseUrl(baseUrl)
     mydata <- getQueryLists(baseUrl=baseUrl, folderPath=folderPath, schemaName=schemaName)
 	return(mydata)
 }
@@ -26,7 +25,7 @@ labkey.getQueries <- function(baseUrl=NULL, folderPath, schemaName)
 labkey.getQueryViews <- function(baseUrl=NULL, folderPath, schemaName, queryName)
 {
 	if(is.null(queryName)==FALSE) {char <- nchar(queryName); if(char<1){queryName<-NULL}}
-	if(exists("queryName")==FALSE)  { stop ("You must provide the query on which the view is based.") }
+	if(missing("queryName"))  { stop ("You must provide the query on which the view is based.") }
 
 	mydata <- getQueryLists(baseUrl=baseUrl, folderPath=folderPath, schemaName=schemaName, queryName=queryName)
 	return(mydata)
@@ -37,19 +36,14 @@ getQueryLists <- function(baseUrl=NULL, folderPath, schemaName, queryName=NULL)
     baseUrl=labkey.getBaseUrl(baseUrl)
     if((length(queryName)>0) && (queryName==URLdecode(queryName)) ) { queryName <- URLencode(queryName) }
 	## Error if any of baseUrl, folderPath, or schemName are missing
-	if(exists("baseUrl")==FALSE || is.null(baseUrl) || exists("folderPath")==FALSE || exists("schemaName")==FALSE )
+	if(missing("baseUrl") || is.null(baseUrl) || missing("folderPath") || missing("schemaName") )
 	    {stop ("A value must be specified for each of baseUrl, folderPath, schemaName.")}
 
-	## URL encoding of schemaName and folderPath (if not already encoded)
+	## URL encoding of schemaName (if not already encoded)
 	if(schemaName==URLdecode(schemaName)) {schemaName <- URLencode(schemaName)}
-	if(folderPath!=URLencode(folderPath)) {folderPath <- URLencode(folderPath)}
 
-	## Formatting
-	baseUrl <- gsub("[\\]", "/", baseUrl)
-	folderPath <- gsub("[\\]", "/", folderPath)
-	if(substr(baseUrl, nchar(baseUrl), nchar(baseUrl))!="/"){baseUrl <- paste(baseUrl,"/",sep="" )}
-	if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/"){folderPath <- paste(folderPath,"/",sep="")}
-	if(substr(folderPath, 1, 1)!="/"){folderPath <- paste("/",folderPath,sep="")}
+    ## normalize the folder path
+    folderPath <- encodeFolderPath(folderPath)
 
 	## now setup the different columns for views vs queries
 	if(length(queryName)==0)
@@ -73,7 +67,7 @@ getQueryLists <- function(baseUrl=NULL, folderPath, schemaName, queryName=NULL)
 	## Execute via our standard GET function
 	mydata <- labkey.get(myurl);
 
-	decode <- fromJSON(mydata)
+	decode <- fromJSON(mydata, simplifyVector=FALSE, simplifyDataFrame=FALSE)
 	qs <- decode[[queryObjType]]
 
 	dmall <- matrix(nrow=0, ncol=2, byrow=TRUE)

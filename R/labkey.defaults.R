@@ -47,12 +47,41 @@ labkey.getBaseUrl <- function(baseUrl=NULL)
         {
             .lkdefaults[["baseUrl"]] = baseUrl
         }
-        return (baseUrl)
+        url <- baseUrl
     }
     else
     {
-        return (.lkdefaults[["baseUrl"]])
+        url <- .lkdefaults[["baseUrl"]]
     }
+
+    if (is.null(url))
+        stop (paste("baseUrl is null or has not been set yet."))
+
+    ## convert any backslashes to forward slashes, ensure terminating slash
+    url <- gsub("[\\]", "/", url)
+    if(substr(url, nchar(url), nchar(url))!="/")
+    {
+        url <- paste(url,"/",sep="")
+    }
+    return (url)
+}
+
+## helper to encode and normalize the folder path parameter
+encodeFolderPath <- function(folderPath=NULL)
+{
+    if (!is.null(folderPath))
+    {
+        ## URL encoding of folderPath
+        folderPath <- URLencode(folderPath)
+
+        ## Formatting
+        folderPath <- gsub("[\\]", "/", folderPath)
+        if(substr(folderPath, nchar(folderPath), nchar(folderPath))!="/")
+            folderPath <- paste(folderPath,"/",sep="")
+        if(substr(folderPath, 1, 1)!="/")
+            folderPath <- paste("/",folderPath,sep="")
+    }
+    return (folderPath)
 }
 
 ## helper to retrieve and cache the CSRF token
@@ -68,9 +97,14 @@ labkey.getCSRF <- function()
                 urlBase <- paste(urlBase,"/",sep="")
             }
             myUrl <- paste(urlBase, "login/", "whoAmI.view", sep="")
-            response <- GET(url=myUrl, config=labkey.getRequestOptions())
+            options = labkey.getRequestOptions()
+            verboseOutput("OPTIONS", options)
+            if (!is.null(.lkdefaults[["debug"]]) && .lkdefaults[["debug"]] == TRUE)
+                response <- GET(url=myUrl, config=options, verbose(data_in=TRUE, info=TRUE, ssl=TRUE))
+            else
+                response <- GET(url=myUrl, config=options)
             r <- processResponse(response, haltOnError=FALSE)
-            json <- fromJSON(r)
+            json <- fromJSON(r, simplifyVector=FALSE, simplifyDataFrame=FALSE)
             if (!is.null(json$CSRF))
             {
                 .lkdefaults[["csrf"]] = json$CSRF
@@ -80,12 +114,15 @@ labkey.getCSRF <- function()
     return (.lkdefaults[["csrf"]])
 }
 
-labkey.getRequestOptions <- function(method='GET')
+labkey.getRequestOptions <- function(method='GET', encoding=NULL)
 {
     ## Set options
     headerFields <- c()
-    if (method == "POST")
-        headerFields <- c('Content-Type'="application/json;charset=utf-8")
+   if (method == "POST")
+   {
+       if (is.null(encoding) || encoding != "multipart")
+           headerFields <- c('Content-Type'="application/json;charset=utf-8")
+   }
 
     options <- labkey.curlOptions()
 
@@ -135,16 +172,24 @@ labkey.get <- function(myurl)
 {
     ## HTTP GET
     options <- labkey.getRequestOptions(method="GET")
-    response <- GET(url=myurl, config=options)
+    verboseOutput("OPTIONS", options)
+    if (!is.null(.lkdefaults[["debug"]]) && .lkdefaults[["debug"]] == TRUE)
+        response <- GET(url=myurl, config=options, verbose(data_in=TRUE, info=TRUE, ssl=TRUE))
+    else
+        response <- GET(url=myurl, config=options)
     processResponse(response)
 }
 
 ## Executes an HTTP POST of pbody against the supplied URL, with standard handling for session, api key, status codes and error messages.
-labkey.post <- function(myurl, pbody)
+labkey.post <- function(myurl, pbody, encoding=NULL)
 {
     ## HTTP POST form
-    options <- labkey.getRequestOptions(method="POST")
-    response <- POST(url=myurl, config=options, body=pbody)
+    options <- labkey.getRequestOptions(method="POST", encoding=encoding)
+    verboseOutput("OPTIONS", options)
+    if (!is.null(.lkdefaults[["debug"]]) && .lkdefaults[["debug"]] == TRUE)
+        response <- POST(url=myurl, config=options, body=pbody, verbose(data_in=TRUE, info=TRUE, ssl=TRUE))
+    else
+        response <- POST(url=myurl, config=options, body=pbody)
     processResponse(response)
 }
 
@@ -167,4 +212,18 @@ processResponse <- function(response, haltOnError=TRUE)
             stop (paste("HTTP request was unsuccessful. Status code = ", status_code, ", Error message = ", message, sep=""))
     }
     content(response, "text")
+}
+
+labkey.setDebugMode <- function(debug=FALSE)
+{
+    .lkdefaults[["debug"]] = debug;
+}
+
+verboseOutput <- function(title, content)
+{
+    if (!is.null(.lkdefaults[["debug"]]) && .lkdefaults[["debug"]] == TRUE) {
+        print(paste("*******************BEGIN ",title,"*******************", sep=""))
+        print(content)
+        print(paste("*******************END ",title,"*********************", sep=""))
+    }
 }
