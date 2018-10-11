@@ -16,12 +16,14 @@
 
 labkey.saveBatch <- function(baseUrl=NULL, folderPath, assayName, resultDataFrame, batchPropertyList=NULL, runPropertyList=NULL)
 {
+    .Deprecated(msg = "This function is deprecated and will be removed in a future release. Please use the newer replacement function : labkey.experiment.saveBatch, as it supports additional features")
+
 	baseUrl = labkey.getBaseUrl(baseUrl)
 
-	## Error if any of baseUrl, folderPathare missing
-	if(missing("baseUrl") || is.null(baseUrl) || missing("folderPath") || missing("assayName")  || missing("resultDataFrame"))
-	    stop (paste("A value must be specified for each of baseUrl, folderPath, assayName, and resultDataFrame"))
-	## TODO.check for at least one of the insert blocks is not null
+    ## Validate required parameters
+    if (missing(folderPath)) stop (paste("A value must be specified for folderPath."))
+    if (missing(assayName)) stop (paste("A value must be specified for assayName."))
+    if (missing(resultDataFrame)) stop (paste("A value must be specified for resultDataFrame."))
 
     ## normalize the folder path
     folderPath <- encodeFolderPath(folderPath)
