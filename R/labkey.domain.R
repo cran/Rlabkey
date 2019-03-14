@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010-2018 LabKey Corporation
+#  Copyright (c) 2018 LabKey Corporation
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -32,7 +32,15 @@ labkey.domain.get <- function(baseUrl=NULL, folderPath, schemaName, queryName)
     params <- list(schemaName=schemaName, queryName=queryName)
     response <- labkey.post(url, toJSON(params, auto_unbox=TRUE))
 
-    return (fromJSON(response))
+    result <- fromJSON(response)
+
+    # Issue 36894: translate NULL values for string props to NA
+    if (is.null(result$description)) result$description = NA
+    if (is.null(result$schemaName)) result$schemaName = NA
+    if (is.null(result$queryName)) result$queryName = NA
+    if (is.null(result$templateDescription)) result$templateDescription = NA
+
+    return (result)
 }
 
 ## Update an existing domain
