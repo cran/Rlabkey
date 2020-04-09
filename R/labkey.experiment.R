@@ -66,7 +66,7 @@ labkey.experiment.createMaterial <- function(config, sampleSetId = NULL, sampleS
 
 ## Create an ExpRun object
 ##
-labkey.experiment.createRun <- function(config, dataInputs = NULL, dataOutputs = NULL, dataRows = NULL, materialInputs = NULL, materialOutputs = NULL)
+labkey.experiment.createRun <- function(config, dataInputs = NULL, dataOutputs = NULL, dataRows = NULL, materialInputs = NULL, materialOutputs = NULL, plateMetadata = NULL)
 {
     ## check required parameters
     if (missing(config))
@@ -126,6 +126,11 @@ labkey.experiment.createRun <- function(config, dataInputs = NULL, dataOutputs =
 
         run$dataRows <- rowsVector
     }
+
+    if (!is.null(plateMetadata))
+    {
+        run$plateMetadata = plateMetadata;
+    }
     return (run)
 }
 
@@ -141,7 +146,7 @@ ensureNestedList <- function(data)
     return (data)
 }
 
-labkey.experiment.saveBatch <- function(baseUrl=NULL, folderPath, assayConfig = NULL, protocolName = NULL, runList)
+labkey.experiment.saveBatch <- function(baseUrl=NULL, folderPath, assayConfig = NULL, protocolName = NULL, batchPropertyList = NULL, runList)
 {
     baseUrl=labkey.getBaseUrl(baseUrl)
 
@@ -165,7 +170,7 @@ labkey.experiment.saveBatch <- function(baseUrl=NULL, folderPath, assayConfig = 
         params = list()
         params$protocolName = protocolName
     }
-    params$batch = list(runs = ensureNestedList(runList))
+    params$batch = c(batchPropertyList, list(runs = ensureNestedList(runList)))
 
     response <- labkey.post(url, toJSON(params, auto_unbox=TRUE))
 

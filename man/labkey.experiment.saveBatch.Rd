@@ -6,13 +6,15 @@ Saves a modified experiment batch.
 }
 \usage{
 labkey.experiment.saveBatch(baseUrl=NULL, folderPath,
-    assayConfig = NULL, protocolName = NULL, runList)
+    assayConfig = NULL, protocolName = NULL,
+    batchPropertyList = NULL, runList)
 }
 \arguments{
   \item{baseUrl}{(optional) a string specifying the \code{baseUrl} for the labkey server}
   \item{folderPath}{a string specifying the \code{folderPath} }
   \item{assayConfig}{(optional) a list specifying assay configuration information}
   \item{protocolName}{(optional) a string specifying the protocol name of the protocol to use}
+  \item{batchPropertyList}{(optional) a list of batch properties }
   \item{runList}{a list of experiment run objects}
 }
 \details{
@@ -45,9 +47,12 @@ library(Rlabkey)
 ## uploads data to an existing assay
 
 df <- data.frame(participantId=c(1:3), visitId = c(10,20,30), sex = c("f", "m", "f"))
+bprops <- list(LabNotes="this is a simple demo")
+bpl <- list(name=paste("Batch ", as.character(date())),properties=bprops)
 run <- labkey.experiment.createRun(list(name="new assay run"), dataRows = df)
 labkey.experiment.saveBatch(baseUrl="http://labkey/", folderPath="home",
-    assayConfig=list(assayName="GPAT", providerName="General"), runList=run)
+    assayConfig=list(assayName="GPAT", providerName="General"),
+    batchPropertyList=bpl, runList=run)
 
 ## create a non-assay backed run with samples as material inputs and outputs
 
@@ -59,6 +64,37 @@ run <- labkey.experiment.createRun(
         list(name="new run"), materialInputs = m1, materialOutputs = m2)
 labkey.experiment.saveBatch(baseUrl="http://labkey/", folderPath="home",
         protocolName=labkey.experiment.SAMPLE_DERIVATION_PROTOCOL, runList=run)
+
+## import an assay run which includes plate metadata
+
+df <- data.frame(participantId=c(1:3), visitId = c(10,20,30), welllocation = c("A1", "D11", "F12"))
+
+runConfig <- fromJSON(txt='{"assayId": 310,
+    "name" : "api imported run with plate metadata",
+    "properties" : {
+        "PlateTemplate" : "urn:lsid:labkey.com:PlateTemplate.Folder-6:d8bbec7d-34cd-1038-bd67-b3bd"
+    }}
+}')
+
+plateMetadata <- fromJSON(txt='{
+      "control" : {
+        "positive" : {"dilution":  0.005},
+        "negative" : {"dilution":  1.0}
+      },
+      "sample" : {
+        "SA01" : {"dilution": 1.0, "ID" : 111, "Barcode" : "BC_111", "Concentration" : 0.0125},
+        "SA02" : {"dilution": 2.0, "ID" : 222, "Barcode" : "BC_222"},
+        "SA03" : {"dilution": 3.0, "ID" : 333, "Barcode" : "BC_333"},
+        "SA04" : {"dilution": 4.0, "ID" : 444, "Barcode" : "BC_444"}
+      }
+    }')
+
+run <- labkey.experiment.createRun(runConfig, dataRows = df, plateMetadata = plateMetadata)
+labkey.experiment.saveBatch(
+    baseUrl="http://labkey/", folderPath="home",
+    assayConfig=list(assayId = 310), runList=run
+)
+
 }
 }
 \keyword{IO}
