@@ -1,11 +1,11 @@
-656be0413b8fca422ef6aec6bc92c9dc *DESCRIPTION
+b313d8ee4c76a0f47c24c8cfd18458e2 *DESCRIPTION
 4f787d5540ca31071566e8079ba3253c *NAMESPACE
-0ddab199161e18216b03e33a5140c65d *NEWS
+b3b73179e762eb2cce2f1e3ea57cdb1b *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
 dc0c278de05047119ca9b2880dd69e50 *R/labkey.curlOptions.R
-ab8b05495335c3159dbdb3336f4da89d *R/labkey.defaults.R
+66334763be119ae26ec30c5550e07ef5 *R/labkey.defaults.R
 f9445afeac7cfe2dbdef33e1e1029577 *R/labkey.deleteRows.R
 9a1135a6b780095701c32fee6cc2f8fd *R/labkey.domain.R
 10f5f43cd6dd3492b96b121818018bbd *R/labkey.executeSql.R
