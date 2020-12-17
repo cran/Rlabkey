@@ -1,6 +1,6 @@
-ecd1ef38f8f03e7ee8327aab4c4423b4 *DESCRIPTION
-4f787d5540ca31071566e8079ba3253c *NAMESPACE
-6efdaf4a8eaab4d4e9bb82b76c46e018 *NEWS
+d6fac7b72ac010858e6ce2d702a8594d *DESCRIPTION
+3d2f9b88ad1a6ad5cd34551d6bdce56d *NAMESPACE
+9d427431879e6052c446af1c4477267e *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -32,7 +32,7 @@ e9547aa658be54f593f87e0e70355841 *R/makeDF.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e84a279e8c8d03a962811c7de01eafe5 *R/schemaObjects.R
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-de67cac4aa5893947c8b3593613e0f9b *man/Rlabkey-package.Rd
+b891c982f407fd637f385d383f6b93c0 *man/Rlabkey-package.Rd
 b04572d16ef0158020e8dd22a55bcd3e *man/RlabkeyUsersGuide.Rd
 0d51cd476a3fbd56f77c00018a89ea57 *man/getFolderPath.Rd
 b5a80b74ecdad6f8637df0c0afbb72cc *man/getLookups.Rd
@@ -68,6 +68,7 @@ fe47e58b8e8a3fd00034d938bf309c49 *man/labkey.getDefaultViewDetails.Rd
 c0dd9ae0545b94e4dcda1414df199f10 *man/labkey.getQueries.Rd
 9efeb4d688a4a99ccec05e4dc16ebf70 *man/labkey.getQueryDetails.Rd
 79f7809d6044173785fd76a8cdb91626 *man/labkey.getQueryViews.Rd
+3ed110984382f47dfa0526dc04ef04f9 *man/labkey.getRequestOptions.Rd
 cf8393334456f087005875c913970721 *man/labkey.getSchemas.Rd
 8fede3f48bd3118280b58a976e7c76d0 *man/labkey.importRows.Rd
 57d8f4a980285e85e57b06b2e269e50d *man/labkey.insertRows.Rd
