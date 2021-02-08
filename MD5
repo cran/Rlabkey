@@ -1,6 +1,6 @@
-d6fac7b72ac010858e6ce2d702a8594d *DESCRIPTION
-3d2f9b88ad1a6ad5cd34551d6bdce56d *NAMESPACE
-9d427431879e6052c446af1c4477267e *NEWS
+3fa619397269069ef18cf45ea0742e03 *DESCRIPTION
+5c7fec7f1f5c68a4867e3d79920bcf3d *NAMESPACE
+40403cbf2c33d451c3b462747699a574 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -18,6 +18,7 @@ f3c8899edbe4f902b5053217a5d8bb64 *R/labkey.getQueryLists.R
 29f30793d58e06b8f94e53a0f539dfb0 *R/labkey.insertRows.R
 d72d14306d1b0726e933c0aa62ed64ec *R/labkey.makeRemotePath.R
 5b82c7d94079597b13b91dfff5734ae1 *R/labkey.moduleProperty.R
+84cb39477e83ee8986ee6929c174df65 *R/labkey.pipeline.R
 16a39de11394f421acba83b4bb43cd7d *R/labkey.provenance.R
 9ad3acfadb171c405001f177b1eaff51 *R/labkey.rstudio.R
 484118a267f4a6547ddc655c0cd128dc *R/labkey.saveBatch.R
@@ -32,7 +33,7 @@ e9547aa658be54f593f87e0e70355841 *R/makeDF.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e84a279e8c8d03a962811c7de01eafe5 *R/schemaObjects.R
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-b891c982f407fd637f385d383f6b93c0 *man/Rlabkey-package.Rd
+1de2208bfc2b6ae447316af1319bd2a0 *man/Rlabkey-package.Rd
 b04572d16ef0158020e8dd22a55bcd3e *man/RlabkeyUsersGuide.Rd
 0d51cd476a3fbd56f77c00018a89ea57 *man/getFolderPath.Rd
 b5a80b74ecdad6f8637df0c0afbb72cc *man/getLookups.Rd
@@ -73,6 +74,10 @@ cf8393334456f087005875c913970721 *man/labkey.getSchemas.Rd
 8fede3f48bd3118280b58a976e7c76d0 *man/labkey.importRows.Rd
 57d8f4a980285e85e57b06b2e269e50d *man/labkey.insertRows.Rd
 5f14073c952ad7ecb0ec42c83a29a4e2 *man/labkey.makeRemotePath.Rd
+f395bed1b17498b9744125cbb940a553 *man/labkey.pipeline.getFileStatus.Rd
+8bf637dd684545b50b2fde0c20003f84 *man/labkey.pipeline.getPipelineContainer.Rd
+44b88a0b14a72ed7ee676d11d46d2324 *man/labkey.pipeline.getProtocols.Rd
+e45faa97b7e8bdbfb23943870598601f *man/labkey.pipeline.startAnalysis.Rd
 431b4aba7c1fdca94c7aa6ecfb2e86b4 *man/labkey.provenance.addRecordingStep.Rd
 9470c71e831254798b88f84bac33953c *man/labkey.provenance.createProvenanceParams.Rd
 0b6d0a37a953c525464d8231b8224290 *man/labkey.provenance.startRecording.Rd
