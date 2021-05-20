@@ -214,8 +214,11 @@ labkey.domain.createAndLoad <- function(baseUrl=NULL, folderPath, name, descript
         stop (paste("A value must be specified for each of baseUrl, folderPath, name, df or domainKind."))
 
     if (is.null(options))
-        options <- list(strictFieldValidation = FALSE)
-    else
+        options <- list()
+
+    # Add option for study dataset and data class creation to skip validation check for required properties,
+    # see DataSetDomainKind.createDomain and ExperimentServiceImpl.createDataClass
+    if (domainKind == "StudyDatasetVisit" || domainKind == "StudyDatatsetDate" || domainKind == "DataClass")
         options <- c(options, list(strictFieldValidation = FALSE))
 
     if (is.null(schemaName))
@@ -241,7 +244,7 @@ labkey.domain.createAndLoad <- function(baseUrl=NULL, folderPath, name, descript
     labkey.domain.create(baseUrl = baseUrl, folderPath = folderPath, domainKind = domainKind,
         domainDesign = design, options = options)
 
-    labkey.insertRows(baseUrl = baseUrl, folderPath = folderPath, schemaName = schemaName, queryName= name, df)
+    labkey.query.import(baseUrl, folderPath, schemaName, queryName= name, toImport = df)
 }
 
 labkey.domain.createConditionalFormat <- function(queryFilter, bold=FALSE, italic=FALSE, strikeThrough=FALSE, textColor="", backgroundColor="")
