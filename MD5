@@ -1,11 +1,11 @@
-bffa08f8232d3447114aa2b50e82621e *DESCRIPTION
-ede928c2894ca52803273774e289f150 *NAMESPACE
-17e3ac536ed2bc63f0115bbf63f898bb *NEWS
+6214edb3ac819f2638505c94216c6900 *DESCRIPTION
+941ef87f5519d9569534193018cdb181 *NAMESPACE
+f625de5c41255477f7477143989e5f26 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
 dc0c278de05047119ca9b2880dd69e50 *R/labkey.curlOptions.R
-66334763be119ae26ec30c5550e07ef5 *R/labkey.defaults.R
+d8642e7577c3cd54cc846fef7b5cd6c3 *R/labkey.defaults.R
 f9445afeac7cfe2dbdef33e1e1029577 *R/labkey.deleteRows.R
 5a75ac9efa6a72cc352c33cf0be65e12 *R/labkey.domain.R
 10f5f43cd6dd3492b96b121818018bbd *R/labkey.executeSql.R
@@ -23,7 +23,7 @@ f45330a109f5acc3585d13940bb1e828 *R/labkey.moduleProperty.R
 418c963e63e067b522292cabc7b27233 *R/labkey.query.import.R
 9ad3acfadb171c405001f177b1eaff51 *R/labkey.rstudio.R
 484118a267f4a6547ddc655c0cd128dc *R/labkey.saveBatch.R
-14c9bf64138558d67a640a3c619de919 *R/labkey.security.R
+d54ee4bb93ca70b5e4e56532d7a2b381 *R/labkey.security.R
 4c96be5cf864fef644148ec525c49955 *R/labkey.selectRows.R
 8bf633b547e608da5d1fec18b3955a5f *R/labkey.setCurlOptions.R
 0803e57456cbc9d7b2374646f3185baf *R/labkey.transform.R
@@ -34,7 +34,7 @@ e9547aa658be54f593f87e0e70355841 *R/makeDF.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e84a279e8c8d03a962811c7de01eafe5 *R/schemaObjects.R
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-7bcb9d91e951edf8e5ea4e7ea3380ddd *man/Rlabkey-package.Rd
+30d42583e098467b8beeab940793e903 *man/Rlabkey-package.Rd
 b04572d16ef0158020e8dd22a55bcd3e *man/RlabkeyUsersGuide.Rd
 0d51cd476a3fbd56f77c00018a89ea57 *man/getFolderPath.Rd
 b5a80b74ecdad6f8637df0c0afbb72cc *man/getLookups.Rd
@@ -93,7 +93,9 @@ c0a64081ba75ddf7a1d1b824b8cd78eb *man/labkey.rstudio.saveReport.Rd
 023cdbb0800eaadab5208a9497946913 *man/labkey.security.createContainer.Rd
 40f8dcc786fc0e973264ce8a67d5c16c *man/labkey.security.deleteContainer.Rd
 26d5bec110117946c9dce48c5e0d47b1 *man/labkey.security.getContainers.Rd
+0272c6f0b5e14ba9c7ffaa49cb9e1a7c *man/labkey.security.impersonateUser.Rd
 aa22ee8a79bd0e6bd2b20d2c0ecc37c9 *man/labkey.security.moveContainer.Rd
+08137a67b497c11006df962ecf78a91d *man/labkey.security.stopImpersonating.Rd
 477796cb19980e36166e2da2be3e486d *man/labkey.selectRows.Rd
 a502186d6e18b56be5b342bb588204d2 *man/labkey.setCurlOptions.Rd
 8309c1815d04d973e5951480548914e4 *man/labkey.setDebugMode.Rd
@@ -111,6 +113,7 @@ d0c9495ebb139cd60136013dde7599ff *man/labkey.webdav.delete.Rd
 9f64d6b0c5e183fbd2e2db2bbf1f62a5 *man/labkey.webdav.mkDirs.Rd
 6cb2dd52cd1314c49b7e910b549beeb3 *man/labkey.webdav.pathExists.Rd
 e71027275070dffdbb881ac80354b1d4 *man/labkey.webdav.put.Rd
+e7935607f571016ddca7ab847ed2e42a *man/labkey.whoAmI.Rd
 86bba16e25f49b170c25ac34e1882310 *man/lsFolders.Rd
 704a074e3beda8d11cac292f2f7f1e56 *man/lsProjects.Rd
 ee91ff443b2c5fa7162927f41e312be0 *man/lsSchemas.Rd
