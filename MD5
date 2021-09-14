@@ -1,6 +1,6 @@
-6214edb3ac819f2638505c94216c6900 *DESCRIPTION
+19dfe7657e7becb5d26b7e0e0ed39e5c *DESCRIPTION
 941ef87f5519d9569534193018cdb181 *NAMESPACE
-f625de5c41255477f7477143989e5f26 *NEWS
+132c514b3b61b6db4c93b6cab4ec26d0 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -17,7 +17,7 @@ f3c8899edbe4f902b5053217a5d8bb64 *R/labkey.getQueryLists.R
 3f95da453706b119e2de455a2aca41d7 *R/labkey.importRows.R
 29f30793d58e06b8f94e53a0f539dfb0 *R/labkey.insertRows.R
 d72d14306d1b0726e933c0aa62ed64ec *R/labkey.makeRemotePath.R
-f45330a109f5acc3585d13940bb1e828 *R/labkey.moduleProperty.R
+f99aeefb6586f8d2d25721bc25a6398a *R/labkey.moduleProperty.R
 84cb39477e83ee8986ee6929c174df65 *R/labkey.pipeline.R
 16a39de11394f421acba83b4bb43cd7d *R/labkey.provenance.R
 418c963e63e067b522292cabc7b27233 *R/labkey.query.import.R
@@ -29,12 +29,12 @@ d54ee4bb93ca70b5e4e56532d7a2b381 *R/labkey.security.R
 0803e57456cbc9d7b2374646f3185baf *R/labkey.transform.R
 936bcd61cb108c8d7630d4f3c39ac23e *R/labkey.updateRows.R
 30c2271da722506504e83a7b929117b6 *R/labkey.webdav.R
-e9547aa658be54f593f87e0e70355841 *R/makeDF.R
+1ea693485b2cdc6c853e131020b66979 *R/makeDF.R
 5a360ea651641fdab4698e9eb5a89798 *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e84a279e8c8d03a962811c7de01eafe5 *R/schemaObjects.R
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-30d42583e098467b8beeab940793e903 *man/Rlabkey-package.Rd
+ac64d65d9d33941bb3cf455b7831ecc2 *man/Rlabkey-package.Rd
 b04572d16ef0158020e8dd22a55bcd3e *man/RlabkeyUsersGuide.Rd
 0d51cd476a3fbd56f77c00018a89ea57 *man/getFolderPath.Rd
 b5a80b74ecdad6f8637df0c0afbb72cc *man/getLookups.Rd
