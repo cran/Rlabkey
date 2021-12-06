@@ -1,6 +1,6 @@
-19dfe7657e7becb5d26b7e0e0ed39e5c *DESCRIPTION
+93cbe8fb43995317d98dfe753aeb0c9c *DESCRIPTION
 941ef87f5519d9569534193018cdb181 *NAMESPACE
-132c514b3b61b6db4c93b6cab4ec26d0 *NEWS
+34f6a661266c7db6b94d237e14bd5f69 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -19,7 +19,7 @@ f3c8899edbe4f902b5053217a5d8bb64 *R/labkey.getQueryLists.R
 d72d14306d1b0726e933c0aa62ed64ec *R/labkey.makeRemotePath.R
 f99aeefb6586f8d2d25721bc25a6398a *R/labkey.moduleProperty.R
 84cb39477e83ee8986ee6929c174df65 *R/labkey.pipeline.R
-16a39de11394f421acba83b4bb43cd7d *R/labkey.provenance.R
+98449d7b2bcea9694e7176ed29223798 *R/labkey.provenance.R
 418c963e63e067b522292cabc7b27233 *R/labkey.query.import.R
 9ad3acfadb171c405001f177b1eaff51 *R/labkey.rstudio.R
 484118a267f4a6547ddc655c0cd128dc *R/labkey.saveBatch.R
@@ -34,7 +34,7 @@ d54ee4bb93ca70b5e4e56532d7a2b381 *R/labkey.security.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e84a279e8c8d03a962811c7de01eafe5 *R/schemaObjects.R
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-ac64d65d9d33941bb3cf455b7831ecc2 *man/Rlabkey-package.Rd
+67cfcd0d5627acc1ea3d5a7987e8e945 *man/Rlabkey-package.Rd
 b04572d16ef0158020e8dd22a55bcd3e *man/RlabkeyUsersGuide.Rd
 0d51cd476a3fbd56f77c00018a89ea57 *man/getFolderPath.Rd
 b5a80b74ecdad6f8637df0c0afbb72cc *man/getLookups.Rd
@@ -80,9 +80,9 @@ f395bed1b17498b9744125cbb940a553 *man/labkey.pipeline.getFileStatus.Rd
 44b88a0b14a72ed7ee676d11d46d2324 *man/labkey.pipeline.getProtocols.Rd
 e45faa97b7e8bdbfb23943870598601f *man/labkey.pipeline.startAnalysis.Rd
 431b4aba7c1fdca94c7aa6ecfb2e86b4 *man/labkey.provenance.addRecordingStep.Rd
-9470c71e831254798b88f84bac33953c *man/labkey.provenance.createProvenanceParams.Rd
+8d8fdab2b73a4de62dd436dfdb9f3774 *man/labkey.provenance.createProvenanceParams.Rd
 0b6d0a37a953c525464d8231b8224290 *man/labkey.provenance.startRecording.Rd
-3bf0e31ec5347de6d0f5f7bcad74643e *man/labkey.provenance.stopRecording.Rd
+4d821f2724b12d755ca7de628c17836a *man/labkey.provenance.stopRecording.Rd
 87c7a8b37f601f2ecba7e7860601b44b *man/labkey.query.import.Rd
 0df6f54317ccd6e39b37ba53248416e0 *man/labkey.rstudio.initRStudio.Rd
 7c3893335c17fab0b04cee9985a72c12 *man/labkey.rstudio.initReport.Rd
