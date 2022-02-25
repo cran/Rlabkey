@@ -1,6 +1,6 @@
-93cbe8fb43995317d98dfe753aeb0c9c *DESCRIPTION
+e37c850afeed4e4e36847a10e82697e8 *DESCRIPTION
 941ef87f5519d9569534193018cdb181 *NAMESPACE
-34f6a661266c7db6b94d237e14bd5f69 *NEWS
+c75be1896c06048ccb2eb94cefe1ebfb *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -10,7 +10,7 @@ f9445afeac7cfe2dbdef33e1e1029577 *R/labkey.deleteRows.R
 5a75ac9efa6a72cc352c33cf0be65e12 *R/labkey.domain.R
 10f5f43cd6dd3492b96b121818018bbd *R/labkey.executeSql.R
 ac63739c7ec2a700b92016fd8af19a23 *R/labkey.experiment.R
-9dbd538e6fc60c4fa997d4fba557b539 *R/labkey.getFolders.R
+7ed5ef2f7b72c8cfcd539ca186f5859f *R/labkey.getFolders.R
 10b85f198a0cda5ab2336a4ba69edc52 *R/labkey.getQueryInfo.R
 f3c8899edbe4f902b5053217a5d8bb64 *R/labkey.getQueryLists.R
 25ccee12111099c266b78c40aa807119 *R/labkey.getSchemas.R
@@ -34,7 +34,7 @@ d54ee4bb93ca70b5e4e56532d7a2b381 *R/labkey.security.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e84a279e8c8d03a962811c7de01eafe5 *R/schemaObjects.R
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-67cfcd0d5627acc1ea3d5a7987e8e945 *man/Rlabkey-package.Rd
+e04e5f263a83c85553e0f2e57431059b *man/Rlabkey-package.Rd
 b04572d16ef0158020e8dd22a55bcd3e *man/RlabkeyUsersGuide.Rd
 0d51cd476a3fbd56f77c00018a89ea57 *man/getFolderPath.Rd
 b5a80b74ecdad6f8637df0c0afbb72cc *man/getLookups.Rd
