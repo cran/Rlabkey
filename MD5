@@ -1,6 +1,6 @@
-b38c6333fb78eb765af66f76c03930ac *DESCRIPTION
-941ef87f5519d9569534193018cdb181 *NAMESPACE
-7b9688a855050149793a4114b9ff0e4d *NEWS
+4ac7bd78f694391d81eec7d8c7fa6a4f *DESCRIPTION
+be48b17562d21c4bdea45be0f580c727 *NAMESPACE
+67614060b8b06f7744a91758f7b608be *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -25,7 +25,8 @@ f99aeefb6586f8d2d25721bc25a6398a *R/labkey.moduleProperty.R
 484118a267f4a6547ddc655c0cd128dc *R/labkey.saveBatch.R
 d54ee4bb93ca70b5e4e56532d7a2b381 *R/labkey.security.R
 4c96be5cf864fef644148ec525c49955 *R/labkey.selectRows.R
-8bf633b547e608da5d1fec18b3955a5f *R/labkey.setCurlOptions.R
+d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
+2b4d75b6e1047fbf685373595dd8a2db *R/labkey.storage.R
 0803e57456cbc9d7b2374646f3185baf *R/labkey.transform.R
 936bcd61cb108c8d7630d4f3c39ac23e *R/labkey.updateRows.R
 30c2271da722506504e83a7b929117b6 *R/labkey.webdav.R
@@ -34,7 +35,7 @@ d54ee4bb93ca70b5e4e56532d7a2b381 *R/labkey.security.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e84a279e8c8d03a962811c7de01eafe5 *R/schemaObjects.R
 ffba688bf755b457e0ee7e9e95920edf *inst/doc/usersguide.pdf
-8899f25accce82ecdada80ffad98cd11 *man/Rlabkey-package.Rd
+b03560ae72c15d553849b6fd6e0f970e *man/Rlabkey-package.Rd
 b04572d16ef0158020e8dd22a55bcd3e *man/RlabkeyUsersGuide.Rd
 0d51cd476a3fbd56f77c00018a89ea57 *man/getFolderPath.Rd
 b5a80b74ecdad6f8637df0c0afbb72cc *man/getLookups.Rd
@@ -101,6 +102,9 @@ a502186d6e18b56be5b342bb588204d2 *man/labkey.setCurlOptions.Rd
 8309c1815d04d973e5951480548914e4 *man/labkey.setDebugMode.Rd
 7915729fffe633b39e5375034f41d8fa *man/labkey.setDefaults.Rd
 92cbc5688c3656b245a78ff603d8527e *man/labkey.setModuleProperty.Rd
+66468fd3bc260dc25dc30cbcb8d0fd57 *man/labkey.storage.create.Rd
+0be0410ad0ee5d1b0d39b0fd83333a9e *man/labkey.storage.delete.Rd
+1e86469ea3de1129d5acd40fe90bf83a *man/labkey.storage.update.Rd
 69c5f161d191b697e3f330010687397e *man/labkey.transform.getRunPropertyValue.Rd
 2010e99d48af2ca5afc2a9757244f9f1 *man/labkey.transform.readRunPropertiesFile.Rd
 a460ea05277121386d408d7b6e3f209f *man/labkey.truncateTable.Rd
