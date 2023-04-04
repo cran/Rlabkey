@@ -14,7 +14,8 @@
 # limitations under the License.
 ##
 
-labkey.getFolders <- function(baseUrl=NULL, folderPath, includeEffectivePermissions=TRUE, includeSubfolders=FALSE, depth=50)
+labkey.getFolders <- function(baseUrl=NULL, folderPath, includeEffectivePermissions=TRUE, includeSubfolders=FALSE, depth=50,
+    includeChildWorkbooks=TRUE, includeStandardProperties=TRUE)
 {
 	baseUrl=labkey.getBaseUrl(baseUrl)
 
@@ -27,16 +28,24 @@ labkey.getFolders <- function(baseUrl=NULL, folderPath, includeEffectivePermissi
 	## Formatting
 	if(includeSubfolders) {inclsf <- paste("1&depth=", depth, sep="")} else {inclsf <- "0"}
 	if(includeEffectivePermissions) {inclep <- "1"} else {inclep <- "0"}
+	if(includeChildWorkbooks) {inclcw <- "1"} else {inclcw <- "0"}
+
+	inclsp <- "0"
+	resultCols = c("name", "path", "id", "effectivePermissions")
+	if(includeStandardProperties) {
+	    inclsp <- "1"
+	    resultCols = c("name", "path", "id", "title", "type", "folderType", "effectivePermissions")
+	}
 
 	## Construct url
-	myurl <- paste(baseUrl,"project",folderPath,"getContainers.view?","includeSubfolders=",inclsf,"&includeEffectivePermissions=",inclep, sep="")
+	myurl <- paste(baseUrl,"project",folderPath,"getContainers.view?","includeSubfolders=",inclsf,
+	    "&includeEffectivePermissions=",inclep,"&includeChildWorkbooks=",inclcw,"&includeStandardProperties=",inclsp,
+	    sep="")
 
 	## Execute via our standard GET function
 	mydata <- labkey.get(myurl);
 
 	decode <- fromJSON(mydata, simplifyVector=FALSE, simplifyDataFrame=FALSE)
-
-	resultCols = c("name", "path", "id", "title", "type", "folderType", "effectivePermissions")
 
 	curfld <- decode
 	curfld$effectivePermissions = paste(curfld$effectivePermissions, collapse=",")
@@ -60,7 +69,11 @@ labkey.getFolders <- function(baseUrl=NULL, folderPath, includeEffectivePermissi
 	}
 
 	allpathsDF <- data.frame(allpaths, stringsAsFactors=FALSE)
-	colnames(allpathsDF) <- c("name", "folderPath", "id", "title", "type", "folderType", "effectivePermissions")
+	if(includeStandardProperties) {
+	    colnames(allpathsDF) <- c("name", "folderPath", "id", "title", "type", "folderType", "effectivePermissions")
+    } else {
+        colnames(allpathsDF) <- c("name", "folderPath", "id", "effectivePermissions")
+    }
 
 	return(allpathsDF)
 }
