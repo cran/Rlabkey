@@ -1,6 +1,6 @@
-c06e7ed5017344b33343b6a8184102bc *DESCRIPTION
-a9977d53992715800e14090d4c203b90 *NAMESPACE
-e768b433b90f3a04fc846af01d68e6e8 *NEWS
+d4920ec12b97ccc9471fe4a2c43a8da8 *DESCRIPTION
+713ef643a768ddb55fac7b64314facd8 *NAMESPACE
+e1f97a17068fdbcc71e61bd386df34c9 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -23,7 +23,7 @@ f99aeefb6586f8d2d25721bc25a6398a *R/labkey.moduleProperty.R
 418c963e63e067b522292cabc7b27233 *R/labkey.query.import.R
 9ad3acfadb171c405001f177b1eaff51 *R/labkey.rstudio.R
 484118a267f4a6547ddc655c0cd128dc *R/labkey.saveBatch.R
-35380567ebcee90b8fe8ec7a1be48f74 *R/labkey.security.R
+8a8a8c2f5d6634327a4b0380d906aac3 *R/labkey.security.R
 4c96be5cf864fef644148ec525c49955 *R/labkey.selectRows.R
 d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 2b4d75b6e1047fbf685373595dd8a2db *R/labkey.storage.R
@@ -34,7 +34,7 @@ d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 5a360ea651641fdab4698e9eb5a89798 *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e11fb677cb1fded8cc4577db71368d6b *R/schemaObjects.R
-5dd14964d3fdc3088d77c3dc30cc5d98 *man/Rlabkey-package.Rd
+8cfa6ed9c18086ac9ba3e94dcf1bf396 *man/Rlabkey-package.Rd
 e9aac15e466211522f2bbd2b96ffcc45 *man/getFolderPath.Rd
 8c479d02c1ee68cec20059adbcc55d2a *man/getLookups.Rd
 5bc5e89adc04cb56e58478bcf4c272ef *man/getRows.Rd
@@ -63,7 +63,7 @@ be1b3a2b6b5bf6da92fde9cb0be3be4d *man/labkey.executeSql.Rd
 447258903d480ee299b9c2afc08c7cee *man/labkey.experiment.saveRuns.Rd
 fc5acfc949e5206c07a3b7c80bf1857c *man/labkey.getBaseUrl.Rd
 b18fd6d758b3016bb2eb6c1a6de043be *man/labkey.getDefaultViewDetails.Rd
-2b295feed7b0d04fee5604fade06fe37 *man/labkey.getFolders.Rd
+675a1b56b892f686a74d562e1dbe5120 *man/labkey.getFolders.Rd
 a6a22e99d364793c673cd24e6a97f4b7 *man/labkey.getLookupDetails.Rd
 e6fb58f53b1f9566908a6ae50dd752c2 *man/labkey.getModuleProperty.Rd
 bc456ee0085d36f6cf093d409ac8e097 *man/labkey.getQueries.Rd
@@ -89,11 +89,12 @@ bbb03d762c517e02a2182de29443eac3 *man/labkey.rstudio.initSession.Rd
 1ea37c2208abf799e866e3920e138685 *man/labkey.rstudio.isInitialized.Rd
 3d2fbe0a4a5a4914369318ce54ff5318 *man/labkey.rstudio.saveReport.Rd
 06d028c0cf477fdc175f7806287d6a03 *man/labkey.saveBatch.Rd
-df2e471d90f93b29109cb63a13cf5e03 *man/labkey.security.createContainer.Rd
-292102c9b32fe5b50577dce5249e035a *man/labkey.security.deleteContainer.Rd
-a4ae40efceca2e97975448a7585ec442 *man/labkey.security.getContainers.Rd
+06e0dd85fcaf13a9b2f4a077205f08fc *man/labkey.security.createContainer.Rd
+f622a8dae5ab8304e18f96dc3887686d *man/labkey.security.deleteContainer.Rd
+1c086b96e7e6ae8ef11a7ce2d13b9f1a *man/labkey.security.getContainers.Rd
 08907b51de058d026fabe54d3724e5da *man/labkey.security.impersonateUser.Rd
-36d05db5ef4a04442b83eca9eee5fa59 *man/labkey.security.moveContainer.Rd
+60b1ba996c580694df85e1ff5ffeded5 *man/labkey.security.moveContainer.Rd
+ab828f6aa27cfed726bc17d17ffa6f69 *man/labkey.security.renameContainer.Rd
 e019c2fbc4c15e81ba29aaa0933a3896 *man/labkey.security.stopImpersonating.Rd
 5f172fff533390571871f5f97260a991 *man/labkey.selectRows.Rd
 a502186d6e18b56be5b342bb588204d2 *man/labkey.setCurlOptions.Rd
