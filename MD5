@@ -1,6 +1,6 @@
-d4920ec12b97ccc9471fe4a2c43a8da8 *DESCRIPTION
+7e825ec469df94e6b32637310a44af85 *DESCRIPTION
 713ef643a768ddb55fac7b64314facd8 *NAMESPACE
-e1f97a17068fdbcc71e61bd386df34c9 *NEWS
+82ea13a027f2f13948b438a79e430ed8 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -11,7 +11,7 @@ f9445afeac7cfe2dbdef33e1e1029577 *R/labkey.deleteRows.R
 10f5f43cd6dd3492b96b121818018bbd *R/labkey.executeSql.R
 ac63739c7ec2a700b92016fd8af19a23 *R/labkey.experiment.R
 d97fa76677d50f74828ff912516c4224 *R/labkey.getFolders.R
-10b85f198a0cda5ab2336a4ba69edc52 *R/labkey.getQueryInfo.R
+f505263fc4b43d09195c3fe4a9079533 *R/labkey.getQueryInfo.R
 f3c8899edbe4f902b5053217a5d8bb64 *R/labkey.getQueryLists.R
 25ccee12111099c266b78c40aa807119 *R/labkey.getSchemas.R
 3f95da453706b119e2de455a2aca41d7 *R/labkey.importRows.R
@@ -31,10 +31,10 @@ d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 936bcd61cb108c8d7630d4f3c39ac23e *R/labkey.updateRows.R
 30c2271da722506504e83a7b929117b6 *R/labkey.webdav.R
 1ea693485b2cdc6c853e131020b66979 *R/makeDF.R
-5a360ea651641fdab4698e9eb5a89798 *R/makeFilter.R
+c22c125fe7da44df8a24f58b83bd1c19 *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e11fb677cb1fded8cc4577db71368d6b *R/schemaObjects.R
-8cfa6ed9c18086ac9ba3e94dcf1bf396 *man/Rlabkey-package.Rd
+225dda3946caccc76db6ba9012d9c19e *man/Rlabkey-package.Rd
 e9aac15e466211522f2bbd2b96ffcc45 *man/getFolderPath.Rd
 8c479d02c1ee68cec20059adbcc55d2a *man/getLookups.Rd
 5bc5e89adc04cb56e58478bcf4c272ef *man/getRows.Rd
@@ -120,7 +120,7 @@ b901dabe8aa252c2241e786e2a6f247e *man/labkey.whoAmI.Rd
 69ac2f5e56d0f9cd28c9508c89fb6e4d *man/lsFolders.Rd
 432515250d1effafe191952ba07aa58b *man/lsProjects.Rd
 adbe03149fca91242c27aa8dd7fa1ced *man/lsSchemas.Rd
-58fa18a79bcff5d70ed050d3bb208d9d *man/makeFilter.Rd
+51048896c873ea106e9412609995ac6a *man/makeFilter.Rd
 5e3a3c77bd439f50c763281249bd57f5 *man/saveResults.Rd
 6cd869004d31f2b54489b4b215dd55f3 *src/R_init.c
 1cc4302dd314f8b6a176e11f85974a4d *src/RcppExports.cpp
