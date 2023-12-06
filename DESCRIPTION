@@ -1,6 +1,6 @@
 Package: Rlabkey
-Version: 3.0.0
-Date: 2023-11-06
+Version: 3.1.0
+Date: 2023-12-04
 Title: Data Exchange Between R and 'LabKey' Server
 Author: Peter Hussey 
 Maintainer: Cory Nathe <cnathe@labkey.com>
@@ -17,6 +17,6 @@ Depends: httr, jsonlite
 LinkingTo: Rcpp
 Imports: Rcpp (>= 0.11.0)
 NeedsCompilation: yes
-Packaged: 2023-11-07 15:32:27 UTC; teamcity-agent
+Packaged: 2023-12-04 21:35:13 UTC; teamcity-agent
 Repository: CRAN
-Date/Publication: 2023-11-07 17:20:02 UTC
+Date/Publication: 2023-12-06 15:20:02 UTC
