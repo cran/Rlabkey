@@ -14,36 +14,32 @@
 #  limitations under the License.
 ##
 
-labkey.insertRows <- function(baseUrl=NULL, folderPath, schemaName, queryName, toInsert, na=NULL, provenanceParams=NULL, options = NULL)
+labkey.moveRows <- function(baseUrl=NULL, folderPath, targetFolderPath, schemaName, queryName, toMove, options = NULL)
 {  
     baseUrl=labkey.getBaseUrl(baseUrl)
 
     ## Validate required parameters
     if (missing(folderPath)) stop (paste("A value must be specified for folderPath."))
+    if (missing(targetFolderPath)) stop (paste("A value must be specified for targetFolderPath."))
     if (missing(schemaName)) stop (paste("A value must be specified for schemaName."))
     if (missing(queryName)) stop (paste("A value must be specified for queryName."))
-    if (missing(toInsert)) stop (paste("A value must be specified for toInsert."))
+    if (missing(toMove)) stop (paste("A value must be specified for toMove."))
     if (!missing(options) & !is.list(options))
         stop (paste("The options parameter must be a list data structure."))
-
-    ## Default showAllRows=TRUE
-    showAllRows=TRUE
 
     ## normalize the folder path
     folderPath <- encodeFolderPath(folderPath)
 
     ## URL encode folder path, JSON encode post body (if not already encoded)
-    toInsert <- convertFactorsToStrings(toInsert);
+    toMove <- convertFactorsToStrings(toMove);
 
-    params <- list(schemaName=schemaName, queryName=queryName, apiVersion=8.3)
-    if (!missing(provenanceParams))
-        params$provenance = provenanceParams
+    params <- list(targetContainerPath=targetFolderPath, schemaName=schemaName, queryName=queryName, apiVersion=8.3)
     if (!missing(options))
         params <- c(params, options)
 
-    pbody <- jsonEncodeRowsAndParams(toInsert, params, na)
+    pbody <- jsonEncodeRowsAndParams(toMove, params, NULL)
 
-    myurl <- paste(baseUrl, "query", folderPath, "insertRows.api", sep="")
+    myurl <- paste(baseUrl, "query", folderPath, "moveRows.api", sep="")
 
     ## Execute via our standard POST function
     mydata <- labkey.post(myurl, pbody)
