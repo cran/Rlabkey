@@ -1,11 +1,11 @@
-96f1a2e81285fda7c847bc661b3cf996 *DESCRIPTION
+0e855f85b6d2acd32bb46140544ae082 *DESCRIPTION
 e2fd7e759166b127f4a6d53c0718162d *NAMESPACE
-9695cd3bc2d85baca246af6dd7385cad *NEWS
+d7985e3fdfc02e4ac3cb7f165c3fcdce *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
 dc0c278de05047119ca9b2880dd69e50 *R/labkey.curlOptions.R
-bdf62d90df91e00851ad2e23743c8c19 *R/labkey.defaults.R
+512b52ed3364b21c3c0d9cb32d362236 *R/labkey.defaults.R
 67f128eb2bcee8a43bc8d7b0111e6082 *R/labkey.deleteRows.R
 8f0d460afb837748dc185bf1c0d37efe *R/labkey.domain.R
 5121237fc1f86c620058a9af60bd63d2 *R/labkey.executeSql.R
@@ -35,7 +35,7 @@ d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 c22c125fe7da44df8a24f58b83bd1c19 *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e11fb677cb1fded8cc4577db71368d6b *R/schemaObjects.R
-bae4eff7da13aacdbc3cd91c41e2c4c3 *man/Rlabkey-package.Rd
+e0c7bc20b08215465c9b220681e84df8 *man/Rlabkey-package.Rd
 e9aac15e466211522f2bbd2b96ffcc45 *man/getFolderPath.Rd
 8c479d02c1ee68cec20059adbcc55d2a *man/getLookups.Rd
 5bc5e89adc04cb56e58478bcf4c272ef *man/getRows.Rd
