@@ -1,6 +1,6 @@
-cb8aa91e009d5aa27c8396c27beba963 *DESCRIPTION
-e2fd7e759166b127f4a6d53c0718162d *NAMESPACE
-7a43b9cd545e320a9dd654d46120ee3d *NEWS
+ee71db73de15ec18315accd8e5912191 *DESCRIPTION
+74823e9a9b9c2eb63cc878468d60b6c0 *NAMESPACE
+8f4ea785cd911d2092e4c9e53abc390e *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -9,7 +9,7 @@ dc0c278de05047119ca9b2880dd69e50 *R/labkey.curlOptions.R
 67f128eb2bcee8a43bc8d7b0111e6082 *R/labkey.deleteRows.R
 8f0d460afb837748dc185bf1c0d37efe *R/labkey.domain.R
 5121237fc1f86c620058a9af60bd63d2 *R/labkey.executeSql.R
-5fc1463d4388e94c7f5de46386f147b7 *R/labkey.experiment.R
+11745f5d538b0f3c287f94d13092ec33 *R/labkey.experiment.R
 d97fa76677d50f74828ff912516c4224 *R/labkey.getFolders.R
 f505263fc4b43d09195c3fe4a9079533 *R/labkey.getQueryInfo.R
 f3c8899edbe4f902b5053217a5d8bb64 *R/labkey.getQueryLists.R
@@ -35,7 +35,7 @@ d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 c22c125fe7da44df8a24f58b83bd1c19 *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e11fb677cb1fded8cc4577db71368d6b *R/schemaObjects.R
-3dca5562b62e000c2cfcb4dc4ad3b1f4 *man/Rlabkey-package.Rd
+66d86aeb2edc2543fc4b1e3af1804005 *man/Rlabkey-package.Rd
 e9aac15e466211522f2bbd2b96ffcc45 *man/getFolderPath.Rd
 8c479d02c1ee68cec20059adbcc55d2a *man/getLookups.Rd
 5bc5e89adc04cb56e58478bcf4c272ef *man/getRows.Rd
@@ -60,6 +60,7 @@ be1b3a2b6b5bf6da92fde9cb0be3be4d *man/labkey.executeSql.Rd
 9575de80fa5ec4e06859a2495e049974 *man/labkey.experiment.createData.Rd
 20440f83c59a7e34ece48bd0b3a7c134 *man/labkey.experiment.createMaterial.Rd
 5cd21a44c578f5abdcd3b405a04924bc *man/labkey.experiment.createRun.Rd
+c46ff8a9b20b0babdab0d6ff165aba65 *man/labkey.experiment.lineage.Rd
 33043610147c6960e86218f061dbc696 *man/labkey.experiment.saveBatch.Rd
 447258903d480ee299b9c2afc08c7cee *man/labkey.experiment.saveRuns.Rd
 fc5acfc949e5206c07a3b7c80bf1857c *man/labkey.getBaseUrl.Rd

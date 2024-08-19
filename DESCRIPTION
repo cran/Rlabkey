@@ -1,9 +1,14 @@
 Package: Rlabkey
-Version: 3.2.3
-Date: 2024-06-25
+Version: 3.3.0
+Date: 2024-08-08
 Title: Data Exchange Between R and 'LabKey' Server
-Author: Peter Hussey 
-Maintainer: Cory Nathe <cnathe@labkey.com>
+Authors@R: c(person(given = "Peter",
+                    family = "Hussey",
+                    role = "aut"),
+             person(given = "Cory",
+                    family = "Nathe",
+                    role = "cre",
+                    email = "cnathe@labkey.com"))
 Description: The 'LabKey' client library for R makes it easy for R users to
     load live data from a 'LabKey' Server, <https://www.labkey.com/>,
     into the R environment for analysis, provided users have permissions
@@ -17,6 +22,9 @@ Depends: httr, jsonlite
 LinkingTo: Rcpp
 Imports: Rcpp (>= 0.11.0)
 NeedsCompilation: yes
-Packaged: 2024-06-28 01:10:03 UTC; teamcity-agent
+Packaged: 2024-08-19 15:48:36 UTC; teamcity-agent
+Author: Peter Hussey [aut],
+  Cory Nathe [cre]
+Maintainer: Cory Nathe <cnathe@labkey.com>
 Repository: CRAN
-Date/Publication: 2024-06-28 14:10:12 UTC
+Date/Publication: 2024-08-19 17:50:02 UTC
