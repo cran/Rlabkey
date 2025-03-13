@@ -11,7 +11,8 @@ labkey.webdav.get(
     remoteFilePath,
     localFilePath,
     overwrite=TRUE,
-    fileSet='@files'
+    fileSet='@files',
+    showProgressBar=FALSE
     )
 }
 \arguments{
@@ -21,6 +22,7 @@ labkey.webdav.get(
   \item{localFilePath}{the local filepath where this file will be saved }
   \item{overwrite}{(optional) if true, any pre-existing file at this location will be overwritten.  Defaults to TRUE }
   \item{fileSet}{(optional) the name of file server fileSet, which is typically "@files" (the default value for this argument). In some cases this might be "@pipeline" or "@fileset". }
+  \item{showProgressBar}{(optional))if true, a progress bar will be shown for all file downloads }
 }
 \details{
 Download a single file from a LabKey Server to the local machine using WebDAV.

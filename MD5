@@ -1,6 +1,6 @@
-e3637f9fc99ad91b9f9afce897b71948 *DESCRIPTION
+b48a35dcd8d647d7dad8efaa89e98891 *DESCRIPTION
 74823e9a9b9c2eb63cc878468d60b6c0 *NAMESPACE
-47db5e676cf201bf5f67111e088a41b5 *NEWS
+034e941d4131d4d84f04542b1ebd6990 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -30,12 +30,12 @@ d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 2b4d75b6e1047fbf685373595dd8a2db *R/labkey.storage.R
 0803e57456cbc9d7b2374646f3185baf *R/labkey.transform.R
 30c640925d413df85df7f3c8eff34d22 *R/labkey.updateRows.R
-12590e4b92fd0f4805fed626cece0c06 *R/labkey.webdav.R
+fcf614a78fc7078308f2ce9625794710 *R/labkey.webdav.R
 e4378e105b4527ee0f48dc2c63a96f1b *R/makeDF.R
 c22c125fe7da44df8a24f58b83bd1c19 *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e11fb677cb1fded8cc4577db71368d6b *R/schemaObjects.R
-67acc0bf67fdf0eb7f9aad26222756a4 *man/Rlabkey-package.Rd
+0fc6091bb40b6daa17594f79f301498f *man/Rlabkey-package.Rd
 e9aac15e466211522f2bbd2b96ffcc45 *man/getFolderPath.Rd
 8c479d02c1ee68cec20059adbcc55d2a *man/getLookups.Rd
 5bc5e89adc04cb56e58478bcf4c272ef *man/getRows.Rd
@@ -113,8 +113,8 @@ f53e7dc60fb60ee9ff5c6a4b99de5647 *man/labkey.transform.readRunPropertiesFile.Rd
 af93abb340b535ff2d07d06ef24e5409 *man/labkey.truncateTable.Rd
 e6b46727aadfd60fe358db060c825f28 *man/labkey.updateRows.Rd
 6c05aa7831e43ec6c46201f1fa652e11 *man/labkey.webdav.delete.Rd
-c2ab263445089fac844ef5b873eb3725 *man/labkey.webdav.downloadFolder.Rd
-af190eb9af71429d07c71a09258e76e0 *man/labkey.webdav.get.Rd
+d5d3a338aa34b8637b363c92f744b0ca *man/labkey.webdav.downloadFolder.Rd
+18b9e537000ba737db325f13e456c4f0 *man/labkey.webdav.get.Rd
 a9897c3b638cf83ad20669fc22960a41 *man/labkey.webdav.listDir.Rd
 9cfebc30106148fd23873c557d86ede3 *man/labkey.webdav.mkDir.Rd
 c2531a023843b89c6470fe017d58fc28 *man/labkey.webdav.mkDirs.Rd

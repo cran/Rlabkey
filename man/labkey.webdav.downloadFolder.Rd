@@ -12,7 +12,8 @@ labkey.webdav.downloadFolder(
     remoteFilePath,
     overwriteFiles=TRUE,
     mergeFolders=TRUE,
-    fileSet='@files'
+    fileSet='@files',
+    showProgressBar=FALSE
     )
 }
 \arguments{
@@ -23,6 +24,7 @@ labkey.webdav.downloadFolder(
   \item{overwriteFiles}{(optional) if true, any pre-existing file at this location will be overwritten.  Defaults to TRUE }
   \item{mergeFolders}{(optional) if false, any pre-existing local folders in the target location will be deleted if there is an incoming folder of the same name. If true, these existing folders will be left alone, and remote files downloaded into them.  Existing file conflicts will be handled based on the overwriteFiles parameter.  Defaults to TRUE }
   \item{fileSet}{(optional) the name of file server fileSet, which is typically "@files" (the default value for this argument).  In some cases this might be "@pipeline" or "@fileset". }
+  \item{showProgressBar}{(optional) if true, a progress bar will be shown for all file downloads }
 }
 \details{
 This will recursively download a folder from a LabKey Server using WebDAV.  This is essentially a wrapper that recursively calls
