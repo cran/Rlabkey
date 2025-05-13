@@ -37,7 +37,7 @@ CharacterMatrix listToMatrix(List data, List names) {
         {
           // only try to parse the first vector element as a string if it is non-null
           GenericVector gv = as<GenericVector>((as<List>(data[i]))[as<int>(indexList[j])]);
-          if(!Rf_isNull(gv[0]))
+          if(gv.size() > 0 && !Rf_isNull(gv[0]))
           {
             cMatrix(i,j) = as<CharacterVector>(gv[0])[0];
           }

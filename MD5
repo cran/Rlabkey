@@ -1,6 +1,6 @@
-b48a35dcd8d647d7dad8efaa89e98891 *DESCRIPTION
+ee728aac22144511094976b91198b6f6 *DESCRIPTION
 74823e9a9b9c2eb63cc878468d60b6c0 *NAMESPACE
-034e941d4131d4d84f04542b1ebd6990 *NEWS
+05fcc9d0637b048f306c37bd26443326 *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -30,12 +30,12 @@ d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 2b4d75b6e1047fbf685373595dd8a2db *R/labkey.storage.R
 0803e57456cbc9d7b2374646f3185baf *R/labkey.transform.R
 30c640925d413df85df7f3c8eff34d22 *R/labkey.updateRows.R
-fcf614a78fc7078308f2ce9625794710 *R/labkey.webdav.R
+b97a5c6fd60d7c2d49b3a8d7942ce7f3 *R/labkey.webdav.R
 e4378e105b4527ee0f48dc2c63a96f1b *R/makeDF.R
 c22c125fe7da44df8a24f58b83bd1c19 *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e11fb677cb1fded8cc4577db71368d6b *R/schemaObjects.R
-0fc6091bb40b6daa17594f79f301498f *man/Rlabkey-package.Rd
+86e53f6a05f430c8aa05828f1f3872c5 *man/Rlabkey-package.Rd
 e9aac15e466211522f2bbd2b96ffcc45 *man/getFolderPath.Rd
 8c479d02c1ee68cec20059adbcc55d2a *man/getLookups.Rd
 5bc5e89adc04cb56e58478bcf4c272ef *man/getRows.Rd
@@ -59,7 +59,7 @@ be1b3a2b6b5bf6da92fde9cb0be3be4d *man/labkey.executeSql.Rd
 47f1dce582919fb1b287b84e9278205a *man/labkey.experiment.SAMPLE_DERIVATION_PROTOCOL.Rd
 9575de80fa5ec4e06859a2495e049974 *man/labkey.experiment.createData.Rd
 20440f83c59a7e34ece48bd0b3a7c134 *man/labkey.experiment.createMaterial.Rd
-5cd21a44c578f5abdcd3b405a04924bc *man/labkey.experiment.createRun.Rd
+d581df71765794278b16789967217548 *man/labkey.experiment.createRun.Rd
 c46ff8a9b20b0babdab0d6ff165aba65 *man/labkey.experiment.lineage.Rd
 33043610147c6960e86218f061dbc696 *man/labkey.experiment.saveBatch.Rd
 447258903d480ee299b9c2afc08c7cee *man/labkey.experiment.saveRuns.Rd
@@ -128,4 +128,4 @@ d16afa17a378de02174f3a46d5a14072 *man/makeFilter.Rd
 3a018b4bc03c49604edbcc395e4eba6f *man/saveResults.Rd
 6cd869004d31f2b54489b4b215dd55f3 *src/R_init.c
 1cc4302dd314f8b6a176e11f85974a4d *src/RcppExports.cpp
-914f04757d1d5e3da7568e450ffdb027 *src/listToMatrix.cpp
+1701ca0807b80410d8f912b5efbc7329 *src/listToMatrix.cpp
