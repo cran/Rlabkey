@@ -26,6 +26,7 @@ labkey.deleteRows <- function(baseUrl=NULL, folderPath, schemaName, queryName, t
     if (missing(schemaName)) stop (paste("A value must be specified for schemaName."))
     if (missing(queryName)) stop (paste("A value must be specified for queryName."))
     if (missing(toDelete)) stop (paste("A value must be specified for toDelete."))
+    if (nrow(toDelete) == 0) stop (paste("toDelete must contain at least one row."))
     if (!missing(options) & !is.list(options))
         stop (paste("The options parameter must be a list data structure."))
 

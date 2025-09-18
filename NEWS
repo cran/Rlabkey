@@ -1,3 +1,7 @@
+Changes in 3.4.4
+  o Issue 53481: additional validation for assay run configurations.
+  o Improve validation when a zero-row dataframe is passed to insertRows/updateRows/deleteRows
+
 Changes in 3.4.3
   o Bugfix to labkey.selectRows when group_concat based field has a NULL value. Related to github issue #112
   o Update documentation for experiment.createRun to include an example of inserting run level properties

@@ -26,6 +26,7 @@ labkey.importRows <- function(baseUrl=NULL, folderPath, schemaName, queryName, t
     if (missing(schemaName)) stop (paste("A value must be specified for schemaName."))
     if (missing(queryName)) stop (paste("A value must be specified for queryName."))
     if (missing(toImport)) stop (paste("A value must be specified for toImport."))
+    if (nrow(toImport) == 0) stop (paste("toImport must contain at least one row."))
 
     ## normalize the folder path
     folderPath <- encodeFolderPath(folderPath)

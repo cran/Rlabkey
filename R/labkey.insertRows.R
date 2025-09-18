@@ -23,6 +23,7 @@ labkey.insertRows <- function(baseUrl=NULL, folderPath, schemaName, queryName, t
     if (missing(schemaName)) stop (paste("A value must be specified for schemaName."))
     if (missing(queryName)) stop (paste("A value must be specified for queryName."))
     if (missing(toInsert)) stop (paste("A value must be specified for toInsert."))
+    if (nrow(toInsert) == 0) stop (paste("toInsert must contain at least one row."))
     if (!missing(options) & !is.list(options))
         stop (paste("The options parameter must be a list data structure."))
 

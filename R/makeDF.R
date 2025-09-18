@@ -240,7 +240,7 @@ jsonEncodeRowsAndParams <- function(rows, params, na=NULL)
     p1 <- toJSON(params, auto_unbox=TRUE, digits = NA) # digits = NA to avoid trimming values (Issue 51160)
     cnames <- colnames(rows)
     p3 <- NULL
-    for(j in 1:nrows)
+    for(j in seq_len(nrows))
     {
         cvalues <- as.list(rows[j,])
         names(cvalues) <- cnames

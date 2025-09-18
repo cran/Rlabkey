@@ -26,6 +26,7 @@ labkey.updateRows <- function(baseUrl=NULL, folderPath, schemaName, queryName, t
     if (missing(schemaName)) stop (paste("A value must be specified for schemaName."))
     if (missing(queryName)) stop (paste("A value must be specified for queryName."))
     if (missing(toUpdate)) stop (paste("A value must be specified for toUpdate."))
+    if (nrow(toUpdate) == 0) stop (paste("toUpdate must contain at least one row."))
     if (!missing(options) & !is.list(options))
         stop (paste("The options parameter must be a list data structure."))
 
