@@ -1,6 +1,6 @@
-ec05e77c0e294e95e9e8425bc7ff1187 *DESCRIPTION
+4e12ea77fa18d861c11dfdf540bc3070 *DESCRIPTION
 74823e9a9b9c2eb63cc878468d60b6c0 *NAMESPACE
-aa3d24d8bb36be0ffb9fd10a61cb1b94 *NEWS
+2063adafb8aa5fdf4c9ba930a828fa2d *NEWS
 68e3d85ab025d7fd5ac7cae214b55097 *R/RcppExports.R
 4cb250ae25dd33f8aa246b1ff0cc602c *R/fromJSON2.R
 92b51df1e220a92b1a5bf21f01436d64 *R/ifcookie.R
@@ -32,10 +32,10 @@ d589ddcfa9a9613849a357376f146b80 *R/labkey.setCurlOptions.R
 ea1414f4393cd41b7cac6fb1fa514d63 *R/labkey.updateRows.R
 b97a5c6fd60d7c2d49b3a8d7942ce7f3 *R/labkey.webdav.R
 8830e2f24e18ecf49ccc4d9f1231060d *R/makeDF.R
-9f875f807552718ae592718f78df01fe *R/makeFilter.R
+6145e21435a5617b12bb2022e8cbaeee *R/makeFilter.R
 0c079e8c43b204a15d231619573bae2f *R/parseHeader.R
 e11fb677cb1fded8cc4577db71368d6b *R/schemaObjects.R
-af08eed2c34fdf4ed6e173013976b513 *man/Rlabkey-package.Rd
+d5117bb000d1d4ffb136db088c596ef3 *man/Rlabkey-package.Rd
 e9aac15e466211522f2bbd2b96ffcc45 *man/getFolderPath.Rd
 8c479d02c1ee68cec20059adbcc55d2a *man/getLookups.Rd
 5bc5e89adc04cb56e58478bcf4c272ef *man/getRows.Rd
@@ -124,8 +124,8 @@ b901dabe8aa252c2241e786e2a6f247e *man/labkey.whoAmI.Rd
 69ac2f5e56d0f9cd28c9508c89fb6e4d *man/lsFolders.Rd
 7af58b75327d935765d0d801eb22da50 *man/lsProjects.Rd
 8086d33fd1c9b93c234dc84128339219 *man/lsSchemas.Rd
-cf5b455ba7dbff4fc5bf0e954d966175 *man/makeFilter.Rd
+70d9f76ec8c11c0d8a4b645fa49277aa *man/makeFilter.Rd
 3a018b4bc03c49604edbcc395e4eba6f *man/saveResults.Rd
 6cd869004d31f2b54489b4b215dd55f3 *src/R_init.c
 1cc4302dd314f8b6a176e11f85974a4d *src/RcppExports.cpp
-1701ca0807b80410d8f912b5efbc7329 *src/listToMatrix.cpp
+91b2a5ca70ee6eac74b813dd04a73084 *src/listToMatrix.cpp
