@@ -1,5 +1,5 @@
 ##
-#  Copyright (c) 2010-2018 LabKey Corporation
+#  Copyright (c) 2008-2026 LabKey Corporation
 # 
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,6 +13,17 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 ##
+
+MAX_INT <- .Machine$integer.max
+MIN_INT <- -MAX_INT - 1
+safe_as_integer64 <- function(x) {
+  x[x == ""] <- NA
+  if (any(x > MAX_INT | x < MIN_INT, na.rm = T)) {
+    return(bit64::as.integer64(x))
+  }
+
+  return(as.integer(x))
+}
 
 makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
 {
@@ -147,7 +158,7 @@ makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
   	        try(
                 if(mod=="date") { newdat[,j] <- .parseDate(newdat[,j])} else
                 if(mod=="string"){	suppressWarnings(mode(newdat[,j]) <- "character")} else
-                if(mod=="int"){ suppressWarnings(mode(newdat[,j]) <- "integer")} else
+                if(mod=="int"){ suppressWarnings(newdat[,j] <- safe_as_integer64(newdat[,j]))} else
                 if(mod=="boolean"){suppressWarnings(mode(newdat[,j]) <- "logical")} else
                 if(mod=="float"){suppressWarnings(mode(newdat[,j]) <- "numeric")} else
                 {print("MetaData field type not recognized.")}
@@ -163,7 +174,7 @@ makeDF <- function(rawdata, colSelect=NULL, showHidden, colNameOpt)
 	    try(
             if(mod=="date"){ newdat <- .parseDate(newdat)}else
             if(mod=="string"){suppressWarnings(mode(newdat) <- "character")} else
-            if(mod=="int"){ suppressWarnings(mode(newdat) <- "integer")} else
+            if(mod=="int"){ suppressWarnings(newdat[,j] <- safe_as_integer64(newdat[,j]))} else
             if(mod=="boolean"){suppressWarnings(mode(newdat) <- "logical")} else
             if(mod=="float"){suppressWarnings(mode(newdat) <- "numeric")} else
             {print("MetaData field type not recognized.")}
